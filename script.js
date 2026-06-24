@@ -219,6 +219,10 @@
       e.preventDefault();
       closeMobileMenu();
 
+      // Immediately highlight the clicked tab for instant feedback
+      navLinks.forEach(link => link.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+
       // Smooth scroll to section
       const targetId = href.substring(1);
       const targetElement = document.getElementById(targetId);
@@ -245,8 +249,40 @@
   // ===================== ACTIVE NAVIGATION HIGHLIGHTING =====================
 
   /**
+   * Sets up a robust Intersection Observer to highlight the active nav link.
+   * Uses intersection ratio instead of margin hacks, guaranteeing only ONE tab is active at a time.
+   */
+  function initActiveNavHighlighting() {
+    const sections = document.querySelectorAll('section[id]');
+    
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        let activeId = null;
+        
+        // Filter only visible sections and sort by how much of them is currently seen
+        const visibleSections = entries.filter(entry => entry.isIntersecting);
+        if (visibleSections.length > 0) {
+          visibleSections.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          activeId = visibleSections[0].target.id;
+        } else {
+          // Fallback to top section if viewport is empty or at very start
+          activeId = 'hero';
+        }
+
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.dataset.section === activeId);
+        });
+      }, { threshold: [0, 1] }); // Triggers on entry/exit boundaries
+
+      sections.forEach(section => observer.observe(section));
+    } else {
+      updateActiveNavLink(); // Fallback for legacy browsers
+    }
+  }
+
+  /**
    * Updates the active navigation link based on scroll position.
-   * Uses Intersection Observer for accuracy.
+   * Used as a fallback if IntersectionObserver is not supported.
    */
   function updateActiveNavLink() {
     const sections = document.querySelectorAll('section[id]');
@@ -443,9 +479,11 @@
     // Keyboard accessibility
     document.addEventListener('keydown', handleKeyDown);
 
+    // Initialize active nav highlighting with Intersection Observer
+    initActiveNavHighlighting();
+
     // Initial state checks
     handleNavbarScroll();
-    updateActiveNavLink();
     handleBackToTopVisibility();
   }
 
