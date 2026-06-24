@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Laymon Games — Independent Creative Developer specializing in 2D Game Development, Pixel Art, Music Production, and Video Editing.">
+  <meta name="keywords" content="game developer, pixel artist, music producer, video editor, Godot Engine, indie game developer, Laymon Games">
+  <meta name="author" content="Laymon Games">
+  
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Laymon Games — Creative Developer Portfolio">
+  <meta property="og:description" content="Independent creative developer specializing in 2D game development, pixel art, music production, and video editing.">
+  
+  <title>Laymon Games — Creative Developer Portfolio</title>
+  
+  <!-- Favicon placeholder -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo" aria-label="Laymon Games Home">
+        <svg class="nav-logo-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Pixelated Lemon Icon -->
+          <rect x="18" y="18" width="28" height="28" fill="#F5D442"/>
+          <rect x="14" y="22" width="4" height="20" fill="#C9A800"/>
+          <rect x="46" y="22" width="4" height="20" fill="#C9A800"/>
+          <rect x="10" y="26" width="4" height="12" fill="#B89500"/>
+          <rect x="50" y="26" width="4" height="12" fill="#B89500"/>
+          <rect x="22" y="14" width="20" height="4" fill="#C9A800"/>
+          <rect x="26" y="10" width="12" height="4" fill="#1B7A3D"/>
+          <rect x="30" y="6" width="4" height="4" fill="#156330"/>
+          <rect x="28" y="30" width="4" height="8" fill="#6B5C1E"/>
+          <rect x="36" y="30" width="4" height="8" fill="#6B5C1E"/>
+          <rect x="26" y="40" width="16" height="4" fill="#6B5C1E"/>
+          <rect x="22" y="46" width="20" height="4" fill="#C9A800"/>
+        </svg>
+        <span class="nav-logo-text">Laymon Games</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+
+      <div class="nav-menu" id="navMenu" role="menubar">
+        <a href="#hero" class="nav-link active" data-section="hero" role="menuitem">Home</a>
+        <a href="#about" class="nav-link" data-section="about" role="menuitem">About</a>
+        <a href="#skills" class="nav-link" data-section="skills" role="menuitem">Skills</a>
+        <a href="#projects" class="nav-link" data-section="projects" role="menuitem">Projects</a>
+        <a href="#experience" class="nav-link" data-section="experience" role="menuitem">Journey</a>
+        <a href="#tools" class="nav-link" data-section="tools" role="menuitem">Tools</a>
+        <a href="#contact" class="nav-link nav-cta" data-section="contact" role="menuitem">Contact</a>
+      </div>
+
+      <!-- Mobile overlay -->
+      <div class="nav-overlay" id="navOverlay"></div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-pattern"></div>
+    
+    <!-- Animated particles background -->
+    <div class="hero-particles" id="heroParticles"></div>
+
+    <div class="hero-container container">
+      <div class="hero-content">
+        <span class="hero-brand-label">Laymon Games</span>
+        
+        <!-- REAL NAME PLACEHOLDER — Replace with your actual name -->
+        <h1 class="hero-name">Aymen Meghezzi</h1>
+        
+        <!-- PROFESSIONAL TITLE PLACEHOLDER — Replace with your title -->
+        <p class="hero-title">2D Game Developer · Pixel Artist · Creative Technologist</p>
+        
+        <p class="hero-description">
+          Crafting immersive digital experiences through the intersection of game development, 
+          pixel art, music production, and video editing. Building worlds one pixel at a time 
+          with Godot Engine, Aseprite, FL Studio, and DaVinci Resolve.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="hero-avatar-wrapper">
+        <div class="hero-avatar-glow"></div>
+        <!-- PIXELATED LEMON PLACEHOLDER — Replace src with your actual lemon avatar image -->
+        <div class="hero-avatar-frame">
+          <img 
+            src="assets/lemon-avatar.png" 
+            alt="Laymon Games — Pixelated Lemon Avatar" 
+            class="hero-avatar"
+            width="280"
+            height="280"
+            loading="eager"
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT SECTION ===================== -->
+  <section class="about section" id="about">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-tag">About</span>
+        <h2 class="section-title">Two Identities, One Vision</h2>
+        <p class="section-subtitle">The person behind the pixels and the brand that brings creativity to life.</p>
+      </header>
+
+      <div class="about-grid">
+        <!-- PERSONAL IDENTITY CARD -->
+        <article class="about-card reveal about-personal">
+          <div class="about-card-header">
+            <span class="about-card-badge personal-badge">Personal</span>
+          </div>
+          <div class="about-card-body">
+            <!-- REAL PHOTO PLACEHOLDER — Replace with your professional headshot -->
+            <div class="photo-placeholder" title="Replace this placeholder with your professional photo">
+              <img 
+                src="assets/me.png" 
+                alt="Laymon Games Pixelated Lemon Avatar" 
+                width="120"
+                height="120"
+                loading="lazy"
+              >
+                <circle cx="40" cy="28" r="14" fill="#F5D442" opacity="0.6"/>
+                <ellipse cx="40" cy="62" rx="22" ry="16" fill="#F5D442" opacity="0.6"/>
+              </svg>
+              <span class="photo-placeholder-text">Professional Photo</span>
+            </div>
+
+            <!-- REAL NAME PLACEHOLDER — Replace with your actual name -->
+            <h3 class="about-card-name">Aymen Meghezzi</h3>
+
+            <!-- PROFESSIONAL BIOGRAPHY PLACEHOLDER — Replace with your bio -->
+            <p class="about-bio">
+              A multidisciplinary creative developer passionate about interactive media and digital art. 
+              With expertise spanning game development, pixel art creation, music production, and video editing, 
+              I bring a unique perspective to every project. Driven by the belief that great experiences emerge 
+              from the convergence of technical precision and artistic vision.
+            </p>
+
+            <div class="about-stats">
+              <div class="stat-item">
+                <span class="stat-number">2D</span>
+                <span class="stat-label">Game Dev</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">Pixel</span>
+                <span class="stat-label">Art</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">Audio</span>
+                <span class="stat-label">Production</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- LAYMON GAMES BRAND CARD -->
+        <article class="about-card reveal about-brand">
+          <div class="about-card-header">
+            <span class="about-card-badge brand-badge">Brand</span>
+          </div>
+          <div class="about-card-body">
+            <!-- LEMON AVATAR PLACEHOLDER — Replace with your pixelated lemon image -->
+            <div class="avatar-placeholder" title="Replace this placeholder with your pixelated lemon avatar">
+              <img 
+                src="assets/lemon-avatar.png" 
+                alt="Laymon Games Pixelated Lemon Avatar" 
+                width="120"
+                height="120"
+                loading="lazy"
+              >
+            </div>
+
+            <h3 class="about-card-name">Laymon Games</h3>
+
+            <!-- BRAND STORY PLACEHOLDER — Replace with your brand story -->
+            <p class="about-bio">
+              Laymon Games is the creative studio and personal brand through which interactive experiences 
+              come to life. From concept to completion, every project reflects a commitment to quality 
+              craftsmanship—whether it's a polished 2D game, a pixel art collection, an original soundtrack, 
+              or a cinematic video edit. The lemon represents freshness, creativity, and the boldness to 
+              stand out in a crowded digital landscape.
+            </p>
+
+            <div class="about-tags">
+              <span class="tag">Game Developer</span>
+              <span class="tag">Pixel Artist</span>
+              <span class="tag">Music Producer</span>
+              <span class="tag">Video Editor</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS SECTION ===================== -->
+  <section class="skills section" id="skills">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-tag">Skills</span>
+        <h2 class="section-title">Crafted Expertise</h2>
+        <p class="section-subtitle">A multidisciplinary toolkit refined through years of dedicated practice and real-world projects.</p>
+      </header>
+
+      <div class="skills-grid">
+        <!-- Game Development -->
+        <article class="skill-category reveal" data-category="game-dev">
+          <div class="skill-category-header">
+            <div class="skill-icon game-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="6" y="14" width="36" height="20" rx="4" fill="none" stroke="#F5D442" stroke-width="2"/>
+                <circle cx="18" cy="24" r="3" fill="#F5D442"/>
+                <line x1="28" y1="20" x2="36" y2="20" stroke="#F5D442" stroke-width="2" stroke-linecap="round"/>
+                <line x1="28" y1="28" x2="36" y2="28" stroke="#F5D442" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="skill-category-title">Game Development</h3>
+          </div>
+          <ul class="skill-list">
+            <li class="skill-item"><span class="skill-name">Godot Engine</span><span class="skill-level">Advanced</span></li>
+            <li class="skill-item"><span class="skill-name">GDScript</span><span class="skill-level">Advanced</span></li>
+            <li class="skill-item"><span class="skill-name">Game Design</span><span class="skill-level">Intermediate+</span></li>
+            <li class="skill-item"><span class="skill-name">UI Design</span><span class="skill-level">Intermediate+</span></li>
+            <li class="skill-item"><span class="skill-name">Level Design</span><span class="skill-level">Advanced</span></li>
+          </ul>
+        </article>
+
+        <!-- Art -->
+        <article class="skill-category reveal" data-category="art">
+          <div class="skill-category-header">
+            <div class="skill-icon art-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="10" y="6" width="28" height="36" rx="2" fill="none" stroke="#F5D442" stroke-width="2"/>
+                <circle cx="20" cy="18" r="4" fill="#F5D442" opacity="0.7"/>
+                <path d="M14 36 L22 26 L30 32 L34 28 L38 36 Z" fill="#F5D442" opacity="0.5"/>
+              </svg>
+            </div>
+            <h3 class="skill-category-title">Art</h3>
+          </div>
+          <ul class="skill-list">
+            <li class="skill-item"><span class="skill-name">Pixel Art</span><span class="skill-level">Advanced</span></li>
+            <li class="skill-item"><span class="skill-name">Animation</span><span class="skill-level">Intermediate+</span></li>
+            <li class="skill-item"><span class="skill-name">Character Design</span><span class="skill-level">Intermediate+</span></li>
+            <li class="skill-item"><span class="skill-name">Environment Art</span><span class="skill-level">Advanced</span></li>
+          </ul>
+        </article>
+
+        <!-- Audio -->
+        <article class="skill-category reveal" data-category="audio">
+          <div class="skill-category-header">
+            <div class="skill-icon audio-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M16 36 L16 12 L36 18 L36 42 Z" fill="none" stroke="#F5D442" stroke-width="2"/>
+                <circle cx="20" cy="30" r="3" fill="#F5D442"/>
+                <line x1="30" y1="18" x2="30" y2="42" stroke="#F5D442" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 class="skill-category-title">Audio</h3>
+          </div>
+          <ul class="skill-list">
+            <li class="skill-item"><span class="skill-name">Music Production</span><span class="skill-level">Advanced</span></li>
+            <li class="skill-item"><span class="skill-name">Sound Design</span><span class="skill-level">Intermediate+</span></li>
+            <li class="skill-item"><span class="skill-name">FL Studio</span><span class="skill-level">Advanced</span></li>
+          </ul>
+        </article>
+
+        <!-- Media -->
+        <article class="skill-category reveal" data-category="media">
+          <div class="skill-category-header">
+            <div class="skill-icon media-icon">
+              <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="6" y="10" width="36" height="28" rx="3" fill="none" stroke="#F5D442" stroke-width="2"/>
+                <polygon points="20,18 20,32 34,25" fill="#F5D442"/>
+              </svg>
+            </div>
+            <h3 class="skill-category-title">Media</h3>
+          </div>
+          <ul class="skill-list">
+            <li class="skill-item"><span class="skill-name">Video Editing</span><span class="skill-level">Advanced</span></li>
+            <li class="skill-item"><span class="skill-name">Motion Graphics</span><span class="skill-level">Intermediate+</span></li>
+            <li class="skill-item"><span class="skill-name">DaVinci Resolve</span><span class="skill-level">Advanced</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS SECTION ===================== -->
+  <section class="projects section" id="projects">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-tag">Projects</span>
+        <h2 class="section-title">Selected Work</h2>
+        <p class="section-subtitle">A curated collection of games, art, music, and video projects.</p>
+      </header>
+
+      <!-- Filter Buttons -->
+      <div class="project-filters reveal" role="tablist" aria-label="Filter projects by category">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+        <button class="filter-btn" data-filter="games" role="tab" aria-selected="false">Games</button>
+        <button class="filter-btn" data-filter="art" role="tab" aria-selected="false">Art</button>
+        <button class="filter-btn" data-filter="music" role="tab" aria-selected="false">Music</button>
+        <button class="filter-btn" data-filter="video" role="tab" aria-selected="false">Video</button>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projectsGrid">
+
+        <!-- Project 1: Game Project Alpha -->
+        <article class="project-card reveal" data-project-category="games">
+          <div class="project-thumb">
+            <img src="assets/project-alpha.png" alt="Game Project Alpha — Screenshot or thumbnail" loading="lazy">
+            <span class="project-status status-active">In Progress</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Game Project Alpha</h3>
+            <p class="project-desc">A 2D platformer built with Godot Engine featuring hand-crafted pixel art, custom soundtracks, and tight gameplay mechanics.</p>
+            <ul class="project-techs">
+              <li>Godot Engine</li>
+              <li>GDScript</li>
+              <li>Aseprite</li>
+              <li>FL Studio</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" class="project-link" aria-label="View Game Project Alpha on GitHub">GitHub</a>
+              <a href="#" class="project-link project-link-play" aria-label="Play Game Project Alpha">▶ Play</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Game Project Beta -->
+        <article class="project-card reveal" data-project-category="games">
+          <div class="project-thumb">
+            <img src="assets/project-beta.png" alt="Game Project Beta — Screenshot or thumbnail" loading="lazy">
+            <span class="project-status status-completed">Completed</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Game Project Beta</h3>
+            <p class="project-desc">A top-down adventure game with procedural level generation, atmospheric audio design, and a rich pixel art world.</p>
+            <ul class="project-techs">
+              <li>Godot Engine</li>
+              <li>GDScript</li>
+              <li>Aseprite</li>
+              <li>DaVinci Resolve</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" class="project-link" aria-label="View Game Project Beta on GitHub">GitHub</a>
+              <a href="#" class="project-link project-link-play" aria-label="Play Game Project Beta">▶ Play</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Pixel Art Collection -->
+        <article class="project-card reveal" data-project-category="art">
+          <div class="project-thumb">
+            <img src="assets/project-pixel-art.png" alt="Pixel Art Collection — Showcase of pixel art works" loading="lazy">
+            <span class="project-status status-completed">Completed</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Pixel Art Collection</h3>
+            <p class="project-desc">A curated portfolio of original pixel art pieces including characters, environments, props, and animated sprites.</p>
+            <ul class="project-techs">
+              <li>Aseprite</li>
+              <li>Photoshop</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" class="project-link" aria-label="View Pixel Art Collection gallery">Gallery</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: Music Project -->
+        <article class="project-card reveal" data-project-category="music">
+          <div class="project-thumb">
+            <img src="assets/project-music.png" alt="Music Project — Album or soundtrack cover art" loading="lazy">
+            <span class="project-status status-completed">Completed</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Original Soundtrack</h3>
+            <p class="project-desc">An original chiptune and ambient soundtrack composed for indie game projects, featuring layered melodies and retro-inspired sound design.</p>
+            <ul class="project-techs">
+              <li>FL Studio</li>
+              <li>Ableton Live</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" class="project-link" aria-label="Listen to the soundtrack on YouTube">YouTube</a>
+              <a href="#" class="project-link project-link-play" aria-label="Stream the music">▶ Listen</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: Video Editing Reel -->
+        <article class="project-card reveal" data-project-category="video">
+          <div class="project-thumb">
+            <img src="assets/project-video-reel.png" alt="Video Editing Reel — Showreel thumbnail" loading="lazy">
+            <span class="project-status status-completed">Completed</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Showreel 2024</h3>
+            <p class="project-desc">A dynamic editing reel showcasing motion graphics, game trailers, and creative video compositions with professional color grading.</p>
+            <ul class="project-techs">
+              <li>DaVinci Resolve</li>
+              <li>Motion Graphics</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" class="project-link" aria-label="Watch the showreel on YouTube">YouTube</a>
+              <a href="#" class="project-link project-link-play" aria-label="Play the showreel">▶ Watch</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: Experimental Project -->
+        <article class="project-card reveal" data-project-category="games art music video">
+          <div class="project-thumb">
+            <img src="assets/project-experimental.png" alt="Experimental Project — Creative experiment thumbnail" loading="lazy">
+            <span class="project-status status-active">In Progress</span>
+          </div>
+          <div class="project-info">
+            <h3 class="project-title">Creative Experiment</h3>
+            <p class="project-desc">An experimental interactive project blending generative art, procedural music, and real-time rendering in a unique multimedia experience.</p>
+            <ul class="project-techs">
+              <li>Godot Engine</li>
+              <li>Aseprite</li>
+              <li>FL Studio</li>
+              <li>DaVinci Resolve</li>
+            </ul>
+            <div class="project-links">
+              <a href="#" class="project-link" aria-label="View the experimental project on GitHub">GitHub</a>
+              <a href="#" class="project-link project-link-play" aria-label="Try the experiment">▶ Try It</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EXPERIENCE / JOURNEY SECTION ===================== -->
+  <section class="experience section" id="experience">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-tag">Journey</span>
+        <h2 class="section-title">Creative Evolution</h2>
+        <p class="section-subtitle">Milestones that shaped my path as a multidisciplinary creator.</p>
+      </header>
+
+      <div class="timeline" id="timeline">
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item reveal">
+          <span class="timeline-year">2024</span>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Laymon Games Established</h3>
+            <p class="timeline-desc">Formalized the creative brand and began a structured approach to game development, pixel art, and multimedia production.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="timeline-item reveal">
+          <span class="timeline-year">2023</span>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Deep Dive into Godot Engine</h3>
+            <p class="timeline-desc">Transitioned to Godot as the primary game development tool, mastering GDScript and building multiple 2D game prototypes.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="timeline-item reveal">
+          <span class="timeline-year">2022</span>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Pixel Art Mastery</h3>
+            <p class="timeline-desc">Dedicated significant time to refining pixel art skills using Aseprite, creating detailed character and environment assets.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 4 -->
+        <div class="timeline-item reveal">
+          <span class="timeline-year">2021</span>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Music Production Journey</h3>
+            <p class="timeline-desc">Began composing original music and soundtracks using FL Studio, developing skills in chiptune, ambient, and electronic genres.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 5 -->
+        <div class="timeline-item reveal">
+          <span class="timeline-year">2020</span>
+          <div class="timeline-content">
+            <h3 class="timeline-title">Video Editing & Motion Graphics</h3>
+            <p class="timeline-desc">Expanded into video production using DaVinci Resolve, creating trailers, showreels, and motion graphics for creative projects.</p>
+          </div>
+        </div>
+
+        <!-- Timeline Item 6 -->
+        <div class="timeline-item reveal">
+          <span class="timeline-year">2019</span>
+          <div class="timeline-content">
+            <h3 class="timeline-title">The Beginning</h3>
+            <p class="timeline-desc">Started the creative journey—experimenting with digital art, game design concepts, and multimedia tools. The spark that ignited everything.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TOOLS SECTION ===================== -->
+  <section class="tools section" id="tools">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-tag">Tools</span>
+        <h2 class="section-title">My Creative Toolkit</h2>
+        <p class="section-subtitle">The essential tools that power every project from concept to completion.</p>
+      </header>
+
+      <div class="tools-grid">
+        <!-- Godot -->
+        <article class="tool-card reveal">
+          <div class="tool-icon-wrapper">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="32" cy="32" r="28" fill="none" stroke="#F5D442" stroke-width="2"/>
+              <path d="M24 20 L40 20 L40 44 L24 44 Z" fill="none" stroke="#F5D442" stroke-width="2"/>
+              <circle cx="32" cy="32" r="6" fill="#F5D442"/>
+            </svg>
+          </div>
+          <h3 class="tool-name">Godot Engine</h3>
+          <p class="tool-desc">The primary game development engine. Used for building 2D games with GDScript—from prototyping to polished releases. Chosen for its lightweight nature, open-source philosophy, and excellent 2D capabilities.</p>
+        </article>
+
+        <!-- Aseprite -->
+        <article class="tool-card reveal">
+          <div class="tool-icon-wrapper">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="12" y="12" width="40" height="40" rx="4" fill="none" stroke="#F5D442" stroke-width="2"/>
+              <rect x="20" y="20" width="8" height="8" fill="#F5D442" opacity="0.6"/>
+              <rect x="36" y="20" width="8" height="8" fill="#F5D442" opacity="0.6"/>
+              <rect x="20" y="36" width="8" height="8" fill="#F5D442" opacity="0.6"/>
+              <rect x="36" y="36" width="8" height="8" fill="#F5D442" opacity="0.6"/>
+            </svg>
+          </div>
+          <h3 class="tool-name">Aseprite</h3>
+          <p class="tool-desc">The go-to tool for pixel art creation and animation. Used to craft every sprite, tileset, character design, and environment asset with precision and artistic flair.</p>
+        </article>
+
+        <!-- FL Studio -->
+        <article class="tool-card reveal">
+          <div class="tool-icon-wrapper">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M16 48 L16 16 L48 24 L48 56 Z" fill="none" stroke="#F5D442" stroke-width="2"/>
+              <circle cx="24" cy="36" r="4" fill="#F5D442"/>
+              <line x1="32" y1="28" x2="32" y2="52" stroke="#F5D442" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3 class="tool-name">FL Studio</h3>
+          <p class="tool-desc">The music production workstation. Used for composing original soundtracks, designing game audio, and creating ambient tracks that bring projects to life with immersive soundscapes.</p>
+        </article>
+
+        <!-- DaVinci Resolve -->
+        <article class="tool-card reveal">
+          <div class="tool-icon-wrapper">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="8" y="16" width="48" height="32" rx="4" fill="none" stroke="#F5D442" stroke-width="2"/>
+              <polygon points="26,24 26,40 42,32" fill="#F5D442"/>
+            </svg>
+          </div>
+          <h3 class="tool-name">DaVinci Resolve</h3>
+          <p class="tool-desc">The professional video editing and color grading suite. Used for creating game trailers, showreels, motion graphics, and cinematic video content with industry-standard quality.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT SECTION ===================== -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <header class="section-header reveal">
+        <span class="section-tag">Contact</span>
+        <h2 class="section-title">Let's Create Together</h2>
+        <p class="section-subtitle">Open to game development opportunities, freelance projects, collaborations, and creative partnerships.</p>
+      </header>
+
+      <div class="contact-grid reveal">
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <p class="contact-intro">
+            Whether you have a project in mind, need a developer for your team, or just want to connect—
+            I'd love to hear from you. Let's build something extraordinary together.
+          </p>
+
+          <!-- Email Placeholder — Replace with your actual email -->
+          <a href="mailto:[your-email@example.com]" class="contact-item">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="#F5D442" stroke-width="1.5"/>
+                <polyline points="2,4 12,13 22,4" fill="none" stroke="#F5D442" stroke-width="1.5"/>
+              </svg>
+            </span>
+            <div class="contact-details">
+              <span class="contact-label">Email</span>
+              <span class="placeholder-tag contact-value">[your-email@example.com]</span>
+            </div>
+          </a>
+
+          <!-- Discord Placeholder — Replace with your Discord username or invite link -->
+          <a href="https://discord.gg/your-server-link" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M9.5 16 C8 16 7 14.5 7 14.5 L8.5 13 C8.5 13 9.5 14 10.5 14 C10.5 14 11 13.5 11 13 L9.5 16 Z" fill="#F5D442"/>
+                <path d="M14.5 16 C16 16 17 14.5 17 14.5 L15.5 13 C15.5 13 14.5 14 13.5 14 C13.5 14 13 13.5 13 13 L14.5 16 Z" fill="#F5D442"/>
+                <ellipse cx="12" cy="10" rx="8" ry="6" fill="none" stroke="#F5D442" stroke-width="1.5"/>
+              </svg>
+            </span>
+            <div class="contact-details">
+              <span class="contact-label">Discord</span>
+              <span class="placeholder-tag contact-value">laymon_games</span>
+            </div>
+          </a>
+
+          <!-- GitHub Placeholder — Replace with your GitHub URL -->
+          <a href="https://github.com/[your-github-username]" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M12 2 C6.5 2 2 6.5 2 12 C2 16.4 4.8 20.2 8.6 21.4 C9 21.5 9.2 21.2 9.2 21 V19.3 C6.7 19.8 6.2 18 6.2 18 C5.8 17 5.2 16.7 5.2 16.7 C4.4 16.2 5.3 16.2 5.3 16.2 C6.1 16.3 6.5 17 6.5 17 C7.3 18.4 8.6 18 9.2 17.7 C9.3 17.2 9.5 16.8 9.8 16.5 C7.6 16.3 5.3 15.5 5.3 11.5 C5.3 10.4 5.7 9.4 6.4 8.6 C6.3 8.4 6 7.5 6.5 6.3 C6.5 6.3 7.3 6 9.2 7.3 C10 7 10.9 6.8 11.8 6.8 C12.7 6.8 13.6 7 14.4 7.3 C16.3 6 17.1 6.3 17.1 6.3 C17.6 7.5 17.3 8.4 17.2 8.6 C17.9 9.4 18.3 10.4 18.3 11.5 C18.3 15.5 16 16.3 13.8 16.5 C14.2 16.9 14.6 17.7 14.6 19 C14.6 20.2 14.6 21 14.6 21 C14.6 21.2 14.8 21.5 15.2 21.4 C19 20.2 21.8 16.4 21.8 12 C21.8 6.5 17.3 2 12 2 Z" fill="none" stroke="#F5D442" stroke-width="1.5"/>
+              </svg>
+            </span>
+            <div class="contact-details">
+              <span class="contact-label">GitHub</span>
+              <span class="placeholder-tag contact-value">LaymonGames</span>
+            </div>
+          </a>
+
+          <!-- YouTube Placeholder — Replace with your YouTube URL -->
+          <a href="https://youtube.com/@[your-youtube-channel]" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="2" y="6" width="20" height="12" rx="4" fill="none" stroke="#F5D442" stroke-width="1.5"/>
+                <polygon points="10,9 10,15 16,12" fill="#F5D442"/>
+              </svg>
+            </span>
+            <div class="contact-details">
+              <span class="contact-label">YouTube</span>
+              <span class="placeholder-tag contact-value">Laymon Games</span>
+            </div>
+          </a>
+
+          <!-- Twitter/X Placeholder — Replace with your X/Twitter URL -->
+          <a href="https://twitter.com/[your-twitter-handle]" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M4 4 L10 12 L4 20 H7 L12 15 L16 20 H20 L14 13 L19.5 4 H16.5 L12.5 8.5 L9 4 Z" fill="none" stroke="#F5D442" stroke-width="1.5"/>
+              </svg>
+            </span>
+            <div class="contact-details">
+              <span class="contact-label">Twitter / X</span>
+              <span class="placeholder-tag contact-value">[your-twitter-handle]</span>
+            </div>
+          </a>
+
+          <!-- LinkedIn Placeholder — Replace with your LinkedIn URL -->
+          <a href="https://linkedin.com/in/[your-linkedin-profile]" target="_blank" rel="noopener noreferrer" class="contact-item">
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="#F5D442" stroke-width="1.5"/>
+                <line x1="8" y1="10" x2="8" y2="16" stroke="#F5D442" stroke-width="1.5"/>
+                <path d="M8 7 C9.5 7 10 7.5 10 9 L10 16" fill="none" stroke="#F5D442" stroke-width="1.5"/>
+                <line x1="13" y1="10" x2="13" y2="16" stroke="#F5D442" stroke-width="1.5"/>
+                <path d="M13 7 C15 7 16 8 16 10 L16 12 C16 14 15 15 13 15" fill="none" stroke="#F5D442" stroke-width="1.5"/>
+              </svg>
+            </span>
+            <div class="contact-details">
+              <span class="contact-label">LinkedIn</span>
+              <span class="placeholder-tag contact-value">[your-linkedin-profile]</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="contact-cta">
+          <div class="contact-cta-card">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="contact-lemon-icon">
+              <!-- Pixelated Lemon -->
+              <rect x="18" y="18" width="28" height="28" fill="#F5D442"/>
+              <rect x="14" y="22" width="4" height="20" fill="#C9A800"/>
+              <rect x="46" y="22" width="4" height="20" fill="#C9A800"/>
+              <rect x="10" y="26" width="4" height="12" fill="#B89500"/>
+              <rect x="50" y="26" width="4" height="12" fill="#B89500"/>
+              <rect x="22" y="14" width="20" height="4" fill="#C9A800"/>
+              <rect x="26" y="10" width="12" height="4" fill="#1B7A3D"/>
+              <rect x="30" y="6" width="4" height="4" fill="#156330"/>
+              <rect x="28" y="30" width="4" height="8" fill="#6B5C1E"/>
+              <rect x="36" y="30" width="4" height="8" fill="#6B5C1E"/>
+              <rect x="26" y="40" width="16" height="4" fill="#6B5C1E"/>
+              <rect x="22" y="46" width="20" height="4" fill="#C9A800"/>
+            </svg>
+            <h3 class="contact-cta-title">Ready to collaborate?</h3>
+            <p class="contact-cta-text">I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+            <a href="mailto:[your-email@example.com]" class="btn btn-primary btn-large">Send a Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" id="footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="footer-lemon">
+          <!-- Pixelated Lemon -->
+          <rect x="18" y="18" width="28" height="28" fill="#F5D442"/>
+          <rect x="14" y="22" width="4" height="20" fill="#C9A800"/>
+          <rect x="46" y="22" width="4" height="20" fill="#C9A800"/>
+          <rect x="10" y="26" width="4" height="12" fill="#B89500"/>
+          <rect x="50" y="26" width="4" height="12" fill="#B89500"/>
+          <rect x="22" y="14" width="20" height="4" fill="#C9A800"/>
+          <rect x="26" y="10" width="12" height="4" fill="#1B7A3D"/>
+          <rect x="30" y="6" width="4" height="4" fill="#156330"/>
+          <rect x="28" y="30" width="4" height="8" fill="#6B5C1E"/>
+          <rect x="36" y="30" width="4" height="8" fill="#6B5C1E"/>
+          <rect x="26" y="40" width="16" height="4" fill="#6B5C1E"/>
+          <rect x="22" y="46" width="20" height="4" fill="#C9A800"/>
+        </svg>
+        <span class="footer-brand-name">Laymon Games</span>
+      </div>
+
+      <p class="footer-text">&copy; <span id="currentYear"></span> Laymon Games. All rights reserved.</p>
+
+      <p class="footer-credit">Crafted with passion & precision.</p>
+    </div>
+  </footer>
+
+  <!-- ===================== BACK TO TOP BUTTON ===================== -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <polyline points="6,15 12,9 18,15" fill="none" stroke="#0D0D0D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

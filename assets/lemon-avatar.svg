@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Pixelated Lemon Avatar for Laymon Games -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="512" height="512">
+  <!-- Background (transparent) -->
+  
+  <!-- Main lemon body - pixelated style -->
+  <rect x="18" y="18" width="28" height="28" fill="#F5D442"/>
+  
+  <!-- Left side shading -->
+  <rect x="14" y="22" width="4" height="20" fill="#C9A800"/>
+  
+  <!-- Right side highlight -->
+  <rect x="46" y="22" width="4" height="20" fill="#FFE680"/>
+  
+  <!-- Far left edge -->
+  <rect x="10" y="26" width="4" height="12" fill="#B89500"/>
+  
+  <!-- Far right edge -->
+  <rect x="50" y="26" width="4" height="12" fill="#FFE680"/>
+  
+  <!-- Top highlight strip -->
+  <rect x="22" y="14" width="20" height="4" fill="#FFE680"/>
+  
+  <!-- Leaf (green) -->
+  <rect x="26" y="10" width="12" height="4" fill="#1B7A3D"/>
+  
+  <!-- Stem detail -->
+  <rect x="30" y="6" width="4" height="4" fill="#156330"/>
+  
+  <!-- Eyes (dark brown) -->
+  <rect x="28" y="30" width="4" height="8" fill="#6B5C1E"/>
+  <rect x="36" y="30" width="4" height="8" fill="#6B5C1E"/>
+  
+  <!-- Mouth (smile) -->
+  <rect x="26" y="40" width="16" height="4" fill="#6B5C1E"/>
+  
+  <!-- Bottom shading -->
+  <rect x="22" y="46" width="20" height="4" fill="#C9A800"/>
+</svg>
