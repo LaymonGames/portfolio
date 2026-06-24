@@ -203,6 +203,11 @@ img {
   transition: transform var(--transition-fast);
 }
 
+.nav-logo img {
+  width: 40px;
+  height: 40px;
+}
+
 .nav-logo:hover {
   transform: scale(1.02);
 }
