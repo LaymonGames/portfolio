@@ -141,10 +141,6 @@
                 height="120"
                 loading="lazy"
               >
-                <circle cx="40" cy="28" r="14" fill="#F5D442" opacity="0.6"/>
-                <ellipse cx="40" cy="62" rx="22" ry="16" fill="#F5D442" opacity="0.6"/>
-              </svg>
-              <span class="photo-placeholder-text">Professional Photo</span>
             </div>
 
             <!-- REAL NAME PLACEHOLDER — Replace with your actual name -->
@@ -345,7 +341,8 @@
             </ul>
             <div class="project-links">
               <a href="#" class="project-link" aria-label="View Game Project Alpha on GitHub">GitHub</a>
-              <a href="#" class="project-link project-link-play" aria-label="Play Game Project Alpha">▶ Play</a>
+              <!-- Added data-action attribute -->
+              <button type="button" class="project-link project-link-play" data-action="play" aria-label="Play Game Project Alpha">▶ Play</button>
             </div>
           </div>
         </article>
@@ -367,7 +364,8 @@
             </ul>
             <div class="project-links">
               <a href="#" class="project-link" aria-label="View Game Project Beta on GitHub">GitHub</a>
-              <a href="#" class="project-link project-link-play" aria-label="Play Game Project Beta">▶ Play</a>
+              <!-- Added data-action attribute -->
+              <button type="button" class="project-link project-link-play" data-action="play" aria-label="Play Game Project Beta">▶ Play</button>
             </div>
           </div>
         </article>
@@ -406,7 +404,8 @@
             </ul>
             <div class="project-links">
               <a href="#" class="project-link" aria-label="Listen to the soundtrack on YouTube">YouTube</a>
-              <a href="#" class="project-link project-link-play" aria-label="Stream the music">▶ Listen</a>
+              <!-- Added data-action attribute -->
+              <button type="button" class="project-link project-link-play" data-action="listen" aria-label="Stream the music">▶ Listen</button>
             </div>
           </div>
         </article>
@@ -426,7 +425,8 @@
             </ul>
             <div class="project-links">
               <a href="#" class="project-link" aria-label="Watch the showreel on YouTube">YouTube</a>
-              <a href="#" class="project-link project-link-play" aria-label="Play the showreel">▶ Watch</a>
+              <!-- Added data-action attribute -->
+              <button type="button" class="project-link project-link-play" data-action="watch" aria-label="Play the showreel">▶ Watch</button>
             </div>
           </div>
         </article>
@@ -448,7 +448,8 @@
             </ul>
             <div class="project-links">
               <a href="#" class="project-link" aria-label="View the experimental project on GitHub">GitHub</a>
-              <a href="#" class="project-link project-link-play" aria-label="Try the experiment">▶ Try It</a>
+              <!-- Added data-action attribute -->
+              <button type="button" class="project-link project-link-play" data-action="try-it" aria-label="Try the experiment">▶ Try It</button>
             </div>
           </div>
         </article>
@@ -466,6 +467,7 @@
         <p class="section-subtitle">Milestones that shaped my path as a multidisciplinary creator.</p>
       </header>
 
+      <!-- Changed structure to use flexbox for better alignment -->
       <div class="timeline" id="timeline">
         <!-- Timeline Item 1 -->
         <div class="timeline-item reveal">
@@ -621,14 +623,11 @@
             </div>
           </a>
 
-          <!-- Discord Placeholder — Replace with your Discord username or invite link -->
+          <!-- Discord — Replaced SVG with Image -->
           <a href="https://discord.gg/your-server-link" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <span class="contact-icon">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M9.5 16 C8 16 7 14.5 7 14.5 L8.5 13 C8.5 13 9.5 14 10.5 14 C10.5 14 11 13.5 11 13 L9.5 16 Z" fill="#F5D442"/>
-                <path d="M14.5 16 C16 16 17 14.5 17 14.5 L15.5 13 C15.5 13 14.5 14 13.5 14 C13.5 14 13 13.5 13 13 L14.5 16 Z" fill="#F5D442"/>
-                <ellipse cx="12" cy="10" rx="8" ry="6" fill="none" stroke="#F5D442" stroke-width="1.5"/>
-              </svg>
+            <span class="contact-icon contact-img-wrapper">
+              <!-- Replace src with your custom icon path -->
+              <img src="assets/discord-icon.png" alt="Discord Icon" width="24" height="24">
             </span>
             <div class="contact-details">
               <span class="contact-label">Discord</span>
@@ -636,12 +635,11 @@
             </div>
           </a>
 
-          <!-- GitHub Placeholder — Replace with your GitHub URL -->
+          <!-- GitHub — Replaced SVG with Image -->
           <a href="https://github.com/[your-github-username]" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <span class="contact-icon">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M12 2 C6.5 2 2 6.5 2 12 C2 16.4 4.8 20.2 8.6 21.4 C9 21.5 9.2 21.2 9.2 21 V19.3 C6.7 19.8 6.2 18 6.2 18 C5.8 17 5.2 16.7 5.2 16.7 C4.4 16.2 5.3 16.2 5.3 16.2 C6.1 16.3 6.5 17 6.5 17 C7.3 18.4 8.6 18 9.2 17.7 C9.3 17.2 9.5 16.8 9.8 16.5 C7.6 16.3 5.3 15.5 5.3 11.5 C5.3 10.4 5.7 9.4 6.4 8.6 C6.3 8.4 6 7.5 6.5 6.3 C6.5 6.3 7.3 6 9.2 7.3 C10 7 10.9 6.8 11.8 6.8 C12.7 6.8 13.6 7 14.4 7.3 C16.3 6 17.1 6.3 17.1 6.3 C17.6 7.5 17.3 8.4 17.2 8.6 C17.9 9.4 18.3 10.4 18.3 11.5 C18.3 15.5 16 16.3 13.8 16.5 C14.2 16.9 14.6 17.7 14.6 19 C14.6 20.2 14.6 21 14.6 21 C14.6 21.2 14.8 21.5 15.2 21.4 C19 20.2 21.8 16.4 21.8 12 C21.8 6.5 17.3 2 12 2 Z" fill="none" stroke="#F5D442" stroke-width="1.5"/>
-              </svg>
+            <span class="contact-icon contact-img-wrapper">
+              <!-- Replace src with your custom icon path -->
+              <img src="assets/github-icon.png" alt="GitHub Icon" width="24" height="24">
             </span>
             <div class="contact-details">
               <span class="contact-label">GitHub</span>
@@ -649,13 +647,11 @@
             </div>
           </a>
 
-          <!-- YouTube Placeholder — Replace with your YouTube URL -->
+          <!-- YouTube — Replaced SVG with Image -->
           <a href="https://youtube.com/@[your-youtube-channel]" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <span class="contact-icon">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="2" y="6" width="20" height="12" rx="4" fill="none" stroke="#F5D442" stroke-width="1.5"/>
-                <polygon points="10,9 10,15 16,12" fill="#F5D442"/>
-              </svg>
+            <span class="contact-icon contact-img-wrapper">
+              <!-- Replace src with your custom icon path -->
+              <img src="assets/youtube-icon.png" alt="YouTube Icon" width="24" height="24">
             </span>
             <div class="contact-details">
               <span class="contact-label">YouTube</span>
@@ -663,12 +659,11 @@
             </div>
           </a>
 
-          <!-- Twitter/X Placeholder — Replace with your X/Twitter URL -->
+          <!-- Twitter/X — Replaced SVG with Image -->
           <a href="https://twitter.com/[your-twitter-handle]" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <span class="contact-icon">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M4 4 L10 12 L4 20 H7 L12 15 L16 20 H20 L14 13 L19.5 4 H16.5 L12.5 8.5 L9 4 Z" fill="none" stroke="#F5D442" stroke-width="1.5"/>
-              </svg>
+            <span class="contact-icon contact-img-wrapper">
+              <!-- Replace src with your custom icon path -->
+              <img src="assets/twitter-icon.png" alt="Twitter Icon" width="24" height="24">
             </span>
             <div class="contact-details">
               <span class="contact-label">Twitter / X</span>
@@ -676,16 +671,11 @@
             </div>
           </a>
 
-          <!-- LinkedIn Placeholder — Replace with your LinkedIn URL -->
+          <!-- LinkedIn — Replaced SVG with Image -->
           <a href="https://linkedin.com/in/[your-linkedin-profile]" target="_blank" rel="noopener noreferrer" class="contact-item">
-            <span class="contact-icon">
-              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="3" fill="none" stroke="#F5D442" stroke-width="1.5"/>
-                <line x1="8" y1="10" x2="8" y2="16" stroke="#F5D442" stroke-width="1.5"/>
-                <path d="M8 7 C9.5 7 10 7.5 10 9 L10 16" fill="none" stroke="#F5D442" stroke-width="1.5"/>
-                <line x1="13" y1="10" x2="13" y2="16" stroke="#F5D442" stroke-width="1.5"/>
-                <path d="M13 7 C15 7 16 8 16 10 L16 12 C16 14 15 15 13 15" fill="none" stroke="#F5D442" stroke-width="1.5"/>
-              </svg>
+            <span class="contact-icon contact-img-wrapper">
+              <!-- Replace src with your custom icon path -->
+              <img src="assets/linkedin-icon.png" alt="LinkedIn Icon" width="24" height="24">
             </span>
             <div class="contact-details">
               <span class="contact-label">LinkedIn</span>
@@ -755,6 +745,16 @@
       <polyline points="6,15 12,9 18,15" fill="none" stroke="#0D0D0D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
+
+  <!-- ===================== MODAL FOR PLAY/WATCH/LISTEN ===================== -->
+  <div class="modal-overlay" id="actionModal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <h3 id="modalTitle">Preview</h3>
+      <p id="modalDescription">This is where your game, video, or music player would appear.</p>
+      <!-- You can embed an iframe here later if needed -->
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>

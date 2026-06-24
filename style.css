@@ -943,6 +943,7 @@ img {
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
   transition: all var(--transition-fast);
+  cursor: pointer; /* Added for button elements */
 }
 
 .project-link:hover {
@@ -970,13 +971,14 @@ img {
   position: relative;
   max-width: 800px;
   margin: 0 auto;
-  padding-left: 60px;
+  /* Removed padding-left to use flexbox alignment instead */
 }
 
+/* Vertical Line */
 .timeline::before {
   content: '';
   position: absolute;
-  left: 24px;
+  left: 24px; /* Centered relative to the year column width */
   top: 0;
   bottom: 0;
   width: 2px;
@@ -986,6 +988,8 @@ img {
 .timeline-item {
   position: relative;
   margin-bottom: var(--space-2xl);
+  display: flex; /* Flexbox for alignment */
+  align-items: flex-start;
 }
 
 .timeline-item:last-child {
@@ -993,20 +997,19 @@ img {
 }
 
 .timeline-year {
-  position: absolute;
-  left: -60px;
-  top: 0;
+  width: 48px;
+  text-align: right;
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--color-accent-primary);
-  width: 48px;
-  text-align: right;
+  padding-right: var(--space-lg); /* Space between year and line */
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .timeline-item::before {
   content: '';
   position: absolute;
-  left: -32px;
+  left: 19px; /* Adjusted to align with the vertical line (24px - 5px radius) */
   top: 6px;
   width: 10px;
   height: 10px;
@@ -1021,6 +1024,7 @@ img {
   padding: var(--space-xl);
   border: 1px solid var(--color-border);
   transition: all var(--transition-base);
+  flex-grow: 1; /* Take remaining space */
 }
 
 .timeline-content:hover {
@@ -1134,6 +1138,14 @@ img {
   background-color: rgba(245, 212, 66, 0.08);
   border-radius: var(--radius-md);
   flex-shrink: 0;
+}
+
+/* New style for image-based icons */
+.contact-img-wrapper img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: invert(1) brightness(0.8); /* Makes dark icons white/light */
 }
 
 .contact-icon svg {
@@ -1283,6 +1295,69 @@ img {
   animation: pulseGlow 2s ease-in-out infinite;
 }
 
+/* ===================== MODAL STYLES ===================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-base);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  border: 1px solid var(--color-border-hover);
+  transform: scale(0.9);
+  transition: transform var(--transition-base);
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  font-size: 2rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.modal-close:hover {
+  color: var(--color-accent-primary);
+}
+
+#modalTitle {
+  margin-bottom: var(--space-md);
+  color: var(--color-accent-primary);
+}
+
+#modalDescription {
+  color: var(--color-text-secondary);
+}
+
 /* ===================== REVEAL ANIMATIONS ===================== */
 .reveal {
   opacity: 0;
@@ -1409,21 +1484,18 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .timeline {
-    padding-left: 40px;
-  }
-
+  /* Timeline Mobile Adjustments */
   .timeline::before {
     left: 12px;
   }
 
   .timeline-year {
-    left: -40px;
     width: 32px;
+    padding-right: var(--space-md);
   }
 
   .timeline-item::before {
-    left: -22px;
+    left: 7px; /* Adjusted for mobile line position */
   }
 
   .scroll-indicator {

@@ -3,7 +3,7 @@
  * LAYMON GAMES — PORTFOLIO JAVASCRIPT
  * Pure Vanilla JS · No Frameworks · Production Ready
  * Features: Smooth scroll, reveal animations, filtering, 
- *           mobile nav, back-to-top, active nav highlighting
+ *           mobile nav, back-to-top, active nav highlighting, Modal
  * ============================================================
  */
 
@@ -31,6 +31,13 @@
 
   // Footer year span
   const currentYearSpan = document.getElementById('currentYear');
+
+  // Modal Elements
+  const actionModal = document.getElementById('actionModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDescription = document.getElementById('modalDescription');
+  const modalCloseBtn = document.querySelector('.modal-close');
+  const playButtons = document.querySelectorAll('.project-link-play');
 
   // ===================== UTILITY FUNCTIONS =====================
 
@@ -100,27 +107,60 @@
     const revealElements = document.querySelectorAll('.reveal');
 
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              // Once revealed, stop observing for performance
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-          rootMargin: '0px 0px -50px 0px'
-        }
-      );
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Only animate once
+          }
+        });
+      }, { threshold: 0.1 });
 
-      revealElements.forEach((el) => observer.observe(el));
+      revealElements.forEach(el => observer.observe(el));
     } else {
-      // Fallback for browsers without IntersectionObserver
-      revealElements.forEach((el) => el.classList.add('visible'));
+      // Fallback for browsers that don't support IntersectionObserver
+      revealElements.forEach(el => el.classList.add('visible'));
     }
+  }
+
+  // ===================== MODAL LOGIC =====================
+
+  /**
+   * Opens the modal with specific content based on the button clicked.
+   */
+  function openModal(actionType, titleText) {
+    let description = '';
+    
+    switch (actionType) {
+      case 'play':
+        description = 'Launching game preview...';
+        break;
+      case 'watch':
+        description = 'Loading video player...';
+        break;
+      case 'listen':
+        description = 'Starting audio stream...';
+        break;
+      case 'try-it':
+        description = 'Initializing interactive demo...';
+        break;
+      default:
+        description = 'This feature is coming soon.';
+    }
+
+    modalTitle.textContent = titleText || 'Preview';
+    modalDescription.textContent = description;
+    
+    actionModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling background
+  }
+
+  /**
+   * Closes the modal.
+   */
+  function closeModal() {
+    actionModal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
   }
 
   // ===================== NAVIGATION =====================
@@ -222,13 +262,14 @@
       }
     });
 
-    // Update active state on nav links
+    // Update active state on links
     navLinks.forEach((link) => {
-      link.classList.remove('active');
-      const targetSection = link.getAttribute('data-section');
-
-      if (targetSection === currentSection) {
+      const sectionId = link.getAttribute('data-section');
+      
+      if (sectionId === currentSection) {
         link.classList.add('active');
+      } else {
+        link.classList.remove('active');
       }
     });
   }
@@ -236,10 +277,10 @@
   // ===================== NAVBAR SCROLL EFFECTS =====================
 
   /**
-   * Handles navbar styling on scroll.
+   * Handles navbar background and shadow on scroll.
    */
   function handleNavbarScroll() {
-    if (window.pageYOffset > 50) {
+    if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
@@ -249,18 +290,7 @@
   // ===================== BACK TO TOP BUTTON =====================
 
   /**
-   * Shows/hides the back-to-top button based on scroll position.
-   */
-  function handleBackToTopVisibility() {
-    if (window.pageYOffset > 500) {
-      backToTopBtn.classList.add('visible');
-    } else {
-      backToTopBtn.classList.remove('visible');
-    }
-  }
-
-  /**
-   * Scrolls to the top of the page when back-to-top is clicked.
+   * Handles back-to-top button click.
    */
   function handleBackToTopClick() {
     window.scrollTo({
@@ -269,10 +299,21 @@
     });
   }
 
+  /**
+   * Toggles visibility of the back-to-top button based on scroll position.
+   */
+  function handleBackToTopVisibility() {
+    if (window.scrollY > 500) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  }
+
   // ===================== PROJECT FILTERING =====================
 
   /**
-   * Handles project category filtering.
+   * Handles project filtering logic.
    */
   function handleFilterClick(e) {
     const filter = e.currentTarget.getAttribute('data-filter');
