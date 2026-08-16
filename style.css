@@ -1355,3 +1355,160 @@ section[id] {
 		animation: none;
 	}
 }
+
+/* =========================================================
+   MOBILE + SECTION FLOW REFINEMENT
+   The artwork becomes a true full-screen home on phones,
+   while the content sections blend together more naturally.
+========================================================= */
+
+/* Let the page read as one continuous composition instead of five
+   strongly separated panels. */
+:root {
+	--space-section: clamp(64px, 7vw, 108px);
+}
+
+.panel-section {
+	background: linear-gradient(180deg, #0b0907 0%, #0c0a08 50%, #0b0907 100%);
+}
+
+.panel-section::after {
+	background:
+		radial-gradient(circle at 50% 50%, rgba(29, 37, 25, 0.12), transparent 56%);
+}
+
+.panel-frame {
+	opacity: 0.11;
+	filter: sepia(0.12) brightness(0.58) contrast(1.04);
+}
+
+.process-section {
+	background:
+		radial-gradient(circle at 50% 0%, rgba(37, 75, 56, 0.14), transparent 36%),
+		#0b0907;
+	border-top: 0;
+	border-bottom: 0;
+}
+
+.contact-section {
+	background: #0b0907;
+	padding-top: clamp(12px, 2vw, 24px);
+}
+
+.site-footer {
+	border-top: 0;
+	background: #090806;
+}
+
+/* Full-height mobile home: the desktop artwork keeps its original ratio,
+   while phones get an intentional viewport-height composition. */
+@media (max-width: 700px) {
+	.legacy-hero {
+		aspect-ratio: auto;
+		min-height: 100svh;
+		height: 100svh;
+	}
+
+	.legacy-hero-image {
+		object-fit: cover;
+		object-position: 51% 50%;
+	}
+
+	.legacy-hero-vignette {
+		background:
+			linear-gradient(180deg, rgba(0,0,0,.58) 0%, rgba(0,0,0,.16) 22%, rgba(0,0,0,.06) 52%, rgba(0,0,0,.64) 100%),
+			radial-gradient(circle at 50% 40%, rgba(0,0,0,0) 0 22%, rgba(0,0,0,.13) 42%, rgba(0,0,0,.28) 100%);
+	}
+
+	/* Keep the signature artwork visible, but let the mobile composition
+	   give the hero breathing room rather than forcing everything into a
+	   16:9-like strip. */
+	.legacy-lemon-layer .floating-lemon {
+		top: 63%;
+		width: clamp(92px, 25vw, 125px);
+	}
+
+	.legacy-lemon-layer .lemon-head {
+		top: 50%;
+		max-width: clamp(64px, 18vw, 88px);
+	}
+
+	/* The clock is decorative on small screens; keep it visually tied to
+	   the painted clock without letting it consume the composition. */
+	.legacy-clock-overlay {
+		--clock-hub-size: clamp(9px, 2.8vw, 13px);
+	}
+
+	.legacy-clock-overlay .hour-hand {
+		--hand-width: clamp(42px, 10vw, 62px);
+	}
+
+	.legacy-clock-overlay .minute-hand {
+		--hand-width: clamp(52px, 12vw, 74px);
+	}
+
+	.legacy-clock-overlay .second-hand {
+		--hand-width: clamp(60px, 14vw, 84px);
+	}
+
+	.panel-section,
+	.process-section {
+		padding-top: clamp(58px, 11vw, 78px);
+		padding-bottom: clamp(58px, 11vw, 78px);
+	}
+
+	.section-content h2,
+	.process-inner h2,
+	.contact-frame h2 {
+		font-size: clamp(29px, 8.5vw, 42px);
+	}
+
+	.copy-column p,
+	.section-intro,
+	.work-copy p,
+	.small-work p,
+	.process-step p,
+	.contact-frame p {
+		font-size: 14px;
+		line-height: 1.78;
+	}
+
+	.skill-grid,
+	.featured-work {
+		margin-top: 34px;
+	}
+
+	.contact-section {
+		padding-bottom: 58px;
+	}
+
+	.contact-frame {
+		box-shadow: 0 18px 44px rgba(0,0,0,.26);
+	}
+}
+
+/* Narrow screens: make the home artwork feel intentional rather than
+   like a clipped desktop canvas. */
+@media (max-width: 420px) {
+	.legacy-hero-image {
+		object-position: 50% 50%;
+	}
+
+	.legacy-clock-overlay .hour-hand {
+		--hand-width: 40px;
+	}
+
+	.legacy-clock-overlay .minute-hand {
+		--hand-width: 49px;
+	}
+
+	.legacy-clock-overlay .second-hand {
+		--hand-width: 57px;
+	}
+
+	.panel-section,
+	.process-section {
+		padding-left: 18px;
+		padding-right: 18px;
+	}
+}
