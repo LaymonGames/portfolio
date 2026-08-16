@@ -870,6 +870,55 @@ section[id] {
 	line-height: 1.65;
 }
 
+/* Mini projects: a repeatable grid of small project cards below the
+   featured work. Add more projects by duplicating .mini-project-card
+   in the HTML — the layout wraps automatically. */
+.mini-projects-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 14px;
+	margin-top: 14px;
+}
+
+.mini-project-card {
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+}
+
+.mini-project-card .small-work-icon {
+	margin-bottom: 16px;
+}
+
+.mini-project-card .mini-label {
+	margin: 0 0 6px;
+}
+
+.mini-project-card h3 {
+	margin: 0;
+	font-family: 'Cinzel', serif;
+	font-size: 18px;
+	font-weight: 600;
+}
+
+.mini-project-card p {
+	margin: 10px 0 0;
+	font-size: 13px;
+	line-height: 1.65;
+	color: var(--muted);
+	flex: 1;
+}
+
+.mini-project-card .text-link {
+	margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+	.mini-projects-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
 /* ---------------------------------------------------------
    Process
 --------------------------------------------------------- */
@@ -1150,8 +1199,8 @@ section[id] {
 
 :root {
 	--legacy-hero-ratio: 1727 / 911;
-	--clock-x: 89.6%;
-	--clock-y: 16.3%;
+	--clock-x: 91%;
+	--clock-y: 26.6%;
 }
 
 /* The visual header is the original portfolio(1) composition. It has its
@@ -1408,8 +1457,8 @@ section[id] {
 
 @media (max-width: 900px) {
 	:root {
-		--clock-x: 89.6%;
-		--clock-y: 16.3%;
+		--clock-x: 91%;
+		--clock-y: 26.6%;
 	}
 
 	.legacy-lemon-layer .floating-lemon {
@@ -1423,8 +1472,8 @@ section[id] {
 
 @media (max-width: 600px) {
 	:root {
-		--clock-x: 89.6%;
-		--clock-y: 16.3%;
+		--clock-x: 91%;
+		--clock-y: 26.6%;
 	}
 
 	.legacy-lemon-layer .floating-lemon {
