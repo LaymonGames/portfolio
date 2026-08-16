@@ -121,3 +121,27 @@ if (navToggle && mobileNav) {
 		}
 	});
 }
+
+
+const navLinks = Array.from(document.querySelectorAll('.site-header .nav a'));
+const sections = Array.from(document.querySelectorAll('main section[id]'));
+
+function updateActiveNav() {
+	const scrollY = window.scrollY + 120;
+	let activeId = 'top';
+	for (const section of sections) {
+		if (section.offsetTop <= scrollY) activeId = section.id;
+	}
+	navLinks.forEach((link) => {
+		const target = link.getAttribute('href');
+		if (target === `#${activeId}` || (activeId === 'top' && target === '#top')) {
+			link.setAttribute('aria-current', 'page');
+		} else {
+			link.removeAttribute('aria-current');
+		}
+	});
+}
+
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+window.addEventListener('resize', updateActiveNav);
+updateActiveNav();

@@ -17,7 +17,7 @@
 	--line: rgba(216, 164, 60, 0.32);
 	--shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
 
-	--header-h: 78px;
+	--header-h: 72px;
 	--content-max: 1180px;
 	--radius: 6px;
 	--space-section: clamp(88px, 10vw, 150px);
@@ -26,7 +26,7 @@
 
 @media (max-width: 700px) {
 	:root {
-		--header-h: 64px;
+		--header-h: 60px;
 	}
 }
 
@@ -121,8 +121,11 @@ img {
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 clamp(20px, 4vw, 64px);
-	background: linear-gradient(180deg, rgba(6, 5, 4, 0.92), rgba(6, 5, 4, 0.72) 70%, rgba(6, 5, 4, 0));
-	backdrop-filter: blur(10px);
+	background:
+		linear-gradient(180deg, rgba(4, 3, 2, 0.94), rgba(7, 6, 4, 0.82) 72%, rgba(7, 6, 4, 0.14));
+	border-bottom: 1px solid rgba(216, 164, 60, 0.16);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
+	backdrop-filter: blur(12px);
 }
 
 .brand,
@@ -174,14 +177,14 @@ img {
 .nav {
 	display: flex;
 	gap: clamp(14px, 2.2vw, 34px);
-	font-size: 11px;
+	font-size: 10px;
 	letter-spacing: 0.15em;
 	text-transform: uppercase;
 }
 
 .nav a {
 	position: relative;
-	padding: 4px 2px;
+	padding: 8px 2px;
 	color: rgba(246, 236, 215, 0.78);
 	transition: color 0.2s ease;
 }
@@ -206,6 +209,14 @@ img {
 
 .nav a:hover::after,
 .nav a:focus-visible::after {
+	transform: scaleX(1);
+}
+
+.nav a[aria-current="page"] {
+	color: var(--gold-bright);
+}
+
+.nav a[aria-current="page"]::after {
 	transform: scaleX(1);
 }
 
@@ -1140,8 +1151,8 @@ section[id] {
 
 :root {
 	--legacy-hero-ratio: 1727 / 911;
-	--clock-x: 88.65%;
-	--clock-y: 22.75%;
+	--clock-x: 88.55%;
+	--clock-y: 18.55%;
 }
 
 /* The visual header is the original portfolio(1) composition. It has its
@@ -1164,6 +1175,7 @@ section[id] {
 	object-fit: cover;
 	object-position: center;
 	display: block;
+	filter: brightness(.82) saturate(.88) contrast(1.04);
 }
 
 .legacy-hero-vignette {
@@ -1172,8 +1184,8 @@ section[id] {
 	z-index: 1;
 	pointer-events: none;
 	background:
-		linear-gradient(180deg, rgba(0,0,0,.18) 0%, transparent 35%, transparent 78%, rgba(0,0,0,.52) 100%),
-		radial-gradient(circle at 89% 23%, rgba(0,0,0,0) 0 7.5%, rgba(0,0,0,.08) 11%, transparent 18%);
+		linear-gradient(180deg, rgba(0,0,0,.48) 0%, rgba(0,0,0,.18) 22%, rgba(0,0,0,.12) 52%, rgba(0,0,0,.62) 100%),
+		radial-gradient(circle at 88.5% 18.5%, rgba(0,0,0,0) 0 8%, rgba(0,0,0,.16) 11%, rgba(0,0,0,.04) 18%, transparent 24%);
 }
 
 .legacy-lemon-layer {
@@ -1222,6 +1234,7 @@ section[id] {
 	inset: 0;
 	z-index: 4;
 	pointer-events: none;
+	--clock-hub-size: clamp(12px, 1.25vw, 21px);
 }
 
 .legacy-clock-overlay .clock-hand {
@@ -1233,27 +1246,42 @@ section[id] {
 	max-width: none;
 	max-height: none;
 	display: block;
+	opacity: .94;
+	filter: drop-shadow(0 2px 4px rgba(0,0,0,.72));
 	transform: translate(var(--hand-pivot), -50%) rotate(var(--rotation-angle, 0deg));
 	transform-origin: var(--rotation-origin);
 	will-change: transform;
 }
 
 .legacy-clock-overlay .hour-hand {
-	--hand-width: clamp(120px, 16.2vw, 330px);
-	--hand-pivot: -12%;
-	--rotation-origin: 12% 50%;
+	--hand-width: clamp(78px, 7.2vw, 126px);
+	--hand-pivot: -7.2%;
+	--rotation-origin: 7.2% 50%;
 }
 
 .legacy-clock-overlay .minute-hand {
-	--hand-width: clamp(160px, 19.1vw, 390px);
-	--hand-pivot: -8%;
-	--rotation-origin: 8% 50%;
+	--hand-width: clamp(96px, 8.9vw, 154px);
+	--hand-pivot: -7.8%;
+	--rotation-origin: 7.8% 50%;
 }
 
 .legacy-clock-overlay .second-hand {
-	--hand-width: clamp(190px, 21.5vw, 440px);
-	--hand-pivot: -26.3%;
-	--rotation-origin: 26.3% 50%;
+	--hand-width: clamp(118px, 10.7vw, 184px);
+	--hand-pivot: -24.6%;
+	--rotation-origin: 24.6% 50%;
+}
+
+.legacy-clock-overlay .clock-hub {
+	position: absolute;
+	left: var(--clock-x);
+	top: var(--clock-y);
+	width: var(--clock-hub-size);
+	aspect-ratio: 1;
+	transform: translate(-50%, -50%);
+	border-radius: 50%;
+	background: radial-gradient(circle at 38% 34%, #f4d27c 0 12%, #a66f1a 30%, #3f2a0d 58%, #0d0a05 100%);
+	border: 1px solid rgba(243,199,100,.72);
+	box-shadow: 0 0 0 3px rgba(0,0,0,.32), 0 2px 8px rgba(0,0,0,.72);
 }
 
 /* Content begins after the original header. Nothing from portfolio text is
@@ -1276,13 +1304,13 @@ main#top {
 }
 
 section[id] {
-	scroll-margin-top: 24px;
+	scroll-margin-top: calc(var(--header-h) + 18px);
 }
 
 @media (max-width: 900px) {
 	:root {
-		--clock-x: 88.55%;
-		--clock-y: 22.7%;
+		--clock-x: 88.45%;
+		--clock-y: 18.4%;
 	}
 
 	.legacy-lemon-layer .floating-lemon {
@@ -1296,8 +1324,8 @@ section[id] {
 
 @media (max-width: 600px) {
 	:root {
-		--clock-x: 88.45%;
-		--clock-y: 22.65%;
+		--clock-x: 88.1%;
+		--clock-y: 18.15%;
 	}
 
 	.legacy-lemon-layer .floating-lemon {
@@ -1310,15 +1338,15 @@ section[id] {
 	}
 
 	.legacy-clock-overlay .hour-hand {
-		--hand-width: clamp(78px, 17vw, 115px);
+		--hand-width: clamp(52px, 10vw, 80px);
 	}
 
 	.legacy-clock-overlay .minute-hand {
-		--hand-width: clamp(92px, 20vw, 135px);
+		--hand-width: clamp(64px, 12vw, 94px);
 	}
 
 	.legacy-clock-overlay .second-hand {
-		--hand-width: clamp(108px, 22.5vw, 150px);
+		--hand-width: clamp(74px, 14vw, 108px);
 	}
 }
 
