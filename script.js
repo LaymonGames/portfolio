@@ -14,15 +14,31 @@ function setHandAngle(hand, angle) {
 	}
 }
 
-function updateClock() {
-	const now = new Date();
-	const seconds = now.getSeconds();
-	const minutes = now.getMinutes() + seconds / 60;
-	const hours = (now.getHours() % 12) + minutes / 60;
+/* Smooth sweeping clock — replaces the 1-second tick.
+   Falls back to ticking for prefers-reduced-motion users. */
+const clockSmooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	setHandAngle(secondHand, seconds * 6);
-	setHandAngle(minuteHand, minutes * 6);
-	setHandAngle(hourHand, hours * 30);
+function updateClock() {
+  const now = new Date();
+  const seconds = now.getSeconds() + (clockSmooth ? now.getMilliseconds() / 1000 : 0);
+  const minutes = now.getMinutes() + seconds / 60;
+  const hours = (now.getHours() % 12) + minutes / 60;
+  setHandAngle(secondHand, seconds * 6);
+  setHandAngle(minuteHand, minutes * 6);
+  setHandAngle(hourHand, hours * 30);
+}
+
+if (secondHand && minuteHand && hourHand) {
+  updateClock();
+  if (clockSmooth) {
+    const sweepClock = () => {
+      updateClock();
+      requestAnimationFrame(sweepClock);
+    };
+    requestAnimationFrame(sweepClock);
+  } else {
+    setInterval(updateClock, 1000);
+  }
 }
 
 function setLemonHeadTarget(clientX) {
@@ -47,11 +63,6 @@ function updateLemonHeadFrame() {
 	}
 
 	requestAnimationFrame(updateLemonHeadFrame);
-}
-
-if (secondHand && minuteHand && hourHand) {
-	updateClock();
-	setInterval(updateClock, 1000);
 }
 
 if (lemonHead) {
@@ -205,3 +216,77 @@ allSectionLinks.forEach((link) => {
 	});
 });
 
+/* =========================================================
+   UPGRADE PACK — header state, card spotlight, scroll reveals
+   ========================================================= */
+const upgradeReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Header depth on scroll ---------- */
+const siteHeader = document.querySelector('.site-header');
+function updateHeaderState() {
+  if (!siteHeader) return;
+  siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
+}
+window.addEventListener('scroll', updateHeaderState, { passive: true });
+updateHeaderState();
+
+/* ---------- Cursor spotlight on cards ---------- */
+if (window.matchMedia('(hover: hover)').matches) {
+  document
+    .querySelectorAll('.skill-card, .small-work, .work-main, .contact-channel')
+    .forEach((card) => {
+      card.addEventListener('pointermove', (event) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+        card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+      });
+    });
+}
+
+/* ---------- Scroll reveals ---------- */
+const revealSelector = [
+  '.about-identity',
+  '.section-heading-row',
+  '.copy-column',
+  '.skill-card',
+  '.work-main',
+  '.small-work',
+  '.process-step',
+  '.contact-frame',
+].join(',');
+
+const revealTargets = Array.from(document.querySelectorAll(revealSelector));
+
+if (!upgradeReducedMotion && 'IntersectionObserver' in window && revealTargets.length) {
+  revealTargets.forEach((el) => {
+    const parent = el.parentElement;
+    const siblings = parent
+      ? Array.from(parent.children).filter((child) => child.matches(revealSelector))
+      : [];
+    const siblingIndex = siblings.indexOf(el);
+    if (siblingIndex > 0) {
+      el.style.setProperty('--reveal-delay', `${Math.min(siblingIndex * 90, 420)}ms`);
+    }
+    el.classList.add('reveal');
+  });
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        el.classList.add('is-visible');
+        revealObserver.unobserve(el);
+        /* Release the reveal classes once the entrance finishes so the
+           original fast hover transitions take over again. */
+        window.setTimeout(() => {
+          el.classList.remove('reveal', 'is-visible');
+          el.style.removeProperty('--reveal-delay');
+        }, 1500);
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+  );
+
+  revealTargets.forEach((el) => revealObserver.observe(el));
+}
