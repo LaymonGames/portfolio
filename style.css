@@ -1175,7 +1175,7 @@ section[id] {
 	object-fit: cover;
 	object-position: center;
 	display: block;
-	filter: brightness(.80) saturate(.90) contrast(1.05);
+	filter: brightness(.56) saturate(.88) contrast(1.06);
 }
 
 /* A localized light pass keeps the glowing sky behind the floating lemon
@@ -1189,10 +1189,80 @@ section[id] {
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	filter: brightness(1.45) saturate(1.14) contrast(1.02);
-	opacity: .54;
-	-webkit-mask-image: radial-gradient(circle at 50% 20%, #000 0 14%, rgba(0,0,0,.88) 18%, rgba(0,0,0,.42) 30%, transparent 48%);
+	filter: brightness(1.72) saturate(1.18) contrast(1.02);
+	opacity: .74;
+	-webkit-mask-image: radial-gradient(circle at 50% 20%, #000 0 15%, rgba(0,0,0,.92) 23%, rgba(0,0,0,.48) 36%, transparent 54%);
 	mask-image: radial-gradient(circle at 50% 20%, #000 0 14%, rgba(0,0,0,.88) 18%, rgba(0,0,0,.42) 30%, transparent 48%);
+}
+
+/* Focused brightness passes for the warm lamps and the glass chamber.
+   The background remains dark overall, while these painted regions regain
+   enough luminance to read as intentional focal details. */
+.legacy-detail-lift {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	pointer-events: none;
+	background-image: url("assets/pg01.png");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	filter: brightness(1.9) saturate(1.22) contrast(1.02);
+	opacity: .82;
+}
+
+.legacy-lamp-lift {
+	-webkit-mask-image: radial-gradient(ellipse var(--lamp-rx, 5.2%) var(--lamp-ry, 8.2%) at var(--focus-x) var(--focus-y), #000 0 42%, rgba(0,0,0,.95) 58%, rgba(0,0,0,.55) 74%, transparent 100%);
+	mask-image: radial-gradient(ellipse var(--lamp-rx, 5.2%) var(--lamp-ry, 8.2%) at var(--focus-x) var(--focus-y), #000 0 42%, rgba(0,0,0,.95) 58%, rgba(0,0,0,.55) 74%, transparent 100%);
+}
+
+.lamp-left {
+	--focus-x: 2.7%;
+	--focus-y: 28.1%;
+	--lamp-rx: 4.0%;
+	--lamp-ry: 6.7%;
+}
+
+.lamp-upper-left {
+	--focus-x: 23.4%;
+	--focus-y: 11.8%;
+	--lamp-rx: 4.2%;
+	--lamp-ry: 6.5%;
+}
+
+.lamp-upper-right {
+	--focus-x: 76.6%;
+	--focus-y: 11.7%;
+	--lamp-rx: 4.2%;
+	--lamp-ry: 6.5%;
+}
+
+.lamp-right-tube {
+	--focus-x: 79.2%;
+	--focus-y: 51.2%;
+	--lamp-rx: 5.2%;
+	--lamp-ry: 12.2%;
+}
+
+.lamp-bottom-left {
+	--focus-x: 8.4%;
+	--focus-y: 89.7%;
+	--lamp-rx: 5.4%;
+	--lamp-ry: 7.6%;
+}
+
+.lamp-bottom-center {
+	--focus-x: 49.7%;
+	--focus-y: 96.1%;
+	--lamp-rx: 6.3%;
+	--lamp-ry: 6.0%;
+}
+
+.legacy-glass-lift {
+	opacity: .88;
+	filter: brightness(1.72) saturate(1.2) contrast(1.04);
+	-webkit-mask-image: radial-gradient(ellipse 18% 30% at 50% 64%, #000 0 46%, rgba(0,0,0,.94) 58%, rgba(0,0,0,.62) 72%, rgba(0,0,0,.18) 86%, transparent 100%);
+	mask-image: radial-gradient(ellipse 18% 30% at 50% 64%, #000 0 46%, rgba(0,0,0,.94) 58%, rgba(0,0,0,.62) 72%, rgba(0,0,0,.18) 86%, transparent 100%);
 }
 
 .legacy-hero-vignette {
@@ -1420,6 +1490,15 @@ section[id] {
 /* Full-height mobile home: the desktop artwork keeps its original ratio,
    while phones get an intentional viewport-height composition. */
 @media (max-width: 700px) {
+	.legacy-detail-lift {
+		background-size: cover;
+		background-position: center;
+	}
+
+	.legacy-glass-lift {
+		opacity: .82;
+	}
+
 	.legacy-hero {
 		aspect-ratio: auto;
 		min-height: 100svh;
@@ -1433,8 +1512,8 @@ section[id] {
 
 	.legacy-sky-lift {
 		background-position: 51% 50%;
-		opacity: .62;
-		filter: brightness(1.52) saturate(1.18) contrast(1.02);
+		opacity: .76;
+		filter: brightness(1.76) saturate(1.18) contrast(1.02);
 		-webkit-mask-image: radial-gradient(circle at 50% 20%, #000 0 16%, rgba(0,0,0,.90) 21%, rgba(0,0,0,.46) 36%, transparent 58%);
 		mask-image: radial-gradient(circle at 50% 20%, #000 0 16%, rgba(0,0,0,.90) 21%, rgba(0,0,0,.46) 36%, transparent 58%);
 	}
