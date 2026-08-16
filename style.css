@@ -139,8 +139,8 @@ img {
 	display: grid;
 	place-items: center;
 	flex: none;
-	width: 38px;
-	height: 38px;
+	width: 48px;
+	height: 48px;
 	border: 1px solid rgba(216, 164, 60, 0.6);
 	border-radius: 10px;
 	background: linear-gradient(145deg, #4e3a16, #191207);
@@ -727,6 +727,14 @@ section[id] {
 		radial-gradient(circle at 70% 30%, rgba(112, 201, 160, 0.35), transparent 16%),
 		radial-gradient(circle at 40% 55%, rgba(36, 91, 69, 0.35), transparent 25%),
 		linear-gradient(145deg, #06110c, #132c20 45%, #0a1610);
+}
+
+.work-visual-game .mini-project-img {
+	transition: transform 0.35s ease, opacity 0.2s ease;
+}
+
+.work-main:hover .work-visual-game .mini-project-img {
+	transform: scale(1.04);
 }
 
 .visual-stars,
@@ -1848,9 +1856,9 @@ section[id] {
 ========================================================= */
 
 .brand-mark {
-	width: 38px;
-	height: 38px;
-	padding: 4px;
+	width: 48px;
+	height: 48px;
+	padding: 3px;
 	border-radius: 8px;
 	background: linear-gradient(145deg, rgba(64, 49, 18, 0.92), rgba(18, 13, 6, 0.98));
 	image-rendering: pixelated;
@@ -1951,9 +1959,9 @@ section[id] {
 	}
 
 	.brand-mark {
-		width: 34px;
-		height: 34px;
-		padding: 4px;
+		width: 42px;
+		height: 42px;
+		padding: 3px;
 	}
 
 	.brand strong {
