@@ -291,49 +291,52 @@ if (!upgradeReducedMotion && 'IntersectionObserver' in window && revealTargets.l
   revealTargets.forEach((el) => revealObserver.observe(el));
 }
 
-/* Click-to-copy email button in the Contact section. */
-const copyEmailBtn = document.querySelector('.copy-email');
+/* ── Click-to-copy email: the whole card is the button ── */
+const copyEmailBtn = document.querySelector('.contact-channel-copy');
 
 if (copyEmailBtn) {
   const copyEmailText = copyEmailBtn.querySelector('.copy-email-text');
-  const originalEmailLabel = copyEmailText ? copyEmailText.textContent : '';
+  const originalLabel  = copyEmailText ? copyEmailText.textContent.trim() : '';
   let copyResetTimeout = null;
 
-  async function copyEmailToClipboard(email) {
+  async function copyToClipboard(text) {
     if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(email);
+      await navigator.clipboard.writeText(text);
       return;
     }
-    // Fallback for browsers/contexts without the async Clipboard API.
-    const tempInput = document.createElement('textarea');
-    tempInput.value = email;
-    tempInput.style.position = 'fixed';
-    tempInput.style.opacity = '0';
-    document.body.appendChild(tempInput);
-    tempInput.select();
+    /* Fallback for non-secure contexts (e.g. plain file://) */
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+    document.body.appendChild(ta);
+    ta.select();
     document.execCommand('copy');
-    document.body.removeChild(tempInput);
+    document.body.removeChild(ta);
   }
 
   copyEmailBtn.addEventListener('click', async () => {
     const email = copyEmailBtn.dataset.email;
     if (!email) return;
-
     try {
-      await copyEmailToClipboard(email);
-    } catch (err) {
+      await copyToClipboard(email);
+    } catch (_) {
       return;
     }
 
     copyEmailBtn.classList.add('is-copied');
     copyEmailBtn.setAttribute('aria-label', 'Email copied to clipboard');
-    if (copyEmailText) copyEmailText.textContent = 'Copied to clipboard!';
+    if (copyEmailText) copyEmailText.textContent = 'Copied!';
 
     window.clearTimeout(copyResetTimeout);
     copyResetTimeout = window.setTimeout(() => {
       copyEmailBtn.classList.remove('is-copied');
-      copyEmailBtn.removeAttribute('aria-label');
-      if (copyEmailText) copyEmailText.textContent = originalEmailLabel;
-    }, 1800);
+      copyEmailBtn.setAttribute('aria-label', 'Copy email address');
+      if (copyEmailText) copyEmailText.textContent = originalLabel;
+    }, 2000);
   });
 }
+
+/* ── Clock already uses new Date() → device local time ──
+   The updateClock() function above reads the user's system clock
+   directly (getHours / getMinutes / getSeconds), so it automatically
+   shows the correct local time with no extra configuration needed. */

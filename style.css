@@ -1038,36 +1038,53 @@ section[id] {
 	font-style: italic;
 }
 
-/* Click-to-copy email button. Shares the base .contact-placeholder look
-   but behaves like a real control instead of static placeholder text. */
-button.contact-placeholder.copy-email {
-	display: inline-flex;
+/* Full-card copy button: the entire email contact-channel is the button */
+button.contact-channel-copy {
+	width: 100%;
+	text-align: left;
+	font-family: inherit;
+	cursor: pointer;
+	border: 1px solid rgba(216, 164, 60, 0.24);
+	border-radius: var(--radius);
+	background: rgba(9, 8, 6, 0.4);
+	padding: 18px 20px;
+	transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+button.contact-channel-copy:hover,
+button.contact-channel-copy:focus-visible {
+	border-color: rgba(216, 164, 60, 0.6);
+	background: rgba(216, 164, 60, 0.06);
+}
+
+button.contact-channel-copy:focus-visible {
+	outline: 1px solid rgba(216, 164, 60, 0.55);
+	outline-offset: 2px;
+}
+
+button.contact-channel-copy.is-copied {
+	border-color: rgba(216, 164, 60, 0.6);
+}
+
+.copy-email-row {
+	display: flex;
 	align-items: center;
 	gap: 10px;
 	margin-top: 8px;
-	padding: 0;
-	border: 0;
-	background: none;
+}
+
+.copy-email-text {
 	color: var(--text);
 	font-size: 13px;
-	font-style: normal;
-	font-family: inherit;
-	cursor: pointer;
-	transition: color 0.2s ease;
 }
 
-button.contact-placeholder.copy-email:hover,
-button.contact-placeholder.copy-email:focus-visible {
+button.contact-channel-copy.is-copied .copy-email-text {
 	color: var(--gold-bright);
-}
-
-button.contact-placeholder.copy-email:focus-visible {
-	outline: 1px solid rgba(216, 164, 60, 0.55);
-	outline-offset: 4px;
 }
 
 .copy-email-icon {
 	display: inline-flex;
+	flex-shrink: 0;
 	color: rgba(216, 164, 60, 0.72);
 	transition: color 0.2s ease;
 }
@@ -1077,13 +1094,59 @@ button.contact-placeholder.copy-email:focus-visible {
 	height: 14px;
 }
 
-button.contact-placeholder.copy-email:hover .copy-email-icon,
-button.contact-placeholder.copy-email:focus-visible .copy-email-icon {
+button.contact-channel-copy:hover .copy-email-icon,
+button.contact-channel-copy:focus-visible .copy-email-icon,
+button.contact-channel-copy.is-copied .copy-email-icon {
 	color: var(--gold-bright);
 }
 
-button.contact-placeholder.copy-email.is-copied {
+/* Social links inside the Elsewhere channel */
+.social-links {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.social-link {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	text-decoration: none;
+	color: var(--text);
+	font-size: 13px;
+	transition: color 0.2s ease;
+}
+
+.social-link:hover {
 	color: var(--gold-bright);
+}
+
+.social-icon {
+	display: inline-flex;
+	flex-shrink: 0;
+	color: rgba(216, 164, 60, 0.72);
+	transition: color 0.2s ease;
+}
+
+.social-icon svg {
+	width: 16px;
+	height: 16px;
+}
+
+.social-link:hover .social-icon {
+	color: var(--gold-bright);
+}
+
+.social-name {
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	min-width: 58px;
+}
+
+.social-handle {
+	color: rgba(246, 236, 215, 0.55);
+	font-size: 12px;
 }
 
 /* ---------------------------------------------------------
