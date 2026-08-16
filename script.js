@@ -23,9 +23,11 @@ function updateClock() {
   const seconds = now.getSeconds() + (clockSmooth ? now.getMilliseconds() / 1000 : 0);
   const minutes = now.getMinutes() + seconds / 60;
   const hours = (now.getHours() % 12) + minutes / 60;
-  setHandAngle(secondHand, seconds * 6);
-  setHandAngle(minuteHand, minutes * 6);
-  setHandAngle(hourHand, hours * 30);
+  // The hand wrapper naturally points to 3 o'clock (90°) at 0° rotation,
+  // so subtract 90° to align 0° with 12 o'clock.
+  setHandAngle(secondHand, seconds * 6 - 90);
+  setHandAngle(minuteHand, minutes * 6 - 90);
+  setHandAngle(hourHand, hours * 30 - 90);
 }
 
 if (secondHand && minuteHand && hourHand) {
@@ -304,7 +306,6 @@ if (copyEmailBtn) {
       await navigator.clipboard.writeText(text);
       return;
     }
-    /* Fallback for non-secure contexts (e.g. plain file://) */
     const ta = document.createElement('textarea');
     ta.value = text;
     ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
@@ -335,8 +336,3 @@ if (copyEmailBtn) {
     }, 2000);
   });
 }
-
-/* ── Clock already uses new Date() → device local time ──
-   The updateClock() function above reads the user's system clock
-   directly (getHours / getMinutes / getSeconds), so it automatically
-   shows the correct local time with no extra configuration needed. */
