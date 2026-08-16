@@ -1038,6 +1038,54 @@ section[id] {
 	font-style: italic;
 }
 
+/* Click-to-copy email button. Shares the base .contact-placeholder look
+   but behaves like a real control instead of static placeholder text. */
+button.contact-placeholder.copy-email {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 8px;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--text);
+	font-size: 13px;
+	font-style: normal;
+	font-family: inherit;
+	cursor: pointer;
+	transition: color 0.2s ease;
+}
+
+button.contact-placeholder.copy-email:hover,
+button.contact-placeholder.copy-email:focus-visible {
+	color: var(--gold-bright);
+}
+
+button.contact-placeholder.copy-email:focus-visible {
+	outline: 1px solid rgba(216, 164, 60, 0.55);
+	outline-offset: 4px;
+}
+
+.copy-email-icon {
+	display: inline-flex;
+	color: rgba(216, 164, 60, 0.72);
+	transition: color 0.2s ease;
+}
+
+.copy-email-icon svg {
+	width: 14px;
+	height: 14px;
+}
+
+button.contact-placeholder.copy-email:hover .copy-email-icon,
+button.contact-placeholder.copy-email:focus-visible .copy-email-icon {
+	color: var(--gold-bright);
+}
+
+button.contact-placeholder.copy-email.is-copied {
+	color: var(--gold-bright);
+}
+
 /* ---------------------------------------------------------
    Footer
 --------------------------------------------------------- */

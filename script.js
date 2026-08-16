@@ -290,3 +290,50 @@ if (!upgradeReducedMotion && 'IntersectionObserver' in window && revealTargets.l
 
   revealTargets.forEach((el) => revealObserver.observe(el));
 }
+
+/* Click-to-copy email button in the Contact section. */
+const copyEmailBtn = document.querySelector('.copy-email');
+
+if (copyEmailBtn) {
+  const copyEmailText = copyEmailBtn.querySelector('.copy-email-text');
+  const originalEmailLabel = copyEmailText ? copyEmailText.textContent : '';
+  let copyResetTimeout = null;
+
+  async function copyEmailToClipboard(email) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(email);
+      return;
+    }
+    // Fallback for browsers/contexts without the async Clipboard API.
+    const tempInput = document.createElement('textarea');
+    tempInput.value = email;
+    tempInput.style.position = 'fixed';
+    tempInput.style.opacity = '0';
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+  }
+
+  copyEmailBtn.addEventListener('click', async () => {
+    const email = copyEmailBtn.dataset.email;
+    if (!email) return;
+
+    try {
+      await copyEmailToClipboard(email);
+    } catch (err) {
+      return;
+    }
+
+    copyEmailBtn.classList.add('is-copied');
+    copyEmailBtn.setAttribute('aria-label', 'Email copied to clipboard');
+    if (copyEmailText) copyEmailText.textContent = 'Copied to clipboard!';
+
+    window.clearTimeout(copyResetTimeout);
+    copyResetTimeout = window.setTimeout(() => {
+      copyEmailBtn.classList.remove('is-copied');
+      copyEmailBtn.removeAttribute('aria-label');
+      if (copyEmailText) copyEmailText.textContent = originalEmailLabel;
+    }, 1800);
+  });
+}
