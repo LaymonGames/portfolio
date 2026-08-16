@@ -145,3 +145,63 @@ function updateActiveNav() {
 window.addEventListener('scroll', updateActiveNav, { passive: true });
 window.addEventListener('resize', updateActiveNav);
 updateActiveNav();
+
+
+/* ---------------------------------------------------------
+   Deterministic section navigation
+   The fixed header must not change where the browser lands on
+   different devices/browsers. Calculate the target from the
+   element's actual rendered position every time.
+--------------------------------------------------------- */
+const allSectionLinks = Array.from(document.querySelectorAll('a[href^="#"]'));
+const HEADER_GAP = 10;
+
+function getHeaderOffset() {
+	const header = document.querySelector('.site-header');
+	if (!header) return 0;
+	return Math.max(0, header.getBoundingClientRect().height);
+}
+
+function scrollToSectionId(id, behavior = 'smooth') {
+	const section = document.getElementById(id);
+	if (!section) return;
+
+	/*
+		Use the actual visible content inside the section rather than the
+		outer section box. The panel sections have intentional top padding,
+		so scrolling to the section element itself makes the browser stop
+		above the heading/content.
+	*/
+	const contentTarget =
+		section.querySelector(':scope > .section-content') ||
+		section.querySelector(':scope > .process-inner') ||
+		section.querySelector(':scope > .contact-frame') ||
+		section;
+
+	const targetTop = contentTarget.getBoundingClientRect().top + window.scrollY;
+	const destination = Math.max(0, targetTop - getHeaderOffset() - HEADER_GAP);
+
+	window.scrollTo({
+		top: destination,
+		behavior
+	});
+
+	if (history.replaceState) {
+		history.replaceState(null, '', `#${id}`);
+	}
+}
+
+allSectionLinks.forEach((link) => {
+	link.addEventListener('click', (event) => {
+		const href = link.getAttribute('href');
+		if (!href || href === '#' || !href.startsWith('#')) return;
+
+		const id = href.slice(1);
+		if (!document.getElementById(id)) return;
+
+		event.preventDefault();
+		closeMobileNav();
+		scrollToSectionId(id);
+	});
+});
+
