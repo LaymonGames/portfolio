@@ -1150,8 +1150,8 @@ section[id] {
 
 :root {
 	--legacy-hero-ratio: 1727 / 911;
-	--clock-x: 88.55%;
-	--clock-y: 18.55%;
+	--clock-x: 89.6%;
+	--clock-y: 16.3%;
 }
 
 /* The visual header is the original portfolio(1) composition. It has its
@@ -1323,38 +1323,51 @@ section[id] {
 	--clock-hub-size: clamp(12px, 1.25vw, 21px);
 }
 
+/*
+   The hand images are mounted from their real pivot point at the painted
+   clock's center. Each hand is a zero-height wrapper whose origin is the
+   clock hub; the PNG is offset left by its own pivot percentage. This keeps
+   the hands together when the hero scales instead of letting them drift.
+*/
 .legacy-clock-overlay .clock-hand {
 	position: absolute;
 	left: var(--clock-x);
 	top: var(--clock-y);
 	width: var(--hand-width);
+	height: 0;
+	display: block;
+	transform-origin: 0 0;
+	transform: rotate(var(--rotation-angle, 0deg));
+	opacity: .94;
+	will-change: transform;
+}
+
+.legacy-clock-overlay .clock-hand img {
+	position: absolute;
+	left: calc(-1 * var(--pivot));
+	top: 0;
+	display: block;
+	width: 100%;
 	height: auto;
 	max-width: none;
 	max-height: none;
-	display: block;
-	opacity: .94;
+	transform: translateY(-50%);
 	filter: drop-shadow(0 2px 4px rgba(0,0,0,.72));
-	transform: translate(var(--hand-pivot), -50%) rotate(var(--rotation-angle, 0deg));
-	transform-origin: var(--rotation-origin);
-	will-change: transform;
 }
 
 .legacy-clock-overlay .hour-hand {
 	--hand-width: clamp(78px, 7.2vw, 126px);
-	--hand-pivot: -7.2%;
-	--rotation-origin: 7.2% 50%;
+	--pivot: 7.2%;
 }
 
 .legacy-clock-overlay .minute-hand {
 	--hand-width: clamp(96px, 8.9vw, 154px);
-	--hand-pivot: -7.8%;
-	--rotation-origin: 7.8% 50%;
+	--pivot: 7.8%;
 }
 
 .legacy-clock-overlay .second-hand {
 	--hand-width: clamp(118px, 10.7vw, 184px);
-	--hand-pivot: -24.6%;
-	--rotation-origin: 24.6% 50%;
+	--pivot: 24.6%;
 }
 
 .legacy-clock-overlay .clock-hub {
@@ -1395,8 +1408,8 @@ section[id] {
 
 @media (max-width: 900px) {
 	:root {
-		--clock-x: 88.45%;
-		--clock-y: 18.4%;
+		--clock-x: 89.6%;
+		--clock-y: 16.3%;
 	}
 
 	.legacy-lemon-layer .floating-lemon {
@@ -1410,8 +1423,8 @@ section[id] {
 
 @media (max-width: 600px) {
 	:root {
-		--clock-x: 88.1%;
-		--clock-y: 18.15%;
+		--clock-x: 89.6%;
+		--clock-y: 16.3%;
 	}
 
 	.legacy-lemon-layer .floating-lemon {
@@ -1423,7 +1436,7 @@ section[id] {
 		max-width: 18vw;
 	}
 
-	.legacy-clock-overlay .hour-hand {
+	 .legacy-clock-overlay .hour-hand {
 		--hand-width: clamp(52px, 10vw, 80px);
 	}
 
