@@ -1175,7 +1175,24 @@ section[id] {
 	object-fit: cover;
 	object-position: center;
 	display: block;
-	filter: brightness(.82) saturate(.88) contrast(1.04);
+	filter: brightness(.80) saturate(.90) contrast(1.05);
+}
+
+/* A localized light pass keeps the glowing sky behind the floating lemon
+   as the visual focal point without undoing the darker treatment elsewhere. */
+.legacy-sky-lift {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	background-image: url("assets/pg01.png");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	filter: brightness(1.45) saturate(1.14) contrast(1.02);
+	opacity: .54;
+	-webkit-mask-image: radial-gradient(circle at 50% 20%, #000 0 14%, rgba(0,0,0,.88) 18%, rgba(0,0,0,.42) 30%, transparent 48%);
+	mask-image: radial-gradient(circle at 50% 20%, #000 0 14%, rgba(0,0,0,.88) 18%, rgba(0,0,0,.42) 30%, transparent 48%);
 }
 
 .legacy-hero-vignette {
@@ -1184,8 +1201,8 @@ section[id] {
 	z-index: 1;
 	pointer-events: none;
 	background:
-		linear-gradient(180deg, rgba(0,0,0,.48) 0%, rgba(0,0,0,.18) 22%, rgba(0,0,0,.12) 52%, rgba(0,0,0,.62) 100%),
-		radial-gradient(circle at 88.5% 18.5%, rgba(0,0,0,0) 0 8%, rgba(0,0,0,.16) 11%, rgba(0,0,0,.04) 18%, transparent 24%);
+		linear-gradient(180deg, rgba(0,0,0,.38) 0%, rgba(0,0,0,.11) 22%, rgba(0,0,0,.10) 52%, rgba(0,0,0,.62) 100%),
+		radial-gradient(circle at 50% 20%, rgba(0,0,0,0) 0 16%, rgba(0,0,0,.04) 27%, rgba(0,0,0,.12) 42%, rgba(0,0,0,.24) 70%, transparent 100%);
 }
 
 .legacy-lemon-layer {
@@ -1412,6 +1429,14 @@ section[id] {
 	.legacy-hero-image {
 		object-fit: cover;
 		object-position: 51% 50%;
+	}
+
+	.legacy-sky-lift {
+		background-position: 51% 50%;
+		opacity: .62;
+		filter: brightness(1.52) saturate(1.18) contrast(1.02);
+		-webkit-mask-image: radial-gradient(circle at 50% 20%, #000 0 16%, rgba(0,0,0,.90) 21%, rgba(0,0,0,.46) 36%, transparent 58%);
+		mask-image: radial-gradient(circle at 50% 20%, #000 0 16%, rgba(0,0,0,.90) 21%, rgba(0,0,0,.46) 36%, transparent 58%);
 	}
 
 	.legacy-hero-vignette {
