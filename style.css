@@ -295,7 +295,7 @@ img {
    Section anchor offsets — never hide a heading under the header
 --------------------------------------------------------- */
 section[id] {
-	scroll-margin-top: calc(var(--header-h) + 16px);
+	scroll-margin-top: calc(var(--header-h) + 42px);
 }
 
 /* ---------------------------------------------------------
@@ -649,7 +649,7 @@ section[id] {
 }
 
 .skill-card.accent-card {
-	background: linear-gradient(155deg, rgba(20, 51, 38, 0.95), rgba(10, 24, 18, 0.92));
+	background: linear-gradient(155deg, rgba(30, 25, 17, 0.91), rgba(12, 11, 9, 0.88));
 }
 
 .skill-number {
@@ -1391,7 +1391,7 @@ main#top {
 }
 
 section[id] {
-	scroll-margin-top: calc(var(--header-h) + 18px);
+	scroll-margin-top: calc(var(--header-h) + 42px);
 }
 
 @media (max-width: 900px) {
@@ -2234,5 +2234,12 @@ section[id] {
 	.legacy-glass-lift {
 		filter: brightness(1.46) saturate(1.14) contrast(1.03);
 		opacity: .72;
+	}
+}
+
+/* Anchor landing: keep section headings comfortably below the fixed mobile header. */
+@media (max-width: 980px) {
+	section[id] {
+		scroll-margin-top: calc(var(--header-h) + 34px);
 	}
 }
