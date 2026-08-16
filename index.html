@@ -1,43 +1,216 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Background</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <section class="hero">
-      <img class="full-width-image" src="assets/pg01.png" alt="pg01" />
-      <img class="floating-lemon" src="assets/lemon.png" alt="lemon" aria-hidden="true" />
-      <img class="lemon-head" src="frames/frame_001.png" alt="lemon head" aria-hidden="true" />
-      <div class="clock-overlay" aria-hidden="true">
-        <img class="clock-hand hour-hand" src="assets/hous.png" alt="" />
-        <img class="clock-hand minute-hand" src="assets/mins.png" alt="" />
-        <img class="clock-hand second-hand" src="assets/secs.png" alt="" />
-      </div>
-    </section>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Laymon Games — solo indie developer portfolio. Godot game development, pixel art, low-poly 3D, music, and video, featuring the 2D pixel RPG Parallox." />
+	<meta name="theme-color" content="#090806" />
+	<meta property="og:title" content="Laymon Games — Solo Indie Developer" />
+	<meta property="og:description" content="Games, pixel art, low-poly 3D, music, and video — made from idea to finished result by one developer." />
+	<meta property="og:type" content="website" />
+	<title>Laymon Games — Solo Indie Developer Portfolio</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<div class="page-noise" aria-hidden="true"></div>
 
-    <section id="about" class="page-section">
-      <img class="full-width-image" src="assets/pg02.png" alt="about" />
-    </section>
-    <section id="skills" class="page-section">
-      <img class="full-width-image" src="assets/pg02.png" alt="skills" />
-    </section>
-    <section id="projects" class="page-section">
-      <img class="full-width-image" src="assets/pg02.png" alt="projects" />
-    </section>
-    <section id="journey" class="page-section">
-      <img class="full-width-image" src="assets/pg02.png" alt="journey" />
-    </section>
-    <section id="tools" class="page-section">
-      <img class="full-width-image" src="assets/pg02.png" alt="tools" />
-    </section>
-    <section id="contact" class="page-section">
-      <img class="full-width-image" src="assets/pg02.png" alt="contact" />
-    </section>
-    <main class="page"></main>
+	<a class="skip-link" href="#about">Skip to content</a>
 
-    <script src="script.js"></script>
-  </body>
+	<main id="top">
+		<section class="legacy-hero" aria-label="Laymon Games header artwork">
+			<img class="legacy-hero-image" src="assets/pg01.png" alt="" aria-hidden="true" width="1727" height="911" />
+			<div class="legacy-hero-vignette" aria-hidden="true"></div>
+
+			<div class="legacy-lemon-layer" aria-hidden="true">
+				<img class="floating-lemon" src="assets/lemon.png" alt="" />
+				<img class="lemon-head" src="frames/frame_001.png" alt="" />
+			</div>
+
+			<div class="legacy-clock-overlay" aria-hidden="true">
+				<img class="clock-hand hour-hand" src="assets/hous.png" alt="" />
+				<img class="clock-hand minute-hand" src="assets/mins.png" alt="" />
+				<img class="clock-hand second-hand" src="assets/secs.png" alt="" />
+			</div>
+		</section>
+
+		<section id="about" class="panel-section about-section">
+			<img class="panel-frame" src="assets/pg02.png" alt="" aria-hidden="true" loading="lazy" width="1400" height="683" />
+			<div class="section-content split-content">
+				<div>
+					<p class="eyebrow">01 · About</p>
+					<h2>A small team of one.<br /><em>And that is the point.</em></h2>
+				</div>
+				<div class="copy-column">
+					<p>I'm the developer behind <strong>Laymon Games</strong>, a solo indie studio focused on making distinctive games and creative digital projects.</p>
+					<p>I work across programming, 2D and 3D art, sound, music, editing, and presentation instead of treating each part as someone else's problem. That lets me keep a project's visual and technical direction consistent from the first sketch to the finished build.</p>
+					<p>I like building complete things — a playable game, a finished track, an edited trailer — rather than isolated pieces, and I'm always experimenting with new tools when they genuinely speed up the work.</p>
+					<p class="signature">Code · Art · Audio · Video</p>
+				</div>
+			</div>
+		</section>
+
+		<section id="skills" class="panel-section skills-section">
+			<img class="panel-frame" src="assets/pg02.png" alt="" aria-hidden="true" loading="lazy" width="1400" height="683" />
+			<div class="section-content">
+				<p class="eyebrow">02 · Skills</p>
+				<h2>From pixels to polygons,<br /><em>from code to cut.</em></h2>
+
+				<div class="skill-grid">
+					<article class="skill-card skill-card-wide">
+						<span class="skill-number">01</span>
+						<h3>Game Development</h3>
+						<p>Godot and GDScript for gameplay systems, tools, UI, and complete 2D and 3D game projects — the foundation everything else supports.</p>
+						<div class="tags"><span>Godot</span><span>GDScript</span><span>2D</span><span>3D</span></div>
+					</article>
+
+					<article class="skill-card">
+						<span class="skill-number">02</span>
+						<h3>Art</h3>
+						<p>Pixel-art sprites and environments alongside stylized low-poly 3D modelling for a clean, readable look.</p>
+						<div class="tags"><span>Aseprite</span><span>Pixel Art</span><span>Blender</span><span>Low-Poly 3D</span></div>
+					</article>
+
+					<article class="skill-card">
+						<span class="skill-number">03</span>
+						<h3>Audio</h3>
+						<p>Original music and sound design built to set the mood of a scene, a trailer, or a moment of gameplay.</p>
+						<div class="tags"><span>FL Studio</span><span>Music</span><span>Sound Design</span></div>
+					</article>
+
+					<article class="skill-card">
+						<span class="skill-number">04</span>
+						<h3>Media</h3>
+						<p>Editing and pacing for trailers, showcases, and creative videos that present a project the way it deserves.</p>
+						<div class="tags"><span>Video Editing</span><span>Trailers</span><span>Showcases</span></div>
+					</article>
+
+					<article class="skill-card accent-card">
+						<span class="skill-number">05</span>
+						<h3>Digital &amp; AI-Assisted</h3>
+						<p>Websites, apps, and prototypes — including this site — built faster with AI-assisted workflows. A tool for extra capability, not the foundation of my game development, art, or audio work.</p>
+						<div class="tags"><span>Websites</span><span>Apps</span><span>Prototypes</span><span>AI-Assisted</span></div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<section id="work" class="panel-section work-section">
+			<img class="panel-frame" src="assets/pg02.png" alt="" aria-hidden="true" loading="lazy" width="1400" height="683" />
+			<div class="section-content">
+				<div class="section-heading-row">
+					<div>
+						<p class="eyebrow">03 · Work</p>
+						<h2>Projects with a point of view.</h2>
+					</div>
+					<p class="section-intro">A portfolio should show more than a list of software. Here, each piece starts with a mood, a mechanic, or a visual idea — then gets built.</p>
+				</div>
+
+				<div class="featured-work">
+					<div class="work-card work-main">
+						<div class="work-visual work-visual-game">
+							<div class="visual-stars" aria-hidden="true"></div>
+							<div class="visual-sphere" aria-hidden="true"></div>
+							<span class="visual-label">Concept artwork · not a screenshot</span>
+						</div>
+						<div class="work-copy">
+							<p class="mini-label">Game Development · 2D Pixel RPG</p>
+							<h3>Parallox</h3>
+							<p>A 2D pixel RPG developed solo in Godot, combining gameplay programming with a hand-built visual identity and a focus on atmosphere.</p>
+							<dl class="work-meta">
+								<div><dt>Engine</dt><dd>Godot / GDScript</dd></div>
+								<div><dt>Role</dt><dd>Solo developer</dd></div>
+								<div><dt>Status</dt><dd>In development</dd></div>
+							</dl>
+							<a href="#contact" class="text-link">Talk about the project <span aria-hidden="true">→</span></a>
+						</div>
+					</div>
+
+					<div class="work-side">
+						<article class="work-card small-work">
+							<div class="small-work-icon" aria-hidden="true">✦</div>
+							<div>
+								<p class="mini-label">Creative Production</p>
+								<h3>Art &amp; Assets</h3>
+								<p>Pixel art, stylized 3D, props, environments, and visual experiments created to support complete projects.</p>
+							</div>
+						</article>
+						<article class="work-card small-work">
+							<div class="small-work-icon" aria-hidden="true">♪</div>
+							<div>
+								<p class="mini-label">Music &amp; Audio</p>
+								<h3>Scores &amp; Sound</h3>
+								<p>Original music and sound design produced for games, videos, and standalone experiments.</p>
+							</div>
+						</article>
+						<article class="work-card small-work">
+							<div class="small-work-icon" aria-hidden="true">▶</div>
+							<div>
+								<p class="mini-label">Video &amp; Presentation</p>
+								<h3>Edits &amp; Showcases</h3>
+								<p>Edited videos, project showcases, and trailers designed to make the work easier to feel and understand.</p>
+							</div>
+						</article>
+						<article class="work-card small-work">
+							<div class="small-work-icon" aria-hidden="true">◉</div>
+							<div>
+								<p class="mini-label">Digital Experiments</p>
+								<h3>Apps &amp; Websites</h3>
+								<p>Interfaces and web ideas built with AI-assisted workflows when it's the right tool for the job.</p>
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="process" class="process-section" aria-labelledby="process-title">
+			<div class="process-inner">
+				<p class="eyebrow">04 · Process</p>
+				<h2 id="process-title">Idea. Prototype. Create. Polish.</h2>
+				<ol class="process-line">
+					<li class="process-step"><span>01</span><strong>Idea</strong><p>Find the core idea and what makes it interesting enough to build.</p></li>
+					<li class="process-step"><span>02</span><strong>Prototype</strong><p>Build the smallest playable or visible version to see if it works.</p></li>
+					<li class="process-step"><span>03</span><strong>Create</strong><p>Develop gameplay, art, audio, environments, and the systems around them.</p></li>
+					<li class="process-step"><span>04</span><strong>Polish</strong><p>Test, refine, remove what's weak, and improve the presentation.</p></li>
+				</ol>
+				<p class="process-note">One person, moving across the whole pipeline.</p>
+			</div>
+		</section>
+
+		<section id="contact" class="contact-section" aria-labelledby="contact-title">
+			<div class="contact-frame">
+				<div class="contact-intro">
+					<p class="eyebrow">05 · Contact</p>
+					<h2 id="contact-title">Have a project worth making?</h2>
+					<p>For collaborations, game projects, creative work, or digital experiments, get in touch with Laymon Games.</p>
+				</div>
+				<div class="contact-channels">
+					<div class="contact-channel">
+						<span class="mini-label">Email</span>
+						<p class="contact-placeholder">Contact email coming soon</p>
+					</div>
+					<div class="contact-channel">
+						<span class="mini-label">Elsewhere</span>
+						<p class="contact-placeholder">Social links coming soon</p>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+
+	<footer class="site-footer">
+		<div class="footer-brand">
+			<span class="brand-mark"><img src="assets/lemon.png" alt="" loading="lazy" /></span>
+			<span>Laymon Games</span>
+		</div>
+		<p class="footer-statement">Made by one developer. Built with curiosity.</p>
+		<p class="footer-copy">© <span id="year"></span> Laymon Games</p>
+	</footer>
+
+
+	</main>
+
+	<script src="script.js"></script>
+</body>
 </html>
