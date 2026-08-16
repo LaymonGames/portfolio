@@ -1773,8 +1773,8 @@ section[id] {
 	/* Re-anchor the animated lemon face to the painted lemon at the top of the mobile crop. */
 	.legacy-lemon-layer .lemon-head {
 		left: 50%;
-		top: 14.5%;
-		width: 78px;
+		top: 22.5%;
+		width: 96px;
 		max-width: none;
 		max-height: none;
 		transform: translate(-50%, -50%);
@@ -1837,8 +1837,8 @@ section[id] {
 	}
 
 	.legacy-lemon-layer .lemon-head {
-		width: 68px;
-		top: 15%;
+		width: 96px;
+		top: 22%;
 	}
 
 	.creator-profile {
@@ -2202,5 +2202,37 @@ section[id] {
 
 	.about-identity-copy h2 {
 		font-size: 34px;
+	}
+}
+
+/* Final lighting balance: soften the selected highlights while lifting the
+   surrounding dark areas slightly. Keep the bright sky treatment unchanged. */
+.legacy-hero-image {
+	filter: brightness(.82) saturate(.84) contrast(1.05);
+}
+
+.legacy-detail-lift {
+	filter: brightness(1.55) saturate(1.18) contrast(1.02);
+	opacity: .68;
+}
+
+.legacy-glass-lift {
+	filter: brightness(1.5) saturate(1.16) contrast(1.03);
+	opacity: .74;
+}
+
+@media (max-width: 700px) {
+	.legacy-hero-image {
+		filter: brightness(.78) saturate(.82) contrast(1.06);
+	}
+
+	.legacy-detail-lift {
+		filter: brightness(1.5) saturate(1.16) contrast(1.02);
+		opacity: .66;
+	}
+
+	.legacy-glass-lift {
+		filter: brightness(1.46) saturate(1.14) contrast(1.03);
+		opacity: .72;
 	}
 }
