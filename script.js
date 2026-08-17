@@ -340,15 +340,108 @@ if (copyEmailBtn) {
 /* ---------------------------------------------------------
    Skills interactions
 --------------------------------------------------------- */
+const artGalleryImages = [
+	{ src: 'assets/young mike3.gif', alt: 'Art preview 1' },
+	{ src: 'assets/screenshot_2.png', alt: 'Art preview 2' },
+	{ src: 'assets/screenshot_3.png', alt: 'Art preview 2' },
+	{ src: 'assets/screenshot.png', alt: 'Art preview 2' },
+	{ src: 'assets/old mike4.png', alt: 'Art preview 3' }
+];
+
 const skillCards = Array.from(document.querySelectorAll('[data-skill-action]'));
 const artModal = document.querySelector('#skill-art-modal');
 const aiModal = document.querySelector('#skill-ai-modal');
+const artGalleryTrack = document.querySelector('#art-gallery-track');
+
+const artGallery = document.querySelector('.art-gallery');
+
+function enableArtGalleryMouseDrag() {
+	if (!artGallery) return;
+
+	let isDragging = false;
+	let startX = 0;
+	let startScrollLeft = 0;
+	let moved = false;
+
+	artGallery.addEventListener('pointerdown', (event) => {
+		if (event.pointerType === 'mouse' && event.button !== 0) return;
+		if (event.target.closest('button, a')) return;
+		isDragging = true;
+		moved = false;
+		startX = event.clientX;
+		startScrollLeft = artGallery.scrollLeft;
+		artGallery.classList.add('is-dragging');
+		artGallery.setPointerCapture?.(event.pointerId);
+	});
+
+	artGallery.addEventListener('pointermove', (event) => {
+		if (!isDragging) return;
+		const deltaX = event.clientX - startX;
+		if (Math.abs(deltaX) > 4) moved = true;
+		artGallery.scrollLeft = startScrollLeft - deltaX;
+		event.preventDefault();
+	});
+
+	const stopDragging = (event) => {
+		if (!isDragging) return;
+		isDragging = false;
+		artGallery.classList.remove('is-dragging');
+		try {
+			artGallery.releasePointerCapture?.(event.pointerId);
+		} catch (_) {
+			// Pointer capture may already have been released.
+		}
+	};
+
+	artGallery.addEventListener('pointerup', stopDragging);
+	artGallery.addEventListener('pointercancel', stopDragging);
+	artGallery.addEventListener('lostpointercapture', stopDragging);
+	artGallery.addEventListener('click', (event) => {
+		if (!moved) return;
+		event.preventDefault();
+		event.stopPropagation();
+		moved = false;
+	});
+}
+
+enableArtGalleryMouseDrag();
+
+function renderArtGallery() {
+	if (!artGalleryTrack) return;
+
+	artGalleryTrack.innerHTML = '';
+	artGalleryTrack.style.setProperty('--art-count', Math.max(1, artGalleryImages.length));
+
+	artGalleryImages.forEach((image, index) => {
+		const slide = document.createElement('div');
+		slide.className = 'art-gallery-slide';
+		slide.setAttribute('role', 'group');
+		slide.setAttribute('aria-label', `Artwork ${index + 1} of ${artGalleryImages.length}`);
+
+		const img = document.createElement('img');
+		img.className = 'art-gallery-image';
+		img.src = image.src;
+		img.alt = image.alt;
+		img.loading = 'lazy';
+		img.addEventListener('error', () => {
+			slide.innerHTML = '';
+			const fallback = document.createElement('div');
+			fallback.className = 'art-gallery-fallback';
+			fallback.textContent = `Add image: ${image.src}`;
+			slide.appendChild(fallback);
+		}, { once: true });
+
+		slide.appendChild(img);
+		artGalleryTrack.appendChild(slide);
+	});
+}
 
 function openSkillModal(modal) {
 	if (!modal) return;
 	modal.hidden = false;
 	modal.setAttribute('aria-hidden', 'false');
 	document.body.classList.add('skill-modal-open');
+	if (modal === artModal) renderArtGallery();
 	const closeButton = modal.querySelector('.skill-modal-close');
 	if (closeButton) closeButton.focus();
 }
@@ -403,6 +496,28 @@ skillCards.forEach((card) => {
 document.querySelectorAll('[data-modal-close]').forEach((closeTrigger) => {
 	closeTrigger.addEventListener('click', () => {
 		closeSkillModal(closeTrigger.closest('.skill-modal'));
+	});
+});
+
+/* ---------------------------------------------------------
+   Project card links
+--------------------------------------------------------- */
+const projectCards = Array.from(document.querySelectorAll('[data-itch-url]'));
+
+projectCards.forEach((card) => {
+	const url = card.dataset.itchUrl;
+	if (!url) return;
+
+	card.addEventListener('click', (event) => {
+		if (event.target.closest('a')) return;
+		window.location.href = url;
+	});
+
+	card.addEventListener('keydown', (event) => {
+		if (event.key !== 'Enter' && event.key !== ' ') return;
+		if (event.target !== card) return;
+		event.preventDefault();
+		window.location.href = url;
 	});
 });
 
