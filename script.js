@@ -350,6 +350,7 @@ const artGalleryImages = [
 
 const skillCards = Array.from(document.querySelectorAll('[data-skill-action]'));
 const artModal = document.querySelector('#skill-art-modal');
+const wipModal = document.querySelector('#wip-modal');
 const aiModal = document.querySelector('#skill-ai-modal');
 const artGalleryTrack = document.querySelector('#art-gallery-track');
 
@@ -518,6 +519,23 @@ projectCards.forEach((card) => {
 		if (event.target !== card) return;
 		event.preventDefault();
 		window.location.href = url;
+	});
+});
+
+// WIP project cards — show "under development" popup instead of navigating
+const wipCards = Array.from(document.querySelectorAll('[data-wip]'));
+
+wipCards.forEach((card) => {
+	card.addEventListener('click', (event) => {
+		if (event.target.closest('a')) return;
+		openSkillModal(wipModal);
+	});
+
+	card.addEventListener('keydown', (event) => {
+		if (event.key !== 'Enter' && event.key !== ' ') return;
+		if (event.target !== card) return;
+		event.preventDefault();
+		openSkillModal(wipModal);
 	});
 });
 

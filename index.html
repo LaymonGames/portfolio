@@ -238,7 +238,7 @@
 						</div>
 					</article>
 
-					<article class="work-card mini-project-card" data-itch-url="https://laymon-games.itch.io/somethings-off" tabindex="0" role="link" aria-label="Open Something's Off Remastered on itch.io">
+					<article class="work-card mini-project-card" data-wip="true" tabindex="0" role="button" aria-label="Something's Off Remastered – currently in development">
 						<!-- Replace src with your project screenshot. Recommended size: 800×450px (16:9) -->
 						<div class="mini-project-thumb">
 							<img src="assets/off_remastered.webp" alt="Something's Off Remastered" class="mini-project-img" onerror="this.closest('.mini-project-thumb').classList.add('mini-project-thumb--missing')" />
@@ -316,6 +316,16 @@
 				</div>
 			</div>
 		</section>
+		<div class="skill-modal" id="wip-modal" hidden aria-hidden="true">
+			<div class="skill-modal-backdrop" data-modal-close></div>
+			<div class="skill-modal-dialog skill-modal-dialog-small" role="dialog" aria-modal="true" aria-labelledby="wip-modal-title">
+				<button class="skill-modal-close" type="button" aria-label="Close notice" data-modal-close>×</button>
+				<p class="eyebrow">Work in Progress</p>
+				<h2 id="wip-modal-title">Under Development</h2>
+				<p>This project is still under development. Stay tuned!</p>
+			</div>
+		</div>
+
 		<div class="skill-modal" id="skill-art-modal" hidden aria-hidden="true">
 			<div class="skill-modal-backdrop" data-modal-close></div>
 			<div class="skill-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="skill-art-modal-title">
