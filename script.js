@@ -336,3 +336,77 @@ if (copyEmailBtn) {
     }, 2000);
   });
 }
+
+/* ---------------------------------------------------------
+   Skills interactions
+--------------------------------------------------------- */
+const skillCards = Array.from(document.querySelectorAll('[data-skill-action]'));
+const artModal = document.querySelector('#skill-art-modal');
+const aiModal = document.querySelector('#skill-ai-modal');
+
+function openSkillModal(modal) {
+	if (!modal) return;
+	modal.hidden = false;
+	modal.setAttribute('aria-hidden', 'false');
+	document.body.classList.add('skill-modal-open');
+	const closeButton = modal.querySelector('.skill-modal-close');
+	if (closeButton) closeButton.focus();
+}
+
+function closeSkillModal(modal) {
+	if (!modal) return;
+	modal.hidden = true;
+	modal.setAttribute('aria-hidden', 'true');
+	if (!document.querySelector('.skill-modal:not([hidden])')) {
+		document.body.classList.remove('skill-modal-open');
+	}
+}
+
+function handleSkillAction(card) {
+	const action = card.dataset.skillAction;
+
+	if (action === 'projects') {
+		scrollToSectionId('work');
+		return;
+	}
+
+	if (action === 'art') {
+		openSkillModal(artModal);
+		return;
+	}
+
+	if (action === 'audio') {
+		window.location.href = 'https://soundcloud.com/laymon-games';
+		return;
+	}
+
+	if (action === 'video') {
+		window.location.href = 'https://www.youtube.com/@AymensCorner';
+		return;
+	}
+
+	if (action === 'ai') {
+		openSkillModal(aiModal);
+	}
+}
+
+skillCards.forEach((card) => {
+	card.addEventListener('click', () => handleSkillAction(card));
+	card.addEventListener('keydown', (event) => {
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault();
+			handleSkillAction(card);
+		}
+	});
+});
+
+document.querySelectorAll('[data-modal-close]').forEach((closeTrigger) => {
+	closeTrigger.addEventListener('click', () => {
+		closeSkillModal(closeTrigger.closest('.skill-modal'));
+	});
+});
+
+document.addEventListener('keydown', (event) => {
+	if (event.key !== 'Escape') return;
+	document.querySelectorAll('.skill-modal:not([hidden])').forEach((modal) => closeSkillModal(modal));
+});

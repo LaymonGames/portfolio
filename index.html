@@ -105,35 +105,35 @@
 				<h2>From idea,<br /><em>to finish.</em></h2>
 
 				<div class="skill-grid">
-					<article class="skill-card skill-card-wide">
+					<article class="skill-card skill-card-wide" data-skill-action="projects" tabindex="0" role="button" aria-label="Go to projects">
 						<span class="skill-number"> </span>
 						<h3>Game Development</h3>
 						<p>Godot and GDScript for creating 2D and 3D game projects, implementing gameplay systems, and putting everything together.</p>
 						<div class="tags"><span>Godot</span><span>GDScript</span><span>2D</span><span>3D</span></div>
 					</article>
 
-					<article class="skill-card">
+					<article class="skill-card" data-skill-action="art" tabindex="0" role="button" aria-label="Open art preview">
 						<span class="skill-number"> </span>
 						<h3>Art</h3>
 						<p>Pixel-art sprites and environments for 2D, and stylized low-poly 3D modelling for 3D.</p>
 						<div class="tags"><span>Aseprite</span><span>Pixel Art</span><span>Blender</span><span>Low-Poly 3D</span></div>
 					</article>
 
-					<article class="skill-card">
+					<article class="skill-card" data-skill-action="audio" tabindex="0" role="link" aria-label="Open audio link">
 						<span class="skill-number"> </span>
 						<h3>Audio</h3>
 						<p>Original soundtracks and sound design made to set the mood of a scene, or a moment of gameplay.</p>
 						<div class="tags"><span>FL Studio</span><span>Music</span><span>Sound Design</span><span>SFX</span></div>
 					</article>
 
-					<article class="skill-card">
+					<article class="skill-card" data-skill-action="video" tabindex="0" role="link" aria-label="Open YouTube video link">
 						<span class="skill-number"> </span>
 						<h3>Video</h3>
 						<p>Editing for creative videos that present a project the way it deserves.</p>
 						<div class="tags"><span>Davinci Resolve</span><span>Video Editing</span></div>
 					</article>
 
-					<article class="skill-card accent-card">
+					<article class="skill-card accent-card" data-skill-action="ai" tabindex="0" role="button" aria-label="Show AI assisted notice">
 						<span class="skill-number"> </span>
 						<h3>Other/AI-Assisted</h3>
 						<p>Websites, apps, including this site, built with the help of AI-assisted workflows. A tool for extra capability, not the foundation of my game development, art, or audio work.</p>
@@ -316,6 +316,27 @@
 				</div>
 			</div>
 		</section>
+		<div class="skill-modal" id="skill-art-modal" hidden aria-hidden="true">
+			<div class="skill-modal-backdrop" data-modal-close></div>
+			<div class="skill-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="skill-art-modal-title">
+				<button class="skill-modal-close" type="button" aria-label="Close art preview" data-modal-close>×</button>
+				<p class="eyebrow">Art</p>
+				<h2 id="skill-art-modal-title">Art Preview</h2>
+				<img class="skill-placeholder-image" src="assets/old mike4.png" alt="Placeholder art image" />
+				<p>If you want to see more art check out my games!</p>
+			</div>
+		</div>
+
+		<div class="skill-modal" id="skill-ai-modal" hidden aria-hidden="true">
+			<div class="skill-modal-backdrop" data-modal-close></div>
+			<div class="skill-modal-dialog skill-modal-dialog-small" role="dialog" aria-modal="true" aria-labelledby="skill-ai-modal-title">
+				<button class="skill-modal-close" type="button" aria-label="Close AI notice" data-modal-close>×</button>
+				<p class="eyebrow">AI Assisted</p>
+				<h2 id="skill-ai-modal-title">This site was made with the help of AI!</h2>
+				<p>AI-assisted tools were used to help build this website.</p>
+			</div>
+		</div>
+
 	</main>
 
 

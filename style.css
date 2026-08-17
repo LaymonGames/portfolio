@@ -2806,3 +2806,105 @@ body {
   }
 }
 /* Anchor landing is handled by the shared navigation scroll function. */
+
+
+/* ---------------------------------------------------------
+   Skill card interactions + modal
+--------------------------------------------------------- */
+.skill-card[data-skill-action] {
+	cursor: pointer;
+}
+
+.skill-card[data-skill-action]:focus-visible {
+	outline: none;
+	box-shadow: var(--focus-ring), var(--shadow);
+}
+
+body.skill-modal-open {
+	overflow: hidden;
+}
+
+.skill-modal[hidden] {
+	display: none;
+}
+
+.skill-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	display: grid;
+	place-items: center;
+	padding: 24px;
+}
+
+.skill-modal-backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.76);
+	backdrop-filter: blur(8px);
+}
+
+.skill-modal-dialog {
+	position: relative;
+	z-index: 1;
+	width: min(680px, 100%);
+	max-height: min(820px, calc(100vh - 48px));
+	overflow: auto;
+	padding: clamp(28px, 5vw, 48px);
+	border: 1px solid rgba(216, 164, 60, 0.38);
+	border-radius: var(--radius);
+	background: linear-gradient(155deg, rgba(36, 28, 17, 0.98), rgba(12, 11, 9, 0.98));
+	box-shadow: 0 30px 100px rgba(0, 0, 0, 0.68);
+}
+
+.skill-modal-dialog-small {
+	width: min(560px, 100%);
+	text-align: center;
+}
+
+.skill-modal-dialog h2 {
+	margin: 0;
+	font-family: 'Cinzel', Georgia, serif;
+	font-size: clamp(28px, 4vw, 44px);
+	line-height: 1.15;
+}
+
+.skill-modal-dialog p:not(.eyebrow) {
+	color: var(--muted);
+	line-height: 1.7;
+}
+
+.skill-modal-close {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+	width: 40px;
+	height: 40px;
+	border: 1px solid rgba(246, 236, 215, 0.16);
+	border-radius: var(--radius);
+	background: rgba(9, 8, 6, 0.46);
+	color: var(--text);
+	font-size: 26px;
+	line-height: 1;
+	cursor: pointer;
+	transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.skill-modal-close:hover,
+.skill-modal-close:focus-visible {
+	color: var(--gold-bright);
+	border-color: rgba(216, 164, 60, 0.48);
+	transform: translateY(-1px);
+}
+
+.skill-placeholder-image {
+	display: grid;
+	place-items: center;
+	aspect-ratio: 16 / 10;
+	margin: 24px 0 18px;
+	border: 1px dashed rgba(216, 164, 60, 0.48);
+	border-radius: 4px;
+	background: #100e0a;
+	object-fit: cover;
+	color: rgba(243, 199, 100, 0.78);
+}
