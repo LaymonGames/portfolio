@@ -342,9 +342,9 @@ if (copyEmailBtn) {
 --------------------------------------------------------- */
 const artGalleryImages = [
 	{ src: 'assets/young mike3.gif', alt: 'Art preview 1' },
-	{ src: 'assets/screenshot_2.png', alt: 'Art preview 2' },
-	{ src: 'assets/screenshot_3.png', alt: 'Art preview 2' },
-	{ src: 'assets/screenshot.png', alt: 'Art preview 2' },
+	{ src: 'assets/screenshot_2.webp', alt: 'Art preview 2' },
+	{ src: 'assets/screenshot_3.webp', alt: 'Art preview 2' },
+	{ src: 'assets/screenshot.webp', alt: 'Art preview 2' },
 	{ src: 'assets/old mike4.png', alt: 'Art preview 3' }
 ];
 
