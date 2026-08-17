@@ -1414,7 +1414,7 @@ button.contact-channel-copy.is-copied .copy-email-icon {
 	inset: 0;
 	z-index: 0;
 	pointer-events: none;
-	background-image: url("assets/pg01.png");
+	background-image: url("assets/pg01.webp");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -1432,7 +1432,7 @@ button.contact-channel-copy.is-copied .copy-email-icon {
 	inset: 0;
 	z-index: 2;
 	pointer-events: none;
-	background-image: url("assets/pg01.png");
+	background-image: url("assets/pg01.webp");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -2457,9 +2457,16 @@ section[id] {
 	opacity: .68;
 }
 
+.legacy-lamp-lift {
+	-webkit-mask-image: radial-gradient(ellipse var(--lamp-rx, 5.2%) var(--lamp-ry, 8.2%) at var(--focus-x) var(--focus-y), #000 0 42%, rgba(0,0,0,.95) 58%, rgba(0,0,0,.55) 74%, transparent 100%);
+	mask-image: radial-gradient(ellipse var(--lamp-rx, 5.2%) var(--lamp-ry, 8.2%) at var(--focus-x) var(--focus-y), #000 0 42%, rgba(0,0,0,.95) 58%, rgba(0,0,0,.55) 74%, transparent 100%);
+}
+
 .legacy-glass-lift {
 	filter: brightness(1.5) saturate(1.16) contrast(1.03);
 	opacity: .74;
+	-webkit-mask-image: radial-gradient(ellipse 18% 30% at 50% 64%, #000 0 46%, rgba(0,0,0,.94) 58%, rgba(0,0,0,.62) 72%, rgba(0,0,0,.18) 86%, transparent 100%);
+	mask-image: radial-gradient(ellipse 18% 30% at 50% 64%, #000 0 46%, rgba(0,0,0,.94) 58%, rgba(0,0,0,.62) 72%, rgba(0,0,0,.18) 86%, transparent 100%);
 }
 
 @media (max-width: 700px) {
@@ -2472,9 +2479,16 @@ section[id] {
 		opacity: .66;
 	}
 
+	.legacy-lamp-lift {
+		-webkit-mask-image: radial-gradient(ellipse var(--lamp-rx, 5.2%) var(--lamp-ry, 8.2%) at var(--focus-x) var(--focus-y), #000 0 42%, rgba(0,0,0,.95) 58%, rgba(0,0,0,.55) 74%, transparent 100%);
+		mask-image: radial-gradient(ellipse var(--lamp-rx, 5.2%) var(--lamp-ry, 8.2%) at var(--focus-x) var(--focus-y), #000 0 42%, rgba(0,0,0,.95) 58%, rgba(0,0,0,.55) 74%, transparent 100%);
+	}
+
 	.legacy-glass-lift {
 		filter: brightness(1.46) saturate(1.14) contrast(1.03);
 		opacity: .72;
+		-webkit-mask-image: radial-gradient(ellipse 18% 30% at 50% 64%, #000 0 46%, rgba(0,0,0,.94) 58%, rgba(0,0,0,.62) 72%, rgba(0,0,0,.18) 86%, transparent 100%);
+		mask-image: radial-gradient(ellipse 18% 30% at 50% 64%, #000 0 46%, rgba(0,0,0,.94) 58%, rgba(0,0,0,.62) 72%, rgba(0,0,0,.18) 86%, transparent 100%);
 	}
 }
 /* =========================================================
