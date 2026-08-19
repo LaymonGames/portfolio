@@ -58,7 +58,7 @@ function updateLemonHeadFrame() {
 		currentLemonFrameIndex += delta * 0.22;
 		const frameIndex = Math.max(1, Math.min(totalLemonFrames, Math.round(currentLemonFrameIndex)));
 		const frameNumber = String(frameIndex).padStart(3, '0');
-		const nextSrc = `frames/frame_${frameNumber}.png`;
+		const nextSrc = `frames/frame_${frameNumber}.webp`;
 		if (!lemonHead.src.endsWith(nextSrc)) {
 			lemonHead.src = nextSrc;
 		}
