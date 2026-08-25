@@ -3005,6 +3005,14 @@ body.skill-modal-open {
 	flex: none;
 }
 
+/* Keep the primary nav anchored to the side beside the controls:
+   with three visible header children, space-between would otherwise
+   center it. margin-inline-start:auto mirrors correctly in RTL too. */
+.site-header .nav {
+	margin-inline-start: auto;
+	margin-inline-end: clamp(18px, 2.5vw, 32px);
+}
+
 .lang-switch {
 	display: inline-flex;
 	align-items: center;
