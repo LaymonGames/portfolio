@@ -112,7 +112,7 @@
 			'skills.video.desc': 'Editing for creative videos that present a project the way it deserves.',
 			'skills.video.aria': 'Open YouTube video link',
 			'skills.other.title': 'Other/AI-Assisted',
-			'skills.other.desc': 'Websites, apps, including this site, built with the help of AI-assisted workflows. A tool for extra capability, not the foundation of my game development, art, or audio work.',
+			'skills.other.desc': 'Websites, apps, including this site, built with the help of AI-assisted workflows. A tool for extra capability, not a part of my game development, art, or audio work.',
 			'skills.other.aria': 'Show AI assisted notice',
 			'skills.tags.other': '<span>AI</span><span>Websites</span><span>Apps</span>',
 
@@ -220,7 +220,7 @@
 			'about.role': '<strong>' + S + '</strong>، صانع ألعاب ومطوّر مستقل.',
 			'about.note': 'ألعاب، برمجة، رسم، صوت، فيديو — كل ذلك من مكان واحد.',
 			'about.summaryTitle': 'كل شيء من صنع شخص واحد.',
-			'about.bio1': 'أنا الشخص وراء <strong>' + S + '</strong>، مطوّر ألعاب مستقل يركّز على صناعة الألعاب والمشاريع الإبداعية ومونتاج الفيديو. أعمل على البرمجة و الرسوم ثنائية وثلاثية الأبعاد 2D و 3D Low Poly والصوت و الفيديو، لكي يحافظ المشروع بأكمله على اتجاه واحد محدد.',
+			'about.bio1': 'أنا الشخص وراء <strong>' + S + '</strong>، مطوّر ألعاب مستقل أركز على صناعة الألعاب والمشاريع الإبداعية ومونتاج الفيديو. أعمل على البرمجة و الرسوم ثنائية وثلاثية الأبعاد 2D و 3D Low Poly والصوت و الفيديو، لكي يحافظ المشروع بأكمله على اتجاه واحد محدد.',
 			'about.bio2': 'أستمتع ببناء الألعاب، من إنتاج الأفكار إلى إنجاز المشروع، و بتوظيف أدوات تساعد في سير المشروع.',
 			'about.signature': 'برمجة · رسم · صوت · فيديو',
 
@@ -242,7 +242,7 @@
 			'skills.video.desc': 'مونتاج فيديوهات إبداعية تقدّم المشروع بالشكل الذي يستحقه.',
 			'skills.video.aria': 'فتح رابط فيديو YouTube',
 			'skills.other.title': 'أخرى / بمساعدة الذكاء الاصطناعي',
-			'skills.other.desc': 'مواقع وتطبيقات، بينها هذا الموقع، أُنشئت بمساعدة الذكاء الاصطناعي. إنها أداة لإضافة قدرات إضافية، وليست أساس عملي في تطوير الألعاب أو الرسم أو الصوت.',
+			'skills.other.desc': 'مواقع وتطبيقات، بينها هذا الموقع، أُنشئت بمساعدة الذكاء الاصطناعي. إنها أداة لإضافة قدرات إضافية، وليست ضمن عملي في تطوير الألعاب أو الرسم أو الصوت.',
 			'skills.other.aria': 'عرض تنبيه المساعدة بالذكاء الاصطناعي',
 			'skills.tags.other': '<span>AI</span><span>مواقع</span><span>تطبيقات</span>',
 
