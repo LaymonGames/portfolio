@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cairo:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 /* ---------------------------------------------------------
    Tokens
@@ -2992,5 +2992,242 @@ body.skill-modal-open {
 	font-size: 12px;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
+}
+
+/* =========================================================
+   LANGUAGE SWITCHER
+   Subtle pill inside the header, next to the nav toggle.
+========================================================= */
+.header-controls {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex: none;
+}
+
+.lang-switch {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	min-height: 38px;
+	padding: 0 13px;
+	border: 1px solid rgba(216, 164, 60, 0.32);
+	border-radius: var(--radius);
+	background: rgba(9, 8, 6, 0.4);
+	color: rgba(246, 236, 215, 0.85);
+	font-family: inherit;
+	font-size: 11px;
+	letter-spacing: 0.04em;
+	cursor: pointer;
+	transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.lang-switch:hover,
+.lang-switch:focus-visible {
+	color: var(--gold-bright);
+	border-color: rgba(216, 164, 60, 0.55);
+	background: rgba(216, 164, 60, 0.07);
+}
+
+.lang-switch:focus-visible {
+	outline: none;
+	box-shadow: var(--focus-ring);
+}
+
+.lang-switch-icon {
+	width: 14px;
+	height: 14px;
+	flex: none;
+	color: rgba(216, 164, 60, 0.75);
+	transition: color 0.2s ease;
+}
+
+.lang-switch:hover .lang-switch-icon,
+.lang-switch:focus-visible .lang-switch-icon {
+	color: var(--gold-bright);
+}
+
+/* Comfortable touch target on phones */
+@media (pointer: coarse) {
+	.lang-switch {
+		min-height: 44px;
+		padding: 0 15px;
+	}
+}
+
+@media (max-width: 700px) {
+	.lang-switch {
+		min-height: 40px;
+		padding: 0 11px;
+		font-size: 10.5px;
+	}
+}
+
+/* =========================================================
+   ARABIC / RTL LAYOUT
+   Applied via html[lang="ar"] + [dir="rtl"], set by
+   translations.js when العربية is active.
+
+   Principles:
+   - Flex/grid flows flip automatically with direction.
+   - Only physical left/right offsets and directional icons
+     are mirrored below.
+   - The legacy hero artwork is NEVER mirrored: its lamps and
+     clock are anchored to the painted illustration.
+   - Letter-spacing is removed for Arabic text: spacing breaks
+     the connected Arabic script.
+========================================================= */
+
+/* ---------- Typography: Cairo for all Arabic text ---------- */
+html[lang="ar"] body {
+	font-family: 'Cairo', 'Inter', system-ui, sans-serif;
+}
+
+html[lang="ar"] .brand strong,
+html[lang="ar"] .mobile-nav a,
+html[lang="ar"] .hero h1,
+html[lang="ar"] .section-content h2,
+html[lang="ar"] .process-inner h2,
+html[lang="ar"] .contact-frame h2,
+html[lang="ar"] .skill-number,
+html[lang="ar"] .skill-card h3,
+html[lang="ar"] .work-copy h3,
+html[lang="ar"] .small-work h3,
+html[lang="ar"] .mini-project-card h3,
+html[lang="ar"] .process-step span,
+html[lang="ar"] .process-step strong,
+html[lang="ar"] .footer-brand,
+html[lang="ar"] .small-work-icon,
+html[lang="ar"] .skill-modal-dialog h2,
+html[lang="ar"] .about-identity-copy h2,
+html[lang="ar"] .about-summary h3 {
+	font-family: 'Cairo', 'Inter', system-ui, sans-serif;
+}
+
+/* Slightly taller headings so ascenders/descenders breathe */
+html[lang="ar"] .section-content h2,
+html[lang="ar"] .process-inner h2,
+html[lang="ar"] .contact-frame h2 {
+	line-height: 1.28;
+}
+
+html[lang="ar"] .about-identity-copy h2 {
+	line-height: 1.15;
+}
+
+/* ---------- Remove letter-spacing + uppercase tracking ----------
+   letter-spacing visually severs joined Arabic glyphs. Uppercase
+   transforms are no-ops for Arabic but the tracking must go. */
+html[lang="ar"] .nav,
+html[lang="ar"] .eyebrow,
+html[lang="ar"] .mini-label,
+html[lang="ar"] .tags span,
+html[lang="ar"] .brand small,
+html[lang="ar"] .signature,
+html[lang="ar"] .text-link,
+html[lang="ar"] .visual-label,
+html[lang="ar"] .work-meta dt,
+html[lang="ar"] .mini-project-thumb-label,
+html[lang="ar"] .art-gallery-fallback,
+html[lang="ar"] .site-footer {
+	letter-spacing: normal;
+	text-transform: none;
+}
+
+/* Small size bumps: Arabic at 8–10px tracked caps is unreadable.
+   These restore legibility without changing the visual hierarchy. */
+html[lang="ar"] .eyebrow { font-size: 11.5px; font-weight: 600; }
+html[lang="ar"] .mini-label { font-size: 10.5px; font-weight: 600; }
+html[lang="ar"] .tags span { font-size: 10.5px; }
+html[lang="ar"] .brand small { font-size: 10px; font-weight: 600; }
+html[lang="ar"] .text-link { font-size: 11.5px; font-weight: 700; }
+html[lang="ar"] .visual-label { font-size: 10px; font-weight: 600; }
+html[lang="ar"] .work-meta dt { font-size: 10.5px; font-weight: 600; }
+html[lang="ar"] .signature { font-size: 12px; font-weight: 600; }
+html[lang="ar"] .nav { font-size: 11.5px; font-weight: 600; }
+html[lang="ar"] .site-footer { font-size: 12px; }
+html[lang="ar"] .art-gallery-fallback { text-transform: none; }
+
+/* ---------- Directional UI mirrors (RTL only) ---------- */
+
+[dir="rtl"] .skip-link {
+	left: auto;
+	right: 12px;
+}
+
+[dir="rtl"] .skill-modal-close {
+	right: auto;
+	left: 14px;
+}
+
+[dir="rtl"] .visual-label {
+	left: auto;
+	right: 20px;
+}
+
+[dir="rtl"] .about-summary {
+	padding-left: 0;
+	padding-right: clamp(20px, 3vw, 42px);
+	border-left: 0;
+	border-right: 1px solid rgba(216, 164, 60, 0.18);
+}
+
+[dir="rtl"] button.contact-channel-copy {
+	text-align: right;
+}
+
+/* Process connector line: runs from right to left */
+[dir="rtl"] .process-step {
+	padding: 0 0 0 28px;
+}
+
+[dir="rtl"] .process-step:not(:last-child)::after {
+	right: auto;
+	left: 28px;
+	transform: translateX(-100%);
+	background: linear-gradient(-90deg, rgba(216, 164, 60, 0.3), rgba(216, 164, 60, 0));
+}
+
+/* Eyebrow hairlines: keep gradients fading toward the text */
+[dir="rtl"] .eyebrow::before {
+	background: linear-gradient(-90deg, transparent, rgba(243, 199, 100, 0.75));
+}
+
+[dir="rtl"] .eyebrow::after {
+	background: linear-gradient(90deg, transparent, rgba(243, 199, 100, 0.75));
+}
+
+[dir="rtl"] .signature::before {
+	background: linear-gradient(-90deg, transparent, var(--gold));
+}
+
+/* Directional arrows next to links point the reading way */
+[dir="rtl"] .text-link span[aria-hidden="true"] {
+	display: inline-block;
+	transform: scaleX(-1);
+}
+
+/* =========================================================
+   ARABIC RESPONSIVE GUARDS
+========================================================= */
+@media (max-width: 980px) {
+	[dir="rtl"] .header-controls {
+		gap: 8px;
+	}
+}
+
+@media (max-width: 420px) {
+	html[lang="ar"] .brand small {
+		font-size: 8.5px;
+	}
+
+	html[lang="ar"] .nav-toggle {
+		margin-inline-start: 2px;
+	}
+
+	/* Very narrow screens: let long Arabic tags wrap cleanly */
+	html[lang="ar"] .tags span {
+		white-space: normal;
+	}
 }
 

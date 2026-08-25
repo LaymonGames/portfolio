@@ -3,53 +3,64 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Laymon Games — solo indie developer portfolio. Godot game development, pixel art, low-poly 3D, music, and video, featuring the 2D pixel RPG Parallox." />
+	<meta name="description" id="meta-description" content="Laymon Games — solo indie developer portfolio. Godot game development, pixel art, low-poly 3D, music, and video, featuring the 2D pixel RPG Parallox." />
 	<meta name="theme-color" content="#090806" />
 	<link rel="icon" href="assets/lemon-avatar.png" type="image/png" />
-	<meta property="og:title" content="Laymon Games — Solo Indie Developer" />
-	<meta property="og:description" content="Games, pixel art, low-poly 3D, music, and video — made from idea to finished result by one developer." />
+	<meta property="og:title" id="og-title" content="Laymon Games — Solo Indie Developer" />
+	<meta property="og:description" id="og-description" content="Games, pixel art, low-poly 3D, music, and video — made from idea to finished result by one developer." />
 	<meta property="og:type" content="website" />
-	<title>Laymon Games — Solo Indie Developer Portfolio</title>
+	<meta property="og:locale" id="og-locale" content="en_US" />
+	<meta property="og:locale:alternate" content="ar_AR" />
+	<title id="page-title">Laymon Games — Solo Indie Developer Portfolio</title>
 	<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 	<div class="page-noise" aria-hidden="true"></div>
 
-	<a class="skip-link" href="#about">Skip to content</a>
+	<a class="skip-link" href="#about" data-i18n="skip.text">Skip to content</a>
 
-	<header class="site-header" aria-label="Primary navigation">
-		<a class="brand" href="#top" aria-label="Laymon Games home">
+	<header class="site-header" aria-label="Primary navigation" data-i18n-attr="aria-label:nav.ariaPrimary">
+		<a class="brand" href="#top" aria-label="Laymon Games home" data-i18n-attr="aria-label:brand.homeAria">
 			<span class="brand-mark"><img src="assets/lemon-avatar.png" alt="" /></span>
 			<span>
 				<strong>LAYMON GAMES</strong>
-				<small>SOLO INDIE DEVELOPER</small>
+				<small data-i18n="brand.tagline">SOLO INDIE DEVELOPER</small>
 			</span>
 		</a>
-		<nav class="nav" aria-label="Main navigation">
-			<a href="#top">Home</a>
-			<a href="#about">About</a>
-			<a href="#skills">Skills</a>
-			<a href="#work">Projects</a>
-			<a href="#process">Process</a>
-			<a href="#contact">Contact</a>
+		<nav class="nav" aria-label="Main navigation" data-i18n-attr="aria-label:nav.ariaMain">
+			<a href="#top" data-i18n="nav.home">Home</a>
+			<a href="#about" data-i18n="nav.about">About</a>
+			<a href="#skills" data-i18n="nav.skills">Skills</a>
+			<a href="#work" data-i18n="nav.projects">Projects</a>
+			<a href="#process" data-i18n="nav.process">Process</a>
+			<a href="#contact" data-i18n="nav.contact">Contact</a>
 		</nav>
-		<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">
-			<span class="nav-toggle-bar"></span>
-			<span class="nav-toggle-bar"></span>
-			<span class="nav-toggle-bar"></span>
-		</button>
+		<div class="header-controls">
+			<button class="lang-switch" type="button" data-lang-switch aria-label="Switch language">
+				<svg class="lang-switch-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
+					<path d="M3 12h18M12 3c2.6 2.6 3.9 5.7 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.7-3.9-9s1.3-6.4 3.9-9z" stroke="currentColor" stroke-width="1.5"/>
+				</svg>
+				<span class="lang-switch-label" data-lang-switch-label dir="auto">العربية</span>
+			</button>
+			<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation" data-i18n-attr="aria-label:nav.toggleAria">
+				<span class="nav-toggle-bar"></span>
+				<span class="nav-toggle-bar"></span>
+				<span class="nav-toggle-bar"></span>
+			</button>
+		</div>
 	</header>
-	<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden>
-		<a href="#top">Home</a>
-		<a href="#about">About</a>
-		<a href="#skills">Skills</a>
-		<a href="#work">Work</a>
-		<a href="#process">Process</a>
-		<a href="#contact">Contact</a>
+	<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden data-i18n-attr="aria-label:nav.ariaMobile">
+		<a href="#top" data-i18n="nav.home">Home</a>
+		<a href="#about" data-i18n="nav.about">About</a>
+		<a href="#skills" data-i18n="nav.skills">Skills</a>
+		<a href="#work" data-i18n="nav.work">Work</a>
+		<a href="#process" data-i18n="nav.process">Process</a>
+		<a href="#contact" data-i18n="nav.contact">Contact</a>
 	</nav>
 
 	<main id="top">
-		<section class="legacy-hero" aria-label="Laymon Games header artwork">
+		<section class="legacy-hero" aria-label="Laymon Games header artwork" data-i18n-attr="aria-label:hero.ariaLabel">
 			<img class="legacy-hero-image" src="assets/pg01.webp" alt="" aria-hidden="true" width="1727" height="911" />
 			<div class="legacy-sky-lift" aria-hidden="true"></div>
 			<div class="legacy-detail-lift legacy-lamp-lift lamp-left" aria-hidden="true"></div>
@@ -79,20 +90,20 @@
 			<div class="section-content">
 				<div class="about-identity">
 					<div class="creator-photo-frame">
-						<img src="assets/aymen-me.webp" alt="Aymen Meghezzi, creator behind Laymon Games" class="creator-photo" loading="lazy" />
+						<img src="assets/aymen-me.webp" alt="Aymen Meghezzi, creator behind Laymon Games" class="creator-photo" loading="lazy" data-i18n-attr="alt:about.ownerAlt" />
 					</div>
 					<div class="about-identity-copy">
-						<p class="eyebrow">About</p>
-						<p class="mini-label">The person behind the studio</p>
+						<p class="eyebrow" data-i18n="about.eyebrow">About</p>
+						<p class="mini-label" data-i18n="about.personLabel">The person behind the studio</p>
 						<h2>Aymen Meghezzi</h2>
-						<p class="identity-role"><strong>Laymon Games</strong>, a creator &amp; solo developer.</p>
-						<p class="identity-note">Games, code, art, audio, video - all in one.</p>
+						<p class="identity-role" data-i18n-html="about.role"><strong>Laymon Games</strong>, a creator &amp; solo developer.</p>
+						<p class="identity-note" data-i18n="about.note">Games, code, art, audio, video - all in one.</p>
 					</div>
 					<div class="about-summary">
-						<h3>All done by one person.</h3>
-						<p>I'm the person behind <strong>Laymon Games</strong>, a solo indie developer focused on making games, creative digital projects, and editing videos. I work across programming, 2D and 3D art, sound, music, editing, and presentation so the whole project can keep one consistent direction.</p>
-						<p>I like building games, from brainstorming ideas to finishing the project, and using new tools when they genuinely improve the workflow.</p>
-						<p class="signature">Code · Art · Audio · Video</p>
+						<h3 data-i18n="about.summaryTitle">All done by one person.</h3>
+						<p data-i18n-html="about.bio1">I'm the person behind <strong>Laymon Games</strong>, a solo indie developer focused on making games, creative digital projects, and editing videos. I work across programming, 2D and 3D art, sound, music, editing, and presentation so the whole project can keep one consistent direction.</p>
+						<p data-i18n="about.bio2">I like building games, from brainstorming ideas to finishing the project, and using new tools when they genuinely improve the workflow.</p>
+						<p class="signature" data-i18n="about.signature">Code · Art · Audio · Video</p>
 					</div>
 				</div>
 			</div>
@@ -101,43 +112,43 @@
 		<section id="skills" class="panel-section skills-section">
 			<img class="panel-frame" src="assets/pg02.webp" alt="" aria-hidden="true" loading="lazy" width="1400" height="683" />
 			<div class="section-content">
-				<p class="eyebrow">Skills</p>
-				<h2>What I<br /><em>can do:</em></h2>
+				<p class="eyebrow" data-i18n="skills.eyebrow">Skills</p>
+				<h2 data-i18n-html="skills.heading">What I<br /><em>can do:</em></h2>
 
 				<div class="skill-grid">
-					<article class="skill-card skill-card-wide" data-skill-action="projects" tabindex="0" role="button" aria-label="Go to projects">
+					<article class="skill-card skill-card-wide" data-skill-action="projects" tabindex="0" role="button" aria-label="Go to projects" data-i18n-attr="aria-label:skills.game.aria">
 						<span class="skill-number"> </span>
-						<h3>Game Development</h3>
-						<p>Godot and GDScript for creating 2D and 3D game projects, implementing gameplay systems, and putting everything together.</p>
+						<h3 data-i18n="skills.game.title">Game Development</h3>
+						<p data-i18n="skills.game.desc">Godot and GDScript for creating 2D and 3D game projects, implementing gameplay systems, and putting everything together.</p>
 						<div class="tags"><span>Godot</span><span>GDScript</span><span>2D</span><span>3D</span></div>
 					</article>
 
-					<article class="skill-card" data-skill-action="art" tabindex="0" role="button" aria-label="Open art preview">
+					<article class="skill-card" data-skill-action="art" tabindex="0" role="button" aria-label="Open art preview" data-i18n-attr="aria-label:skills.art.aria">
 						<span class="skill-number"> </span>
-						<h3>Art</h3>
-						<p>Pixel-art sprites and environments for 2D, and stylized low-poly 3D modelling for 3D.</p>
-						<div class="tags"><span>Aseprite</span><span>Pixel Art</span><span>Blender</span><span>Low-Poly 3D</span></div>
+						<h3 data-i18n="skills.art.title">Art</h3>
+						<p data-i18n="skills.art.desc">Pixel-art sprites and environments for 2D, and stylized low-poly 3D modelling for 3D.</p>
+						<div class="tags" data-i18n-html="skills.tags.art"><span>Aseprite</span><span>Pixel Art</span><span>Blender</span><span>Low-Poly 3D</span></div>
 					</article>
 
-					<article class="skill-card" data-skill-action="audio" tabindex="0" role="link" aria-label="Open audio link">
+					<article class="skill-card" data-skill-action="audio" tabindex="0" role="link" aria-label="Open audio link" data-i18n-attr="aria-label:skills.audio.aria">
 						<span class="skill-number"> </span>
-						<h3>Audio</h3>
-						<p>Original soundtracks and sound design made to set the mood of a scene, or a moment of gameplay.</p>
-						<div class="tags"><span>FL Studio</span><span>Music</span><span>Sound Design</span><span>SFX</span></div>
+						<h3 data-i18n="skills.audio.title">Audio</h3>
+						<p data-i18n="skills.audio.desc">Original soundtracks and sound design made to set the mood of a scene, or a moment of gameplay.</p>
+						<div class="tags" data-i18n-html="skills.tags.audio"><span>FL Studio</span><span>Music</span><span>Sound Design</span><span>SFX</span></div>
 					</article>
 
-					<article class="skill-card" data-skill-action="video" tabindex="0" role="link" aria-label="Open YouTube video link">
+					<article class="skill-card" data-skill-action="video" tabindex="0" role="link" aria-label="Open YouTube video link" data-i18n-attr="aria-label:skills.video.aria">
 						<span class="skill-number"> </span>
-						<h3>Video</h3>
-						<p>Editing for creative videos that present a project the way it deserves.</p>
-						<div class="tags"><span>Davinci Resolve</span><span>Video Editing</span></div>
+						<h3 data-i18n="skills.video.title">Video</h3>
+						<p data-i18n="skills.video.desc">Editing for creative videos that present a project the way it deserves.</p>
+						<div class="tags" data-i18n-html="skills.tags.video"><span>Davinci Resolve</span><span>Video Editing</span></div>
 					</article>
 
-					<article class="skill-card accent-card" data-skill-action="ai" tabindex="0" role="button" aria-label="Show AI assisted notice">
+					<article class="skill-card accent-card" data-skill-action="ai" tabindex="0" role="button" aria-label="Show AI assisted notice" data-i18n-attr="aria-label:skills.other.aria">
 						<span class="skill-number"> </span>
-						<h3>Other/AI-Assisted</h3>
-						<p>Websites, apps, including this site, built with the help of AI-assisted workflows. A tool for extra capability, not the foundation of my game development, art, or audio work.</p>
-						<div class="tags"><span>AI</span><span>Websites</span><span>Apps</span></div>
+						<h3 data-i18n="skills.other.title">Other/AI-Assisted</h3>
+						<p data-i18n="skills.other.desc">Websites, apps, including this site, built with the help of AI-assisted workflows. A tool for extra capability, not the foundation of my game development, art, or audio work.</p>
+						<div class="tags" data-i18n-html="skills.tags.other"><span>AI</span><span>Websites</span><span>Apps</span></div>
 					</article>
 				</div>
 			</div>
@@ -148,29 +159,29 @@
 			<div class="section-content">
 				<div class="section-heading-row">
 					<div>
-						<p class="eyebrow">Projects</p>
-						<h2>Projects I made.</h2>
+						<p class="eyebrow" data-i18n="work.eyebrow">Projects</p>
+						<h2 data-i18n="work.heading">Projects I made.</h2>
 					</div>
-					<p class="section-intro">Here you can check projects made by Laymon Games.</p>
+					<p class="section-intro" data-i18n-html="work.intro">Here you can check projects made by Laymon Games.</p>
 				</div>
 
 				<div class="featured-work">
-					<div class="work-card work-main" data-itch-url="https://laymon-games.itch.io/parallox" tabindex="0" role="link" aria-label="Open Parallox on itch.io">
+					<div class="work-card work-main" data-itch-url="https://laymon-games.itch.io/parallox" tabindex="0" role="link" aria-label="Open Parallox on itch.io" data-i18n-attr="aria-label:work.main.aria">
 						<div class="work-visual work-visual-game">
 
 							<img src="assets/parallox.webp" alt="Something's Off Remastered" class="mini-project-img" onerror="this.closest('.mini-project-thumb').classList.add('mini-project-thumb--missing')" />
-							<span class="visual-label">In development</span>
+							<span class="visual-label" data-i18n="work.main.badge">In development</span>
 						</div>
 						<div class="work-copy">
-							<p class="mini-label">Main Project · 2D Pixel RPG</p>
+							<p class="mini-label" data-i18n="work.main.label">Main Project · 2D Pixel RPG</p>
 							<h3>Parallox</h3>
-							<p>A 2D indie pixel RPG under solo development in Godot, the game where the hero is also the villain.</p>
+							<p data-i18n="work.main.desc">A 2D indie pixel RPG under solo development in Godot, the game where the hero is also the villain.</p>
 							<dl class="work-meta">
-								<div><dt>Engine</dt><dd>Godot</dd></div>
-								<div><dt>Type</dt><dd>2D pixel RPG</dd></div>
-								<div><dt>Status</dt><dd>In development</dd></div>
+								<div><dt data-i18n="work.meta.engine">Engine</dt><dd>Godot</dd></div>
+								<div><dt data-i18n="work.meta.type">Type</dt><dd data-i18n="work.meta.typeValue">2D pixel RPG</dd></div>
+								<div><dt data-i18n="work.meta.status">Status</dt><dd data-i18n="work.meta.statusValue">In development</dd></div>
 							</dl>
-							<a href="#contact" class="text-link">Talk about the project <span aria-hidden="true">→</span></a>
+							<a href="#contact" class="text-link"><span data-i18n="work.talk">Talk about the project</span> <span aria-hidden="true">→</span></a>
 						</div>
 					</div>
 
@@ -178,25 +189,25 @@
 						<article class="work-card small-work">
 							<div class="small-work-icon" aria-hidden="true">✦</div>
 							<div>
-								<p class="mini-label">Game Art</p>
-								<h3>Art &amp; Assets</h3>
-								<p>Stylized pixel art, characters, props, environments, all created for the project.</p>
+								<p class="mini-label" data-i18n="work.side1.label">Game Art</p>
+								<h3 data-i18n="work.side1.title">Art &amp; Assets</h3>
+								<p data-i18n="work.side1.desc">Stylized pixel art, characters, props, environments, all created for the project.</p>
 							</div>
 						</article>
 						<article class="work-card small-work">
 							<div class="small-work-icon" aria-hidden="true">♪</div>
 							<div>
-								<p class="mini-label">Original Soundtracks</p>
-								<h3>Music &amp; SFX</h3>
-								<p>Original music and sound design produced for the game.</p>
+								<p class="mini-label" data-i18n="work.side2.label">Original Soundtracks</p>
+								<h3 data-i18n="work.side2.title">Music &amp; SFX</h3>
+								<p data-i18n="work.side2.desc">Original music and sound design produced for the game.</p>
 							</div>
 						</article>
 						<article class="work-card small-work">
 							<div class="small-work-icon" aria-hidden="true">◉</div>
 							<div>
-								<p class="mini-label">GDScript</p>
-								<h3>Code &amp; Programming</h3>
-								<p>Coding in Godot's supported language, GDScript, creating gameplay mechanics and in-game scenes.</p>
+								<p class="mini-label" data-i18n="work.side3.label">GDScript</p>
+								<h3 data-i18n="work.side3.title">Code &amp; Programming</h3>
+								<p data-i18n="work.side3.desc">Coding in Godot's supported language, GDScript, creating gameplay mechanics and in-game scenes.</p>
 							</div>
 						</article>
 					</div>
@@ -208,7 +219,7 @@
 				     the small-work-icon glyph, and (optionally) the href need
 				     to change per project. -->
 				<div class="mini-projects-grid">
-					<article class="work-card mini-project-card" data-itch-url="https://laymon-games.itch.io/somethings-off" tabindex="0" role="link" aria-label="Open Something's Off on itch.io">
+					<article class="work-card mini-project-card" data-itch-url="https://laymon-games.itch.io/somethings-off" tabindex="0" role="link" aria-label="Open Something's Off on itch.io" data-i18n-attr="aria-label:work.m1.aria">
 						<!-- Replace src with your project screenshot. Recommended size: 800×450px (16:9) -->
 						<div class="mini-project-thumb">
 							<img src="assets/off.webp" alt="Something's Off" class="mini-project-img" onerror="this.closest('.mini-project-thumb').classList.add('mini-project-thumb--missing')" />
@@ -216,40 +227,40 @@
 						</div>
 						<div class="mini-project-body">
 							<div class="small-work-icon" aria-hidden="true">◉</div>
-							<p class="mini-label">2D Pixel Game</p>
+							<p class="mini-label" data-i18n="work.m1.label">2D Pixel Game</p>
 							<h3>Something's Off</h3>
-							<p>A game made in 1 month, where everything keeps getting weirder until you wake up to the harsh truth.</p>
-							<a href="#contact" class="text-link">Talk about the project <span aria-hidden="true">→</span></a>
+							<p data-i18n="work.m1.desc">A game made in 1 month, where everything keeps getting weirder until you wake up to the harsh truth.</p>
+							<a href="#contact" class="text-link"><span data-i18n="work.talk">Talk about the project</span> <span aria-hidden="true">→</span></a>
 						</div>
 					</article>
 
-					<article class="work-card mini-project-card" data-itch-url="https://laymon-games.itch.io/cursed-arcade" tabindex="0" role="link" aria-label="Open Cursed Arcade on Laymon Games itch.io">
+					<article class="work-card mini-project-card" data-itch-url="https://laymon-games.itch.io/cursed-arcade" tabindex="0" role="link" aria-label="Open Cursed Arcade on Laymon Games itch.io" data-i18n-attr="aria-label:work.m2.aria">
 						<!-- Replace src with your project screenshot. Recommended size: 800×450px (16:9) -->
 						<div class="mini-project-thumb">
 							<img src="assets/cursed.webp" alt="Cursed Arcade" class="mini-project-img" onerror="this.closest('.mini-project-thumb').classList.add('mini-project-thumb--missing')" />
-							<span class="mini-project-thumb-label">Add image → assets/cursed.png</span>
+							<span class="mini-project-thumb-label" data-i18n-html="work.m2.thumbLabel">Add image → assets/cursed.png</span>
 						</div>
 						<div class="mini-project-body">
 							<div class="small-work-icon" aria-hidden="true">◉</div>
-							<p class="mini-label">2D/3D Horror Game</p>
+							<p class="mini-label" data-i18n="work.m2.label">2D/3D Horror Game</p>
 							<h3>Cursed Arcade</h3>
-							<p>A horror game made in 4 days, with a unique style and challenging gameplay.</p>
-							<a href="#contact" class="text-link">Talk about the project <span aria-hidden="true">→</span></a>
+							<p data-i18n="work.m2.desc">A horror game made in 4 days, with a unique style and challenging gameplay.</p>
+							<a href="#contact" class="text-link"><span data-i18n="work.talk">Talk about the project</span> <span aria-hidden="true">→</span></a>
 						</div>
 					</article>
 
-					<article class="work-card mini-project-card" data-wip="true" tabindex="0" role="button" aria-label="Something's Off Remastered – currently in development">
+					<article class="work-card mini-project-card" data-wip="true" tabindex="0" role="button" aria-label="Something's Off Remastered – currently in development" data-i18n-attr="aria-label:work.m3.aria">
 						<!-- Replace src with your project screenshot. Recommended size: 800×450px (16:9) -->
 						<div class="mini-project-thumb">
 							<img src="assets/off_remastered.webp" alt="Something's Off Remastered" class="mini-project-img" onerror="this.closest('.mini-project-thumb').classList.add('mini-project-thumb--missing')" />
-							<span class="mini-project-thumb-label">Add image → assets/off.png</span>
+							<span class="mini-project-thumb-label" data-i18n-html="work.m3.thumbLabel">Add image → assets/off.png</span>
 						</div>
 						<div class="mini-project-body">
 							<div class="small-work-icon" aria-hidden="true">◉</div>
-							<p class="mini-label">2D/3D Horror Game</p>
+							<p class="mini-label" data-i18n="work.m3.label">2D/3D Horror Game</p>
 							<h3>Something's Off Remastered</h3>
-							<p>A 2D game with some aspects of 3D, the remastered version of the previous game "Something's Off".</p>
-							<a href="#contact" class="text-link">Talk about the project <span aria-hidden="true">→</span></a>
+							<p data-i18n-html="work.m3.desc">A 2D game with some aspects of 3D, the remastered version of the previous game "Something's Off".</p>
+							<a href="#contact" class="text-link"><span data-i18n="work.talk">Talk about the project</span> <span aria-hidden="true">→</span></a>
 						</div>
 					</article>
 				</div>
@@ -258,28 +269,28 @@
 
 		<section id="process" class="process-section" aria-labelledby="process-title">
 			<div class="process-inner">
-				<p class="eyebrow">Process</p>
-				<h2 id="process-title">Idea. Prototype. Create. Polish.</h2>
+				<p class="eyebrow" data-i18n="process.eyebrow">Process</p>
+				<h2 id="process-title" data-i18n="process.heading">Idea. Prototype. Create. Polish.</h2>
 				<ol class="process-line">
-					<li class="process-step"><span>01</span><strong>Idea</strong><p>brainstorming an interesting idea, then upgrading it.</p></li>
-					<li class="process-step"><span>02</span><strong>Prototype</strong><p>Building the smallest playable or visible version before polishing it.</p></li>
-					<li class="process-step"><span>03</span><strong>Create</strong><p>Developing gameplay, art, audio, game feel, and the systems around them.</p></li>
-					<li class="process-step"><span>04</span><strong>Polish</strong><p>Test, refine, and improve for the presentation.</p></li>
+					<li class="process-step"><span>01</span><strong data-i18n="process.s1.title">Idea</strong><p data-i18n="process.s1.desc">brainstorming an interesting idea, then upgrading it.</p></li>
+					<li class="process-step"><span>02</span><strong data-i18n="process.s2.title">Prototype</strong><p data-i18n="process.s2.desc">Building the smallest playable or visible version before polishing it.</p></li>
+					<li class="process-step"><span>03</span><strong data-i18n="process.s3.title">Create</strong><p data-i18n="process.s3.desc">Developing gameplay, art, audio, game feel, and the systems around them.</p></li>
+					<li class="process-step"><span>04</span><strong data-i18n="process.s4.title">Polish</strong><p data-i18n="process.s4.desc">Test, refine, and improve for the presentation.</p></li>
 				</ol>
-				<p class="process-note">One person, moving across the whole pipeline.</p>
+				<p class="process-note" data-i18n="process.note">One person, moving across the whole pipeline.</p>
 			</div>
 		</section>
 
 		<section id="contact" class="contact-section" aria-labelledby="contact-title">
 			<div class="contact-frame">
 				<div class="contact-intro">
-					<p class="eyebrow">Contact</p>
-					<h2 id="contact-title">Wanna get in touch?</h2>
-					<p>For collaborations, game projects, creative digital work, or you just want to say hi, get in touch with Laymon Games.</p>
+					<p class="eyebrow" data-i18n="contact.eyebrow">Contact</p>
+					<h2 id="contact-title" data-i18n="contact.heading">Wanna get in touch?</h2>
+					<p data-i18n-html="contact.intro">For collaborations, game projects, creative digital work, or you just want to say hi, get in touch with Laymon Games.</p>
 				</div>
 				<div class="contact-channels">
-					<button type="button" class="contact-channel contact-channel-copy" data-email="gamesbylaymon@gmail.com" aria-label="Copy email address">
-						<span class="mini-label">Email</span>
+					<button type="button" class="contact-channel contact-channel-copy" data-email="gamesbylaymon@gmail.com" aria-label="Copy email address" data-i18n-attr="aria-label:contact.copyAria">
+						<span class="mini-label" data-i18n="contact.emailLabel">Email</span>
 						<span class="copy-email-row">
 							<span class="copy-email-text">gamesbylaymon@gmail.com</span>
 							<span class="copy-email-icon" aria-hidden="true">
@@ -291,7 +302,7 @@
 						</span>
 					</button>
 					<div class="contact-channel">
-						<span class="mini-label">Elsewhere</span>
+						<span class="mini-label" data-i18n="contact.elsewhereLabel">Elsewhere</span>
 						<div class="social-links">
 							<a href="https://discord.com/users/laymon_games" target="_blank" rel="noopener noreferrer" class="social-link">
 								<span class="social-icon" aria-hidden="true">
@@ -319,33 +330,33 @@
 		<div class="skill-modal" id="wip-modal" hidden aria-hidden="true">
 			<div class="skill-modal-backdrop" data-modal-close></div>
 			<div class="skill-modal-dialog skill-modal-dialog-small" role="dialog" aria-modal="true" aria-labelledby="wip-modal-title">
-				<button class="skill-modal-close" type="button" aria-label="Close notice" data-modal-close>×</button>
-				<p class="eyebrow">Work in Progress</p>
-				<h2 id="wip-modal-title">Under Development</h2>
-				<p>This project is still under development. Stay tuned!</p>
+				<button class="skill-modal-close" type="button" aria-label="Close notice" data-modal-close data-i18n-attr="aria-label:modal.wip.closeAria">×</button>
+				<p class="eyebrow" data-i18n="modal.wip.eyebrow">Work in Progress</p>
+				<h2 id="wip-modal-title" data-i18n="modal.wip.title">Under Development</h2>
+				<p data-i18n="modal.wip.body">This project is still under development. Stay tuned!</p>
 			</div>
 		</div>
 
 		<div class="skill-modal" id="skill-art-modal" hidden aria-hidden="true">
 			<div class="skill-modal-backdrop" data-modal-close></div>
 			<div class="skill-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="skill-art-modal-title">
-				<button class="skill-modal-close" type="button" aria-label="Close art preview" data-modal-close>×</button>
-				<p class="eyebrow">Art</p>
-				<h2 id="skill-art-modal-title">Art</h2>
-				<div class="art-gallery" aria-label="Art preview gallery">
+				<button class="skill-modal-close" type="button" aria-label="Close art preview" data-modal-close data-i18n-attr="aria-label:modal.art.closeAria">×</button>
+				<p class="eyebrow" data-i18n="modal.art.eyebrow">Art</p>
+				<h2 id="skill-art-modal-title" data-i18n="modal.art.title">Art</h2>
+				<div class="art-gallery" aria-label="Art preview gallery" data-i18n-attr="aria-label:modal.art.galleryAria">
 					<div class="art-gallery-track" id="art-gallery-track"></div>
 				</div>
-				<p>If you want to see more art check out my games!</p>
+				<p data-i18n="modal.art.body">If you want to see more art check out my games!</p>
 			</div>
 		</div>
 
 		<div class="skill-modal" id="skill-ai-modal" hidden aria-hidden="true">
 			<div class="skill-modal-backdrop" data-modal-close></div>
 			<div class="skill-modal-dialog skill-modal-dialog-small" role="dialog" aria-modal="true" aria-labelledby="skill-ai-modal-title">
-				<button class="skill-modal-close" type="button" aria-label="Close AI notice" data-modal-close>×</button>
-				<p class="eyebrow">AI Assisted</p>
-				<h2 id="skill-ai-modal-title">This site was made with the help of AI!</h2>
-				<p>AI-assisted tools were used to help build this website.</p>
+				<button class="skill-modal-close" type="button" aria-label="Close AI notice" data-modal-close data-i18n-attr="aria-label:modal.ai.closeAria">×</button>
+				<p class="eyebrow" data-i18n="modal.ai.eyebrow">AI Assisted</p>
+				<h2 id="skill-ai-modal-title" data-i18n="modal.ai.title">This site was made with the help of AI!</h2>
+				<p data-i18n="modal.ai.body">AI-assisted tools were used to help build this website.</p>
 			</div>
 		</div>
 
@@ -357,10 +368,11 @@
 			<span class="brand-mark"><img src="assets/lemon-avatar.png" alt="" loading="lazy" /></span>
 			<span>Laymon Games</span>
 		</div>
-		<p class="footer-statement">Site developed by Laymon Games (home page by Youcef Benredjem).</p>
+		<p class="footer-statement" data-i18n-html="footer.statement">Site developed by Laymon Games (home page by Youcef Benredjem).</p>
 		<p class="footer-copy">© <span id="year"></span> Laymon Games</p>
 	</footer>
 
+	<script src="translations.js"></script>
 	<script src="script.js"></script>
 </body>
 </html>

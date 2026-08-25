@@ -295,6 +295,18 @@ if (!upgradeReducedMotion && 'IntersectionObserver' in window && revealTargets.l
 
 /* ── Click-to-copy email: the whole card is the button ── */
 const copyEmailBtn = document.querySelector('.contact-channel-copy');
+const i18n = window.LaymonI18n || null;
+
+function tr(key, params, fallback) {
+  if (i18n) return i18n.t(key, params);
+  let value = fallback;
+  if (params) {
+    Object.keys(params).forEach((name) => {
+      value = String(value).split(`{${name}}`).join(params[name]);
+    });
+  }
+  return value;
+}
 
 if (copyEmailBtn) {
   const copyEmailText = copyEmailBtn.querySelector('.copy-email-text');
@@ -325,13 +337,13 @@ if (copyEmailBtn) {
     }
 
     copyEmailBtn.classList.add('is-copied');
-    copyEmailBtn.setAttribute('aria-label', 'Email copied to clipboard');
-    if (copyEmailText) copyEmailText.textContent = 'Copied!';
+    copyEmailBtn.setAttribute('aria-label', tr('ui.emailCopiedAria', null, 'Email copied to clipboard'));
+    if (copyEmailText) copyEmailText.textContent = tr('ui.copied', null, 'Copied!');
 
     window.clearTimeout(copyResetTimeout);
     copyResetTimeout = window.setTimeout(() => {
       copyEmailBtn.classList.remove('is-copied');
-      copyEmailBtn.setAttribute('aria-label', 'Copy email address');
+      copyEmailBtn.setAttribute('aria-label', tr('contact.copyAria', null, 'Copy email address'));
       if (copyEmailText) copyEmailText.textContent = originalLabel;
     }, 2000);
   });
@@ -417,18 +429,18 @@ function renderArtGallery() {
 		const slide = document.createElement('div');
 		slide.className = 'art-gallery-slide';
 		slide.setAttribute('role', 'group');
-		slide.setAttribute('aria-label', `Artwork ${index + 1} of ${artGalleryImages.length}`);
+		slide.setAttribute('aria-label', tr('ui.artSlideAria', { i: index + 1, total: artGalleryImages.length }, `Artwork ${index + 1} of ${artGalleryImages.length}`));
 
 		const img = document.createElement('img');
 		img.className = 'art-gallery-image';
 		img.src = image.src;
-		img.alt = image.alt;
+		img.alt = tr('ui.artPreviewAlt', { n: index + 1 }, `Art preview ${index + 1}`);
 		img.loading = 'lazy';
 		img.addEventListener('error', () => {
 			slide.innerHTML = '';
 			const fallback = document.createElement('div');
 			fallback.className = 'art-gallery-fallback';
-			fallback.textContent = `Add image: ${image.src}`;
+			fallback.textContent = tr('ui.artAddImage', { src: image.src }, `Add image: ${image.src}`);
 			slide.appendChild(fallback);
 		}, { once: true });
 
@@ -542,4 +554,13 @@ wipCards.forEach((card) => {
 document.addEventListener('keydown', (event) => {
 	if (event.key !== 'Escape') return;
 	document.querySelectorAll('.skill-modal:not([hidden])').forEach((modal) => closeSkillModal(modal));
+});
+
+/* ---------------------------------------------------------
+   Localization hooks — re-render language-dependent content
+--------------------------------------------------------- */
+window.addEventListener('laymon:languagechange', () => {
+	if (artModal && !artModal.hidden) {
+		renderArtGallery();
+	}
 });
