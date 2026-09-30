@@ -1250,6 +1250,28 @@ button.contact-channel-copy.is-copied .copy-email-icon {
 .footer-copy {
 	margin: 0;
 }
+	.footer-link {
+		display: block;
+		margin: 6px 0 4px;
+		color: var(--muted);
+		font-size: 11px;
+		letter-spacing: 0.04em;
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		transition: color 0.15s ease, border-color 0.15s ease;
+	}
+
+	.footer-link:hover,
+	.footer-link:focus-visible {
+		color: var(--gold-bright);
+		border-color: var(--gold-bright);
+	}
+
+	.footer-link:focus-visible {
+		outline: none;
+		box-shadow: var(--focus-ring);
+		border-radius: 3px;
+	}
 
 /* ---------------------------------------------------------
    Responsive

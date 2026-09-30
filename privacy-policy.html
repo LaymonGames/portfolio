@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Privacy Policy for Laymon Games, covering its websites, games, apps, and other digital projects." id="meta-description" name="description"/>
+<meta content="#090806" name="theme-color"/>
+<link href="assets/lemon-avatar.png" rel="icon" type="image/png"/>
+<title id="page-title">Privacy Policy — Laymon Games</title>
+<link href="style.css" rel="stylesheet"/>
+<style>
+		/* Policy page — reuses the site's header/footer/identity (style.css), adds its own layout. */
+		.policy-body {
+			--content-max: 780px;
+		}
+
+		.policy {
+			max-width: var(--content-max);
+			margin: 0 auto;
+			padding: clamp(24px, 5vw, 64px) clamp(20px, 4vw, 40px) clamp(48px, 8vw, 96px);
+		}
+
+		.policy-page-noise {
+			pointer-events: none;
+		}
+
+		.policy-header {
+			position: relative;
+			margin-bottom: clamp(28px, 4vw, 44px);
+		}
+
+		.policy-meta {
+			font-size: 11px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: var(--gold-bright);
+			margin: 0 0 14px;
+		}
+
+		.policy-header h1 {
+			font-family: 'Cinzel', serif;
+			font-size: clamp(28px, 5vw, 42px);
+			font-weight: 600;
+			line-height: 1.12;
+			letter-spacing: 0.01em;
+			margin: 0 0 16px;
+			color: var(--text);
+		}
+
+		.policy-lead {
+			color: var(--muted);
+			font-size: 15px;
+			line-height: 1.7;
+			margin: 0;
+			max-width: 66ch;
+		}
+
+		.policy-rule {
+			border: 1px solid rgba(216, 164, 60, 0.18);
+			border-top: 2px solid var(--gold);
+			border-radius: var(--radius);
+			background:
+				radial-gradient(circle at 80% 0%, rgba(216, 164, 60, 0.06), transparent 60%),
+				var(--bg-soft);
+			padding: 0 clamp(18px, 3vw, 28px);
+			margin: 0 0 clamp(20px, 3vw, 28px) 0;
+		}
+
+		.policy-rule p {
+			margin: 0;
+			color: var(--muted);
+			font-size: 13.5px;
+			line-height: 1.6;
+			padding: 12px 0 0;
+			border-top: 1px solid rgba(216, 164, 60, 0.12);
+		}
+
+		.policy-section {
+			margin-bottom: clamp(28px, 4vw, 40px);
+		}
+
+		.policy-section > h2 {
+			font-family: 'Cinzel', serif;
+			font-size: clamp(18px, 3vw, 22px);
+			font-weight: 600;
+			color: var(--text);
+			margin: 0 0 12px;
+			display: flex;
+			align-items: baseline;
+			gap: 14px;
+			line-height: 1.2;
+		}
+
+		.policy-section > h2 .sec-num {
+			font-size: 12px;
+			font-family: 'Inter', system-ui, sans-serif;
+			font-weight: 700;
+			color: var(--gold-bright);
+			letter-spacing: 0.1em;
+			white-space: nowrap;
+		}
+
+		.policy-section p {
+			color: var(--muted);
+			font-size: 15px;
+			line-height: 1.75;
+			margin: 0 0 14px;
+		}
+
+		.policy-section p strong {
+			color: var(--text);
+			font-weight: 600;
+		}
+
+		.policy-section a {
+			color: var(--gold-bright);
+			text-decoration: underline;
+			text-underline-offset: 3px;
+			border-bottom: 1px solid rgba(243, 199, 100, 0.35);
+		}
+		.policy-section a:hover {
+			color: var(--gold);
+		}
+
+		.policy-section ul,
+		.policy-section ol {
+			padding-left: 24px;
+			margin: 0 0 14px;
+			color: var(--muted);
+			font-size: 15px;
+			line-height: 1.75;
+		}
+		.policy-section li {
+			margin-bottom: 8px;
+		}
+
+		.policy-section li strong {
+			color: var(--text);
+		}
+
+		.policy-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 0 0 14px;
+			font-size: 14px;
+			border: 1px solid rgba(216, 164, 60, 0.16);
+			border-radius: var(--radius);
+			overflow: hidden;
+			background: var(--bg-soft);
+		}
+		.policy-table caption {
+			caption-side: top;
+			text-align: left;
+			padding: 14px 14px 8px;
+			font-size: 12px;
+			letter-spacing: 0.06em;
+			color: var(--gold-bright);
+			font-weight: 700;
+			text-transform: uppercase;
+			font-family: 'Inter', system-ui, sans-serif;
+		}
+		.policy-table thead th {
+			background: rgba(216, 164, 60, 0.06);
+			color: var(--text);
+			font-weight: 600;
+			text-align: left;
+			padding: 12px 14px;
+			border-bottom: 1px solid rgba(216, 164, 60, 0.2);
+			font-size: 12.5px;
+		}
+		.policy-table tbody td {
+			padding: 12px 14px;
+			color: var(--muted);
+			border-bottom: 1px solid rgba(216, 164, 60, 0.08);
+			font-size: 13.5px;
+			line-height: 1.6;
+		}
+		.policy-table tbody td:first-child {
+			color: var(--text);
+			font-weight: 600;
+			white-space: nowrap;
+		}
+		.policy-table tbody tr:last-child td {
+			border-bottom: none;
+		}
+
+		.policy-callout {
+			margin: 0 0 14px;
+			padding: 14px 16px;
+			border-left: 3px solid var(--gold);
+			background: rgba(216, 164, 60, 0.05);
+			border-radius: 0 var(--radius) var(--radius) 0;
+			color: var(--muted);
+			font-size: 14px;
+			line-height: 1.7;
+		}
+		.policy-callout strong {
+			color: var(--text);
+		}
+
+		.policy-email {
+			font-family: 'Cinzel', serif;
+			font-size: 17px;
+			color: var(--gold-bright);
+		}
+
+		/* Sticky table of contents (desktop). */
+		.policy-toc {
+			position: sticky;
+			top: 90px;
+			z-index: 30;
+		}
+		.policy-layout {
+			display: grid;
+			grid-template-columns: 220px 1fr;
+			gap: clamp(28px, 4vw, 64px);
+			padding-top: clamp(20px, 3vw, 40px);
+		}
+		.policy-toc ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.policy-toc a {
+			display: block;
+			padding: 7px 0;
+			color: var(--muted);
+			font-size: 13px;
+			font-weight: 500;
+			text-decoration: none;
+			border-bottom: 1px solid rgba(216, 164, 60, 0.08);
+			transition: color 0.15s ease;
+		}
+		.policy-toc a:hover,
+		.policy-toc a.active {
+			color: var(--gold-bright);
+		}
+		.policy-toc h3 {
+			font-family: 'Inter', system-ui, sans-serif;
+			font-size: 11px;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: var(--gold-bright);
+			margin: 0 0 12px;
+			font-weight: 700;
+		}
+
+		@media (max-width: 760px) {
+			.policy-layout {
+				grid-template-columns: 1fr;
+			}
+			.policy-toc {
+				position: static;
+				z-index: auto;
+				margin-bottom: 24px;
+			}
+			.policy-toc ul {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+<div aria-hidden="true" class="page-noise"></div>
+<a class="skip-link" href="#policy-content">Skip to privacy policy</a>
+<header aria-label="Primary navigation" class="site-header" data-i18n-attr="aria-label:nav.ariaPrimary">
+<a aria-label="Laymon Games home" class="brand" data-i18n-attr="aria-label:brand.homeAria" href="index.html">
+<span class="brand-mark"><img alt="" src="assets/lemon-avatar.png"/></span>
+<span>
+<strong>LAYMON GAMES</strong>
+<small data-i18n="brand.tagline">SOLO INDIE DEVELOPER</small>
+</span>
+</a>
+<nav aria-label="Main navigation" class="nav" data-i18n-attr="aria-label:nav.ariaMain">
+<a href="index.html#top">Home</a>
+<a href="index.html#about">About</a>
+<a href="index.html#skills">Skills</a>
+<a href="index.html#work">Projects</a>
+<a href="index.html#process">Process</a>
+<a href="index.html#contact">Contact</a>
+</nav>
+<div class="header-controls">
+<button aria-label="Switch language" class="lang-switch" data-lang-switch="" type="button">
+<svg aria-hidden="true" class="lang-switch-icon" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+<path d="M3 12h18M12 3c2.6 2.6 3.9 5.7 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.7-3.9-9s1.3-6.4-3.9 9z" stroke="currentColor" stroke-width="1.5"></path>
+</svg>
+<span class="lang-switch-label" data-lang-switch-label="" dir="auto">العربية</span>
+</button>
+<button aria-controls="mobile-nav" aria-expanded="false" aria-label="Open navigation" class="nav-toggle" data-i18n-attr="aria-label:nav.toggleAria" type="button">
+<span class="nav-toggle-bar"></span>
+<span class="nav-toggle-bar"></span>
+<span class="nav-toggle-bar"></span>
+</button>
+</div>
+</header>
+<nav aria-label="Mobile navigation" class="mobile-nav" data-i18n-attr="aria-label:nav.ariaMobile" hidden="" id="mobile-nav">
+<a href="index.html#top">Home</a>
+<a href="index.html#about">About</a>
+<a href="index.html#skills">Skills</a>
+<a href="index.html#work">Projects</a>
+<a href="index.html#process">Process</a>
+<a href="index.html#contact">Contact</a>
+</nav>
+<main class="policy" id="policy-content">
+<div class="policy-layout">
+<aside aria-label="Sections" class="policy-toc">
+<h3>Sections</h3>
+<ul>
+<li><a href="#scope">1. What this covers</a></li>
+<li><a href="#contact">2. Contact and communications</a></li>
+<li><a href="#website">3. Websites</a></li>
+<li><a href="#projects">4. Games and other projects</a></li>
+<li><a href="#moltazim">5. Moltazim</a></li>
+<li><a href="#third-party">6. Third-party services</a></li>
+<li><a href="#local">7. Local storage and device data</a></li>
+<li><a href="#network">8. Network activity</a></li>
+<li><a href="#rights">9. Retention, deletion, and your rights</a></li>
+<li><a href="#security">10. Security</a></li>
+<li><a href="#children">11. Children and age-inclusive use</a></li>
+<li><a href="#changes">12. Changes to this policy</a></li>
+<li><a href="#law">13. Applicable law</a></li>
+</ul>
+</aside>
+<div>
+<div class="policy-header">
+<p class="policy-meta" id="policy-updated">Last Updated: <span data-policy-date="">September 30, 2026</span></p>
+<h1>Privacy Policy</h1>
+<p class="policy-lead">This Privacy Policy explains how <strong>Laymon Games</strong> handles information across its websites, games, applications, and other software projects. Each project can have different functionality, so this policy separates general practices from project-specific details.</p>
+<div class="policy-rule"><p><strong>Developer:</strong> Aymen Meghezzi, operating as Laymon Games. This is an independent developer portfolio; there is no single central user account system or universal user database shared across projects.</p></div>
+</div>
+
+<section class="policy-section" id="scope">
+<h2><span class="sec-num">01</span>What this covers</h2>
+<p>This policy applies to the Laymon Games websites, games, apps, and other digital projects published under the Laymon Games name.</p>
+<p>Projects can have different functionality and therefore different data practices. The sections below describe the general categories of information that a Laymon Games project may handle, followed by the specific practices currently documented for Moltazim.</p>
+<p>Information handled by a third-party platform — such as an app store, game storefront, hosting provider, payment service, or external website — is governed by that provider’s own policies as well.</p>
+</section>
+
+<section class="policy-section" id="contact">
+<h2><span class="sec-num">02</span>Contact and communications</h2>
+<p>If you contact Laymon Games by email or another direct communication method, we may receive the information you choose to provide, such as your name, email address, message, attachments, or other details needed to respond.</p>
+<p>We use this information to respond to you, handle privacy requests, provide support, and manage legitimate communications. We do not sell or use these communications for advertising profiling.</p>
+<p><strong>Privacy contact:</strong> <a href="mailto:gamesbylaymon@gmail.com">gamesbylaymon@gmail.com</a></p>
+</section>
+
+<section class="policy-section" id="website">
+<h2><span class="sec-num">03</span>Websites</h2>
+<p><strong>What the site does:</strong></p>
+<p>The Laymon Games portfolio is a static website. It does not provide user accounts, logins, user profiles, user-generated content, or a first-party analytics or advertising system.</p>
+<p>The site stores a small language preference in your browser’s local storage so the site can remember English or Arabic. This preference stays on your device and is not used as a personal identifier.</p>
+<p>The website contains links to third-party services and platforms. Following those links takes you to services controlled by other organizations, whose own privacy policies and terms apply.</p>
+<div class="policy-callout"><strong>Hosting:</strong> The website is hosted by a third-party provider. The hosting provider may process technical request information such as IP addresses, timestamps, browser information, and access logs for hosting, security, abuse prevention, and service operation. Laymon Games does not use those hosting logs to build visitor profiles.</div>
+</section>
+
+<section class="policy-section" id="projects">
+<h2><span class="sec-num">04</span>Games and other projects</h2>
+<p>Laymon Games publishes different kinds of software. Some projects may operate entirely on the user’s device, while others may use online functionality or third-party services. The relevant data practices depend on what each project actually needs to function.</p>
+<p>Across different projects, the information handled may vary depending on the features implemented in that particular project. This may include device or app information, account information, gameplay or usage information, user-created content, saved progress, network information, diagnostics, purchases, notifications, or device permissions such as location, camera, microphone, files, sensors, or contacts where a particular project requires such access.</p>
+<p>Local saves, settings, downloaded content, and other files that remain on the device are not treated as remotely collected information unless the project transmits them to a server or other service.</p>
+<p>When a project offers online features, information needed to provide those features may be transmitted to the relevant service. The project’s in-app disclosures, store listing, and privacy information should be read together with this policy for the specific handling that applies to that product.</p>
+<div class="policy-callout"><strong>Current offline games:</strong> The Laymon Games games currently described as offline do not require accounts or cloud saves and do not intentionally transmit personal data for advertising, analytics, or tracking. Their save files and settings are stored locally.</div>
+</section>
+
+<section class="policy-section" id="moltazim">
+<h2><span class="sec-num">05</span>Moltazim</h2>
+<p>Moltazim is a prayer and Quran-focused mobile application. Its current features include prayer times, Qibla direction, Quran reading and recitation, offline downloads, dhikr, fasting and goals, a Hijri calendar, prayer reminders, Focus mode, adhan, a home-screen widget, and language/theme settings.</p>
+<p>Moltazim does not use user accounts, login, cloud synchronization, or a Laymon Games server-side user database. Application preferences, history, downloads, and similar app state are stored locally unless stated otherwise below.</p>
+<div class="policy-callout"><strong>Location:</strong> When you grant location permission, Moltazim may access your device’s location to provide location-dependent functionality such as prayer-time calculations, Qibla-related calculations, and location-based schedule updates. Location coordinates used for these functions are processed and stored locally by Moltazim and are not intentionally transmitted to Laymon Games or a third party for these purposes. Moltazim does not request Android background-location permission.</div>
+<ul>
+<li><strong>Local data includes:</strong> app settings, prayer history, dhikr counts/favorites, Quran bookmarks and reading state, fasting and goals, Focus state, and the last saved location.</li>
+<li><strong>Downloaded content:</strong> Quran audio chosen by the user is stored locally for offline listening. Downloading requires network access to external content services.</li>
+<li><strong>Quran text:</strong> the current implementation bundles Quran text in the app rather than requiring a runtime text download.</li>
+<li><strong>Network use:</strong> Moltazim uses HTTPS to request Quran/recitation content and related public content metadata. These requests do not intentionally include a user profile or personal information. The remote service may still receive ordinary technical network information, such as an IP address, under its own logging and privacy practices.</li>
+<li><strong>More Info source disclosure:</strong> the app’s More Info screen identifies the current Quran/recitation sources and related attribution. Those source details are kept in-app so users can see the providers and attributions associated with the current release.</li>
+<li><strong>Prayer reminders:</strong> prayer-time reminders are delivered as local, device-side notifications through the standard notification system. The app uses no push service or third-party notification provider. On Android, it requests the notification permission (POST_NOTIFICATIONS, Android 13+), the exact-alarm permission for accurate scheduling (SCHEDULE_EXACT_ALARM, Android 12+), and listens for boot-completed events (RECEIVE_BOOT_COMPLETED) so reminders keep being delivered after a reboot. A reminder may briefly wake the device to show a lock-screen heads-up (USE_FULL_SCREEN_INTENT, WAKE_LOCK) and vibrate the device (VIBRATE).</li>
+<li><strong>Adhan:</strong> the Adhan is a bundled, offline audio recording (a CC0 1.0 public-domain recording from Wikimedia Commons). It is played only when triggered by a reminder or by the user, through a short-lived media playback service, and has no runtime network dependency for playback.</li>
+<li><strong>Focus mode:</strong> while Prayer Focus is active, the app temporarily switches the system ringer mode to vibration, which suppresses audible incoming-call ringtones only for the duration of the session and then restores the previous ringer mode (MODIFY_AUDIO_SETTINGS). The focus lock runs as a short-lived foreground service. With the optional strict lock, you additionally enable display-over-apps (SYSTEM_ALERT_WINDOW) and the Android accessibility permission (BIND_ACCESSIBILITY_SERVICE) separately in Android system settings. These are used only to bring the focus lock screen back to the front if you navigate away during a Focus session and have no other effect on the device or on other apps while Focus is not active.</li>
+</ul>
+</section>
+
+<section class="policy-section" id="third-party">
+<h2><span class="sec-num">06</span>Third-party services</h2>
+<p>Laymon Games may use third-party infrastructure or services to host websites, distribute software, provide content, process payments, deliver notifications, or provide other functionality. Third-party services may receive information directly from a user or automatically as part of a network request.</p>
+<p>Examples of third-party categories include app stores, game stores, hosting providers, content and media providers, payment processors, authentication services, analytics or crash-reporting providers, advertising providers, and other SDK or API providers. A particular project only uses the services that are actually included in or linked from that project.</p>
+<p>When a third-party service processes information under its own responsibility, that service’s privacy policy and terms govern its own processing. Laymon Games does not control the privacy practices of independent third parties.</p>
+<div class="policy-table">
+<table>
+<caption>Examples of service roles</caption>
+<thead><tr><th>Service role</th><th>Typical purpose</th><th>Data handling</th></tr></thead>
+<tbody>
+<tr><td>Hosting</td><td>Serve the portfolio or project files</td><td>Technical request information may be processed by the host</td></tr>
+<tr><td>Content provider</td><td>Deliver audio, media, or other requested content</td><td>Request information needed to retrieve the selected content</td></tr>
+<tr><td>App / game store</td><td>Distribution, updates, purchases, ratings, and account functions</td><td>Store-controlled data under the platform’s policies</td></tr>
+<tr><td>Payment provider</td><td>Payments or donations where offered</td><td>Payment information is handled by the payment provider</td></tr>
+<tr><td>External links</td><td>Take you to another website or service</td><td>The external service controls what happens after you leave Laymon Games</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="policy-section" id="local">
+<h2><span class="sec-num">07</span>Local storage and device data</h2>
+<p>Projects may store information locally on your device to remember settings, preserve progress, provide offline functionality, or maintain app state. Common examples include save files, preferences, bookmarks, download files, locally stored history, cached content, and similar application data.</p>
+<p>Local storage remains on the device unless the relevant project explicitly synchronizes, uploads, or otherwise transmits it. Users can generally remove local application data through the project’s own controls, the operating system’s storage settings, or by uninstalling the application, subject to normal platform behavior.</p>
+</section>
+
+<section class="policy-section" id="network">
+<h2><span class="sec-num">08</span>Network activity</h2>
+<p>A project may connect to online services when its functionality requires it. The information transmitted can include the content or request parameters needed to provide the feature, along with standard technical network information that is normally visible to a server receiving a request.</p>
+<p>Laymon Games does not intentionally use network communication to collect personal information for advertising or profiling unless the relevant project’s privacy information expressly describes that activity. Third-party services can have their own logging, security, and retention practices that are outside Laymon Games’ control.</p>
+<p>When a Laymon Games project transmits information over a network, it uses appropriate security measures, such as HTTPS/TLS where technically applicable.</p>
+</section>
+
+<section class="policy-section" id="rights">
+<h2><span class="sec-num">09</span>Retention, deletion, and your rights</h2>
+<p>Retention depends on where information is stored and why it is needed. Information stored only on your device generally remains there until you delete it, clear the application’s data, uninstall the application, or use an available in-app deletion control, subject to normal operating-system behavior. Information handled by a third-party service is retained according to that service’s policies and legitimate operational or legal requirements.</p>
+<p>Laymon Games does not maintain a universal user account or central personal-data database across the portfolio. Where we directly receive personal information — for example through email or a future project that requires a server-side service — we use and retain it only for legitimate purposes associated with that interaction or service.</p>
+<p>Depending on the law that applies to you, you may have rights concerning personal information, such as rights to access, correction, deletion, objection, restriction, or other privacy choices. Contact us using the address below for a request or question. We may need enough information to verify and process a request, and some requests may be limited by legal or technical requirements.</p>
+<p>For project-specific account deletion, where an account exists, the project will provide an accessible deletion mechanism consistent with the requirements of the platform and applicable law.</p>
+<p><strong>Privacy contact:</strong> <a href="mailto:gamesbylaymon@gmail.com">gamesbylaymon@gmail.com</a></p>
+</section>
+
+<section class="policy-section" id="security">
+<h2><span class="sec-num">10</span>Security</h2>
+<p>Laymon Games uses reasonable technical and organizational measures appropriate to the type of information and the way a project handles it. Network connections used by projects use modern secure transport where applicable, and local application data is protected by the security mechanisms provided by the operating system and device.</p>
+<p>No website, application, network transmission, or storage system can be guaranteed completely secure.</p>
+</section>
+
+<section class="policy-section" id="children">
+<h2><span class="sec-num">11</span>Children and age-inclusive use</h2>
+<p>Laymon Games projects may be used by people of different ages, including children, unless a particular project is subject to an age restriction required by law, a platform, or the nature of that project.</p>
+<p>Laymon Games does not require users to be adults simply to use its general websites, games, applications, digital products, or services.</p>
+<p>Some projects may collect, use, or share personal information as part of specific features. When personal information relating to a child is handled, Laymon Games will apply the protections required by applicable privacy laws and platform rules, including any required parental consent or authorization.</p>
+<p>Where a project is subject to specific requirements for children or mixed-age audiences, those requirements may be described in the project’s own privacy disclosures, store listing, in-app notices, or other applicable terms.</p>
+<p>Parents or legal guardians who have questions about a child’s personal information or believe that information relating to a child has been handled in a way that requires review may contact Laymon Games at <a href="mailto:gamesbylaymon@gmail.com">gamesbylaymon@gmail.com</a>.</p>
+</section>
+
+<section class="policy-section" id="changes">
+<h2><span class="sec-num">12</span>Changes to this policy</h2>
+<p>This policy may be updated when a project’s functionality, services, data practices, or applicable legal requirements change. The “Last Updated” date at the top will be changed when the policy is revised.</p>
+<p>Because the portfolio can contain multiple independent projects, a project may also provide additional privacy information in its app, website, store listing, or other relevant interface when that project requires more specific disclosure.</p>
+</section>
+
+<section class="policy-section" id="law">
+<h2><span class="sec-num">13</span>Applicable law</h2>
+<p>This policy is written with reference to the Algerian personal-data protection framework, including Law No. 18-07 as amended and supplemented, including Law No. 25-11 of 24 July 2025, together with platform-specific privacy and data-safety requirements that apply to distributed software.</p>
+<p>Privacy obligations can also depend on where a user is located, where a service operates, and which platform or third-party provider is involved. This policy is intended to describe Laymon Games’ practices; it is not a guarantee that one document alone satisfies every law or platform requirement in every jurisdiction.</p>
+</section>
+
+</div>
+</div>
+</main>
+<footer class="site-footer">
+<div class="footer-brand">
+<span class="brand-mark"><img alt="" loading="lazy" src="assets/lemon-avatar.png"/></span>
+<span>Laymon Games</span>
+</div>
+<p class="footer-statement" data-i18n-html="footer.statement">Site developed by Laymon Games (home page by Youcef Benredjem).</p>
+<a class="footer-link" href="privacy-policy.html">Privacy Policy</a>
+<p class="footer-copy">© <span id="year"></span> Laymon Games</p>
+</footer>
+<script src="translations.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
