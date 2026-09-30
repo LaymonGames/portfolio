@@ -90,7 +90,7 @@
 			'about.role': '<strong>' + NAMES.studio + '</strong>, a creator & solo developer.',
 			'about.note': 'Games, code, art, audio, video - all in one.',
 			'about.summaryTitle': 'All done by one person.',
-			'about.bio1': "I'm the person behind <strong>" + NAMES.studio + "</strong>, a solo indie developer focused on making games, creative digital projects, and editing videos. I work across programming, 2D and 3D art, sound, music, editing, and presentation so the whole project can keep one consistent direction.",
+			'about.bio1': "I'm the person behind <strong>" + NAMES.studio + "</strong>, a solo indie developer focused on developing games, apps, and websites, creative digital projects, and editing videos. I work across programming, 2D and 3D art, sound, music, editing, and presentation so the whole project can keep one consistent direction.",
 			'about.bio2': 'I like building games, from brainstorming ideas to finishing the project, and using new tools when they genuinely improve the workflow.',
 			'about.signature': 'Code · Art · Audio · Video',
 
@@ -112,7 +112,7 @@
 			'skills.video.desc': 'Editing for creative videos that present a project the way it deserves.',
 			'skills.video.aria': 'Open YouTube video link',
 			'skills.other.title': 'Other/AI-Assisted',
-			'skills.other.desc': 'Websites, apps, including this site, built with the help of AI-assisted workflows. A tool for extra capability, not a part of my game development, art, or audio work.',
+			'skills.other.desc': 'Apps, websites, including this site, built with the help of AI-assisted workflows. A tool for extra capability, not a part of my game development, art, or audio work.',
 			'skills.other.aria': 'Show AI assisted notice',
 			'skills.tags.other': '<span>AI</span><span>Websites</span><span>Apps</span>',
 
@@ -217,10 +217,10 @@
 			'about.eyebrow': 'نبذة عني',
 			'about.personLabel': 'الشخص وراء الاستوديو',
 			'about.ownerAlt': 'Aymen Meghezzi، المبدع وراء Laymon Games',
-			'about.role': '<strong>' + S + '</strong>، صانع ألعاب ومطوّر مستقل.',
+			'about.role': '<strong>' + S + '</strong>، صانع ومطوّر مستقل.',
 			'about.note': 'ألعاب، برمجة، رسم، صوت، فيديو — كل ذلك من مكان واحد.',
 			'about.summaryTitle': 'كل شيء من صنع شخص واحد.',
-			'about.bio1': 'أنا الشخص وراء <strong>' + S + '</strong>، مطوّر ألعاب مستقل أركز على صناعة الألعاب والمشاريع الإبداعية ومونتاج الفيديو. أعمل على البرمجة و الرسوم ثنائية وثلاثية الأبعاد 2D و 3D Low Poly والصوت و الفيديو، لكي يحافظ المشروع بأكمله على اتجاه واحد محدد.',
+			'about.bio1': 'أنا الشخص وراء <strong>' + S + '</strong>، صانع مواقع و تطبيقات و مطوّر ألعاب مستقل أركز على صناعة الألعاب والمشاريع الإبداعية ومونتاج الفيديو. أعمل على البرمجة و الرسوم ثنائية وثلاثية الأبعاد 2D و 3D Low Poly والصوت و الفيديو، لكي يحافظ المشروع بأكمله على اتجاه واحد محدد.',
 			'about.bio2': 'أستمتع ببناء الألعاب، من إنتاج الأفكار إلى إنجاز المشروع، و بتوظيف أدوات تساعد في سير المشروع.',
 			'about.signature': 'برمجة · رسم · صوت · فيديو',
 
@@ -242,7 +242,7 @@
 			'skills.video.desc': 'مونتاج فيديوهات إبداعية تقدّم المشروع بالشكل الذي يستحقه.',
 			'skills.video.aria': 'فتح رابط فيديو YouTube',
 			'skills.other.title': 'أخرى / بمساعدة الذكاء الاصطناعي',
-			'skills.other.desc': 'مواقع وتطبيقات، بينها هذا الموقع، أُنشئت بمساعدة الذكاء الاصطناعي. إنها أداة لإضافة قدرات إضافية، وليست ضمن عملي في تطوير الألعاب أو الرسم أو الصوت.',
+			'skills.other.desc': 'تطبيقات و مواقع بينها هذا الموقع، أُنشئت بمساعدة الذكاء الاصطناعي. إنها أداة لإضافة قدرات إضافية، وليست ضمن عملي في تطوير الألعاب أو الرسم أو الصوت.',
 			'skills.other.aria': 'عرض تنبيه المساعدة بالذكاء الاصطناعي',
 			'skills.tags.other': '<span>AI</span><span>مواقع</span><span>تطبيقات</span>',
 
