@@ -52,6 +52,7 @@
       /* chrome */
       'a11y.skip': 'Skip to content',
       'lang.switchAria': 'Switch language',
+      'lang.switchAction': 'Switch language:',
       'brand.tagline': 'SOLO INDIE DEVELOPER',
       'brand.homeAria': 'Laymon Games home',
       'nav.ariaPrimary': 'Primary navigation',
@@ -67,9 +68,15 @@
       'ui.emailCopiedAria': 'Email copied to clipboard',
       'ui.artPreviewAlt': 'Art preview {n}',
       'ui.artSlideAria': 'Artwork {i} of {total}',
+      'ui.artOpenAria': 'Show artwork {i}: {name}',
+      'ui.artPrev': 'Previous artwork',
+      'ui.artNext': 'Next artwork',
+      'ui.artOf': '{i} / {total}',
+      'ui.artHint': 'Use the arrow keys',
 
       /* hero */
       'hero.ariaLabel': 'Laymon Games header artwork',
+      'hero.mascotHint': 'The Laymon lemon. Click it.',
       'hero.lede': 'Games, code, art, audio, video - all in one.',
 
       /* about */
@@ -175,7 +182,7 @@
       'modal.ai.body': 'AI-assisted tools were used to help build this website.',
 
       /* footer */
-      'footer.statement': 'Site developed by Laymon Games (home page by Youcef Benredjem).'
+      'footer.statement': 'Site developed by Laymon Games (spinning lemon idea by Youcef Benredjem).'
     },
 
     /* ─────────────────────────────── AR ─────────────────────────── */
@@ -188,6 +195,7 @@
 
       'a11y.skip': 'تخطَّ إلى المحتوى',
       'lang.switchAria': 'تبديل اللغة',
+      'lang.switchAction': 'تبديل اللغة:',
       'brand.tagline': 'مطوّر ألعاب مستقل',
       'brand.homeAria': 'الصفحة الرئيسية — Laymon Games',
       'nav.ariaPrimary': 'التنقّل الأساسي',
@@ -203,8 +211,14 @@
       'ui.emailCopiedAria': 'تم نسخ البريد الإلكتروني إلى الحافظة',
       'ui.artPreviewAlt': 'معاينة فنية {n}',
       'ui.artSlideAria': 'العمل الفني {i} من {total}',
+      'ui.artOpenAria': 'عرض العمل الفني {i}: {name}',
+      'ui.artPrev': 'العمل الفني السابق',
+      'ui.artNext': 'العمل الفني التالي',
+      'ui.artOf': '{i} / {total}',
+      'ui.artHint': 'استخدم مفاتيح الأسهم',
 
       'hero.ariaLabel': 'اللوحة الفنية للترويسة — Laymon Games',
+      'hero.mascotHint': 'ليمونة Laymon. اضغط عليها.',
       'hero.lede': 'ألعاب، برمجة، رسم، صوت، فيديو — كل ذلك من مكان واحد.',
 
       'about.eyebrow': 'نبذة عني',
@@ -303,7 +317,7 @@
       'modal.ai.title': 'أُنشئ هذا الموقع بمساعدة الذكاء الاصطناعي!',
       'modal.ai.body': 'استُخدمت أدوات مدعومة بالذكاء الاصطناعي للمساعدة في بناء هذا الموقع.',
 
-      'footer.statement': 'تطوير الموقع بواسطة <span dir="ltr">Laymon Games</span> (الصفحة الرئيسية بواسطة <span dir="ltr">Youcef Benredjem</span>).'
+      'footer.statement': 'تطوير الموقع بواسطة <span dir="ltr">Laymon Games</span> (فكرة الليمونة الدوارة بواسطة <span dir="ltr">Youcef Benredjem</span>).'
     }
   };
 
@@ -325,14 +339,21 @@
     return v;
   }
 
+  /* A node marked [data-i18n-skip] owns its own children (the art gallery
+     builds them), so fill() must not walk into it. Without this the gallery
+     had its slides replaced by a key string on load and on every switch. */
   function fill(root) {
-    (root || document).querySelectorAll('[data-i18n]').forEach(function (el) {
+    var scope = root || document;
+    (scope.querySelectorAll('[data-i18n]')).forEach(function (el) {
+      if (el.closest('[data-i18n-skip]')) return;
       el.textContent = t(el.getAttribute('data-i18n'));
     });
-    (root || document).querySelectorAll('[data-i18n-html]').forEach(function (el) {
+    (scope.querySelectorAll('[data-i18n-html]')).forEach(function (el) {
+      if (el.closest('[data-i18n-skip]')) return;
       el.innerHTML = t(el.getAttribute('data-i18n-html'));
     });
-    (root || document).querySelectorAll('[data-i18n-attr]').forEach(function (el) {
+    (scope.querySelectorAll('[data-i18n-attr]')).forEach(function (el) {
+      if (el.closest('[data-i18n-skip]')) return;
       el.getAttribute('data-i18n-attr').split(';').forEach(function (pair) {
         var bits = pair.split(':');
         if (bits.length === 2) el.setAttribute(bits[0].trim(), t(bits[1].trim()));

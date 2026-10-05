@@ -1,0 +1,146 @@
+/* ══════════════════════════════════════════════════════════════════
+   LAYMON GAMES — layout-fix.css
+
+   Additive correction layer, loaded last. Everything in here fixes
+   something that measures wrong today; nothing in here is a new idea.
+
+   Each block names the measurement it corrects, taken at 1440×900 and
+   360×780 before the change.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ──────────────── 1 · the About heading was invisible ────────────────
+   motion.css clips every .shead__title to zero width and unclips it from
+   `.shead.is-in`. The About heading is the only one that was not inside a
+   .shead, so it never unclipped: clip-path stayed inset(0 100% 0 0) and
+   `<h2 id="aboutTitle">` — the accessible name of the whole section — was
+   painted at zero width in both languages and at every width. */
+.about .shead__title,
+.about .shead.is-in .shead__title { clip-path: none }
+
+/* ──────────────── 2 · the About column had a 115px hole ────────────────
+   The eyebrow sat at the top of a column whose tallest item was the
+   portrait, and the lead paragraph was centred against it, so the heading
+   was pushed ~100px below the eyebrow and read as unrelated to it. */
+.about { align-items: start }
+.about__prose { padding-block-start: clamp(0rem, 3vh, 2.4rem) }
+.about .shead { margin-block-end: .9rem }
+
+/* ──────────────── 3 · the terminal outgrew the card ────────────────
+   Two measurements, one cause: a fixed 24em min-block-size on a 12.4px
+   base. At ≥1081px the card's left column wants 339px and the block was
+   331px, so the grid stretched it to ~450px and left a 300px void between
+   the paragraph and the listing. Below that the base is still 12.4px
+   against a 260px column, so the longest JS line ran 374px wide and the
+   listing carried a horizontal scrollbar.
+
+   The floor is kept where it is doing real work — a desktop card whose
+   height should not jump while the listing types — and scaled to the
+   column everywhere the column, not the content, is the constraint. */
+.term__out { min-block-size: 22em }
+
+@media (max-width: 1080px) {
+	.skill--lead .term__out { min-block-size: 22em }
+}
+@media (max-width: 640px) {
+	/* The widest line in the listing is 55 characters; JetBrains Mono advances
+	   0.6em, so fitting a 281px column outright would need 8.5px — below
+	   reading size. The listing therefore keeps the horizontal scroll it
+	   always had, and only the block height comes down with the type. */
+	.term__out { font-size: 11px; min-block-size: 18em }
+}
+
+/* the card's own empty band, independent of the terminal */
+.skill--lead .skill__d { max-inline-size: 42ch }
+
+/* the step number was set flush against the dot and clipped by the rail line,
+   so "01" read as "0I". It now clears the dot and its label sits under it. */
+.flow__num {
+	padding-inline-start: .62rem;
+	letter-spacing: .18em;
+}
+
+/* ──────────────── 4 · the process rail was geometrically wrong ────────────────
+   styles.css sets the rail to `calc(--flow-col*3 + --flow-gap*3)` from the
+   inline-start edge, which is 1001px of a 1240px grid: the first three dots
+   sat on it and the fourth landed 66px past its end, outside the line it is
+   supposed to terminate.
+
+   The rail now spans from the first dot to the last. --flow-dot is the one
+   number both the dots and the rail are placed with, so they cannot drift
+   apart again if the padding is retuned. */
+.flow {
+	--flow-dot: 1.55rem;
+	--flow-span: calc(var(--flow-col) * 3 + var(--flow-gap) * 3);
+}
+.flow::before {
+	inset-inline-start: var(--flow-dot);
+	inline-size: var(--flow-span);
+}
+
+/* .flow__step::after scales with --step-y, which no script ever wrote, so the
+   narrow-screen spine was sitting at scaleY(0) — a vertical process list with
+   no line connecting it, and no error anywhere to say why. */
+@media (max-width: 900px) {
+	/* styles.css takes the rail out with `content:none` on .flow::before.
+	   That is a content-level reset which this file's later background and
+	   transform declarations do not override, so it has to be repeated here:
+	   without it a 900px-wide element draws across a single-column list and
+	   reads as a stray horizontal gold bar. Same for the current that rides
+	   the rail — there is no rail left to ride. */
+	.flow::before,
+	.flow::after { content: none }
+	.js [data-reveal="flow"] .flow__step::after { transform: none }
+	/* The spine sits in the flow's 1.9rem inline-start padding, and the dots
+	   are centred on it rather than left-flush against it: styles.css put them
+	   at -1.9rem (flush with the spine's start edge, but on the wrong side of
+	   the step, so they read as belonging to the previous item) while the step
+	   text sits a further 1.1rem in. Centring a 7px dot on a 1px line needs
+	   half its own width back. */
+	.flow__step::after { inset-inline-start: -1.9rem }
+	.flow__dot { inset-inline-start: calc(-1.9rem + 3.5px) }
+}
+
+/* ──────────────── 5 · section rhythm was lopsided ────────────────
+   --sec is a min/max clamp, so at 1440×900 every section took the 99px
+   ceiling while the hero took 124/81. The first and last band on the page
+   should be the two that breathe; the interior sections should not out-space
+   the hero. Trimmed to 88px at the top end and given its own line on a
+   phone, where 86px top and 86px bottom between every section added up to a
+   page with more gap than content. */
+.sec { padding-block: clamp(4rem, 9.5vh, 5.5rem) }
+@media (max-width: 640px) {
+	.sec { padding-block: clamp(3.4rem, 8vh, 4.6rem) }
+}
+
+/* ──────────────── 6 · the feature's right column floated ────────────────
+   265px of copy against a 373px image left the project name and its spec
+   floating in the middle of an empty column. It is centred against the art
+   deliberately, but the extra space should be under it, not above it. */
+@media (min-width: 901px) {
+	.feature__body { align-self: center; padding-block: .5rem }
+}
+
+/* ──────────────── 7 · the archive rows had a two-column gap ────────────────
+   Below 640px the grid drops to two columns and the arrow was hidden, so the
+   row's destination had nowhere to live. It is shown again — it is the only
+   "where does this go" cue on a phone — and the thumbnail gives back the
+   space. */
+@media (max-width: 640px) {
+	.row { grid-template-columns: 88px minmax(0, 1fr) 16px; gap: .75rem }
+	.row__go { display: inline-flex; inline-size: 16px }
+	.row:hover .row__go::before,
+	.row:focus-visible .row__go::before { max-inline-size: 0; opacity: 0 }
+	.row__go { color: var(--gold) }
+}
+
+/* ──────────────── 8 · the hero's field stopped above the wordmark ────────────────
+   hero__field is masked out by 42% and hero__halo sits behind the mascot, so
+   the lower two-thirds of a tall viewport was a flat black rectangle with a
+   canvas that had already faded out. The mask now reaches further down so the
+   texture carries under the kicker; the opacity stays where it was, because
+   the hero must keep exactly one accent. */
+.hero__field {
+	inset: 0 0 26% 0;
+	block-size: 74%;
+	mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .5) 58%, transparent 100%);
+}

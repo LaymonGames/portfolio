@@ -363,30 +363,11 @@
   })();
 
   /* ─────────────── 9. ART GALLERY ─────────────── */
-  (function gallery() {
-    var host = $('#gallery');
-    if (!host) return;
+  /* Moved to gallery.js. The old version rebuilt plain <figure>/<img> nodes on
+     every language change, which is fine to look at and impossible to drive
+     from a keyboard. gallery.js owns #artGallery now: one slide on screen,
+     every slide a real button, arrows / Home / End / digits as shortcuts. */
 
-    /* Every image already in the project. Alt text comes from the
-       supplied ui.artPreviewAlt string; no captions are invented. */
-    var ITEMS = [
-      { src: 'assets/parallox.webp', w: 1920, h: 1080, pos: 'center 42%' },
-      { src: 'assets/off.webp', w: 1920, h: 1080, pos: 'center 45%' },
-      { src: 'assets/cursed.webp', w: 1880, h: 1057, pos: 'center 50%' },
-      { src: 'assets/off_remastered.webp', w: 616, h: 371, pos: 'center 45%' }
-    ];
-
-    function draw() {
-      host.innerHTML = ITEMS.map(function (item, i) {
-        return '<figure><img src="' + item.src + '" alt="' +
-          String(t('ui.artPreviewAlt', { n: i + 1 })).replace(/"/g, '&quot;') +
-          '" width="' + item.w + '" height="' + item.h +
-          '" loading="lazy" decoding="async" style="object-position:' + item.pos + '"></figure>';
-      }).join('');
-    }
-    draw();
-    document.addEventListener('lg:lang', draw);
-  })();
 
   /* ─────────────── 10. MISC ─────────────── */
   (function misc() {

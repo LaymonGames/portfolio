@@ -19,17 +19,35 @@
 <meta property="og:locale" id="og-locale" content="en_US">
 <meta property="og:locale:alternate" content="ar_AR">
 
-<!-- ── type ─────────────────────────────────────────────────────────── -->
+<!-- ── type ───────────────────────────────────────────────────────────
+     The font stylesheet is the last render-blocking request on the page and
+     the biggest single win on a phone (Lighthouse: 4.5s FCP). It is loaded
+     with the media="print" → onload swap, which takes it off the critical
+     path without changing the fonts that eventually arrive. The <noscript>
+     copy is the fallback: no JS, the fonts still load, just blocking. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"
+      media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"></noscript>
 
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="motion.css">
 <link rel="stylesheet" href="polish.css">
+<!-- loaded after polish.css: it owns the mascot stage and the gallery, and
+     both retire decoration that polish.css and motion.css introduced -->
+<link rel="stylesheet" href="mascot.css">
+<link rel="stylesheet" href="gallery.css">
+<!-- last: a correction layer for geometry that measures wrong today -->
+<link rel="stylesheet" href="layout-fix.css">
 
 <script>document.documentElement.classList.add('js');</script>
-<script src="i18n.js"></script>
+<!-- deferred: it used to be parser-blocking in the head, which put ~1s of
+     the mobile critical path in front of first paint. Language and direction
+     are still applied before the body is parsed because apply() runs at the
+     end of this file and again on DOMContentLoaded. -->
+<script src="i18n.js" defer></script>
 </head>
 
 <body>
@@ -61,7 +79,8 @@
 
     <div class="nav__tools">
       <a class="btn btn--gold nav__cta" href="#contact"><span data-i18n="nav.contact">Contact</span></a>
-      <button class="lang" type="button" data-lang-switch data-i18n-attr="aria-label:lang.switchAria">
+      <button class="lang" type="button" data-lang-switch>
+        <span class="sr-only" data-i18n="lang.switchAction">Switch language:</span>
         <svg class="lang__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/>
           <path d="M3 12h18M12 3c2.6 2.6 3.9 5.7 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.7-3.9-9s1.3-6.4 3.9-9z" stroke="currentColor" stroke-width="1.4"/>
@@ -84,12 +103,18 @@
   <div class="hero__halo" aria-hidden="true"></div>
 
   <div class="wrap hero__in">
-    <!-- 3D mascot: above the wordmark, the single focus of the viewport -->
-    <div class="mascot" id="mascot" role="img" data-i18n-attr="aria-label:hero.ariaLabel">
-      <div class="mascot__ring" aria-hidden="true"></div>
+    <!-- 3D mascot: above the wordmark, the single focus of the viewport.
+         It is a real control now (click / tap / Enter / Space licks it), so it
+         is a focusable button rather than a role="img" box. lemon3d.js adds
+         `is-3d` to it once the GLB is on screen; until then the pixel mark is
+         the control's visible face, so the button is never empty. -->
+    <button class="mascot" id="mascot" type="button" data-mascot
+            data-i18n-attr="aria-label:hero.ariaLabel;title:hero.mascotHint">
+      <span class="mascot__shadow" aria-hidden="true"></span>
+      <span class="mascot__ring" aria-hidden="true"></span>
       <canvas class="mascot__canvas" id="mascotCanvas"></canvas>
       <img class="mascot__fallback" src="assets/lemon.png" alt="" width="128" height="128" decoding="async">
-    </div>
+    </button>
 
     <p class="hero__kicker" data-i18n="brand.tagline">SOLO INDIE DEVELOPER</p>
     <h1 class="hero__title" dir="ltr">LAYMON GAMES</h1>
@@ -108,9 +133,11 @@
 <!-- ══════════════════════════════════ ABOUT ═════════════════════════ -->
 <section class="sec sec--about" id="about" aria-labelledby="aboutTitle">
   <div class="wrap about">
-    <div class="about__prose" data-reveal="up">
-      <p class="shead__eyebrow"><span class="shead__num">// 01</span><span data-i18n="about.eyebrow">About</span></p>
-      <h2 class="shead__title" id="aboutTitle" data-i18n="about.summaryTitle">All done by one person.</h2>
+    <div class="about__prose" data-reveal="up" data-i18n-skip>
+      <div class="shead shead--tight">
+        <p class="shead__eyebrow"><span class="shead__num">// 01</span><span data-i18n="about.eyebrow">About</span></p>
+        <h2 class="shead__title" id="aboutTitle" data-i18n="about.summaryTitle">All done by one person.</h2>
+      </div>
       <p class="about__role" data-i18n-html="about.role"><strong>Laymon Games</strong>, a creator &amp; solo developer.</p>
       <p class="lede" data-i18n-html="about.bio1"></p>
       <p data-i18n="about.bio2"></p>
@@ -207,7 +234,7 @@
     <div class="shead" data-reveal="up">
       <p class="shead__eyebrow"><span class="shead__num">// 03</span><span data-i18n="work.eyebrow">Projects</span></p>
       <h2 class="shead__title" id="workTitle" data-i18n="work.heading">Projects I made.</h2>
-      <p class="shead__lede" data-i18n="work.intro"></p>
+      <p class="shead__lede" data-i18n-html="work.intro"></p>
     </div>
 
     <!-- the one hero project -->
@@ -281,7 +308,7 @@
           <span class="row__body">
             <span class="row__name" dir="ltr">Something's Off Remastered</span>
             <span class="row__label" data-i18n="work.m3.label">2D/3D Horror Game</span>
-            <span class="row__desc" data-i18n="work.m3.desc"></span>
+            <span class="row__desc" data-i18n-html="work.m3.desc"></span>
           </span>
           <svg class="row__go" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
         </button>
@@ -335,7 +362,7 @@
     <div class="shead" data-reveal="up">
       <p class="shead__eyebrow"><span class="shead__num">// 05</span><span data-i18n="contact.eyebrow">Contact</span></p>
       <h2 class="shead__title" id="contactTitle" data-i18n="contact.heading">Wanna get in touch?</h2>
-      <p class="shead__lede" data-i18n="contact.intro"></p>
+      <p class="shead__lede" data-i18n-html="contact.intro"></p>
     </div>
 
     <div class="reach" data-reveal="up">
@@ -394,7 +421,18 @@
     <p class="modal__eyebrow" data-i18n="modal.art.eyebrow">Art</p>
     <h3 class="modal__t" id="mArtT" data-i18n="modal.art.title">Art</h3>
     <p class="modal__b" data-i18n="modal.art.body"></p>
-    <div class="gallery" id="gallery" data-i18n-attr="aria-label:modal.art.galleryAria"></div>
+
+    <!-- One slide is on screen at a time and every slide is a real button, so
+         the gallery is reachable and operable from the keyboard alone:
+         ← →  Home  End  1-4, and Esc closes the dialog.
+         The strip itself is built by gallery.js from the same assets the
+         archive already uses, and its alt text comes from the existing
+         ui.artPreviewAlt string. No captions are invented. -->
+    <div class="gal" id="artGallery" role="group" data-i18n-attr="aria-label:modal.art.galleryAria">
+      <div class="gal__stage" id="galStage"></div>
+      <div class="gal__rail" role="tablist" id="galRail"></div>
+      <p class="gal__sr" id="galLive" aria-live="polite"></p>
+    </div>
   </div>
 </div>
 
@@ -411,6 +449,7 @@
 <script src="lemon3d.js" defer></script>
 <script src="motion.js" defer></script>
 <script src="polish.js" defer></script>
+<script src="gallery.js" defer></script>
 <script src="script.js" defer></script>
 </body>
 </html>

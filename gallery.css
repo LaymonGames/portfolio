@@ -1,0 +1,245 @@
+/* ══════════════════════════════════════════════════════════════════
+   LAYMON GAMES — gallery.css
+
+   Two things live here:
+
+   1  the artwork gallery inside the Art dialog. It used to be a static 2×2
+      grid of images with no focusable anything, which meant the Art card in
+      Skills opened a dialog you could only look at. Now one slide is on
+      screen, every slide is a real button in a tablist, and ← → Home End and
+      the digits drive it.
+
+   2  the honest hover state for the archive rows and the feature project.
+      "Real" means it says what the row is and what the link does — the
+      thumbnail magnifies, the border picks up, the status and the
+      destination appear — rather than just tinting the background.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ──────────────── 1 · the gallery ──────────────── */
+.gal {
+	margin-block-start: 1.2rem;
+	/* the slideshow needs a direction, not an accident of the flow */
+	direction: ltr;
+}
+html[dir="rtl"] .gal { direction: rtl }
+
+.gal__stage {
+	position: relative;
+	overflow: hidden;
+	border: 1px solid var(--line-2);
+	border-radius: var(--r-sm);
+	background: var(--ink-3);
+	aspect-ratio: 16 / 9;
+}
+.gal__slide {
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transform: scale(1.015);
+	transition: opacity .45s ease, transform .7s cubic-bezier(.16, 1, .3, 1);
+	pointer-events: none;
+}
+.gal__slide.is-live {
+	opacity: 1;
+	transform: none;
+	pointer-events: auto;
+}
+.gal__slide img {
+	inline-size: 100%; block-size: 100%;
+	object-fit: cover;
+}
+/* the number, kept small and in the corner of the frame — the only chrome
+   the stage carries */
+.gal__count {
+	position: absolute;
+	inset-block-end: .6rem;
+	inset-inline-start: .6rem;
+	padding: .22rem .55rem;
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	background: rgba(9, 8, 6, .82);
+	font: 500 var(--fs-label)/1.4 var(--f-mono);
+	letter-spacing: .1em;
+	color: var(--gold-hi);
+	direction: ltr;
+}
+
+/* the rail: one button per asset, named from the same string the old grid
+   used for its alt text, so nothing is invented */
+.gal__rail {
+	display: flex;
+	gap: .5rem;
+	margin-block-start: .7rem;
+	overflow-x: auto;
+	padding-block-end: 2px;
+	scrollbar-width: thin;
+}
+.gal__thumb {
+	position: relative;
+	flex: 0 0 auto;
+	inline-size: clamp(64px, 15%, 104px);
+	aspect-ratio: 16 / 10;
+	overflow: hidden;
+	border: 1px solid var(--line-2);
+	border-radius: var(--r-xs);
+	opacity: .5;
+	transition: opacity .3s ease, border-color .3s ease, transform .35s cubic-bezier(.16, 1, .3, 1);
+}
+.gal__thumb img { inline-size: 100%; block-size: 100%; object-fit: cover }
+.gal__thumb:hover { opacity: .85; transform: translateY(-2px) }
+.gal__thumb[aria-selected="true"] {
+	opacity: 1;
+	border-color: var(--gold);
+	box-shadow: 0 0 0 1px rgba(216, 164, 60, .4);
+}
+/* the current thumb carries a gold hairline along its bottom edge in both
+   directions — logical property, so RTL needs no second rule */
+.gal__thumb[aria-selected="true"]::after {
+	content: '';
+	position: absolute;
+	inset-inline: 0; inset-block-end: 0;
+	block-size: 2px;
+	background: var(--gold-hi);
+}
+.gal__thumb:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 2px; border-radius: var(--r-xs) }
+
+.gal__sr {
+	position: absolute;
+	inline-size: 1px; block-size: 1px;
+	margin: -1px; padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+/* ──────────────── 2 · the archive rows ────────────────
+   The old hover tinted the row background and scaled the thumbnail by 7% and
+   that was all. This one answers the two questions a project row has to
+   answer: what changed, and where does it go. */
+.row {
+	position: relative;
+	/* the honest part: a gold rule that grows from the reading edge, so the
+	   row you are on is anchored, not just tinted */
+	--row-lift: 0px;
+	transition: background-color .3s ease, padding-inline .3s ease;
+}
+.row::before {
+	content: '';
+	position: absolute;
+	inset-block: 0;
+	inset-inline-start: 0;
+	inline-size: 2px;
+	background: var(--gold);
+	transform: scaleY(0);
+	transform-origin: center top;
+	transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+}
+.row:hover::before,
+.row:focus-visible::before { transform: scaleY(1) }
+.row:hover,
+.row:focus-visible {
+	background: rgba(216, 164, 60, .045);
+	padding-inline: .8rem;
+}
+.row:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: -2px; border-radius: var(--r-xs) }
+
+/* the thumbnail: the old one just grew. This one grows, brightens off its
+   compression, and takes the gold edge. */
+.row__art {
+	position: relative;
+	transition: border-color .35s ease, box-shadow .45s ease;
+}
+.row__art::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, transparent 45%, rgba(9, 8, 6, .55));
+	opacity: .8;
+	transition: opacity .45s ease;
+	pointer-events: none;
+}
+.row:hover .row__art,
+.row:focus-visible .row__art { border-color: var(--line); box-shadow: 0 10px 24px -14px rgba(216, 164, 60, .5) }
+.row:hover .row__art::after,
+.row:focus-visible .row__art::after { opacity: .25 }
+
+/* the description is the sentence that says what changed, so on a pointer it
+   comes up to full contrast rather than staying at muted */
+.row__desc { transition: color .35s ease }
+.row:hover .row__desc,
+.row:focus-visible .row__desc { color: var(--cream) }
+.row__name { transition: color .3s ease }
+.row:hover .row__name,
+.row:focus-visible .row__name { color: var(--gold-hi) }
+
+/* the label already carried the project's scale ("made in 1 month", "made in
+   4 days"). On hover it turns from a quiet mono caption into a stated fact. */
+.row__label {
+	transition: color .3s ease, letter-spacing .35s ease;
+}
+.row:hover .row__label,
+.row:focus-visible .row__label { color: var(--gold-hi); letter-spacing: .14em }
+
+/* the destination: the row says where it goes before you commit to it. The
+   text comes from the markup, not from a new string. */
+.row__go {
+	display: inline-flex;
+	align-items: center;
+	gap: .35rem;
+	inline-size: auto;
+	transition: transform .3s cubic-bezier(.16, 1, .3, 1), color .3s ease;
+}
+.row__go::before {
+	content: attr(data-go);
+	font: 400 var(--fs-label)/1 var(--f-mono);
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	/* revealed only when the row is active, from the reading edge outward */
+	max-inline-size: 0;
+	overflow: hidden;
+	opacity: 0;
+	transition: max-inline-size .45s cubic-bezier(.16, 1, .3, 1), opacity .3s ease;
+}
+.row:hover .row__go::before,
+.row:focus-visible .row__go::before { max-inline-size: 8rem; opacity: 1 }
+
+/* ──────────────── the feature project ────────────────
+   Parallox is the one project with a page behind it, so its hover states the
+   destination and brings the spec up to reading contrast. */
+.feature__art {
+	transition: border-color .4s ease, box-shadow .5s ease;
+}
+.feature:hover .feature__art,
+.feature:focus-within .feature__art {
+	border-color: var(--line);
+	box-shadow: 0 34px 80px -46px rgba(216, 164, 60, .55);
+}
+.feature__badge { transition: color .35s ease, border-color .35s ease }
+.feature:hover .feature__badge { border-color: var(--gold); color: var(--gold-hi) }
+.feature__desc { transition: color .4s ease }
+.feature:hover .feature__desc { color: var(--cream) }
+.feature .spec dd { transition: color .4s ease }
+.feature:hover .spec dd { color: var(--cream) }
+
+/* the itch.io button already sheens; on the feature hover the whole body
+   leans in a little, so the card reads as one object */
+.feature__body { transition: translate .55s cubic-bezier(.16, 1, .3, 1) }
+@media (hover: hover) {
+	.feature:hover .feature__body { translate: 0 -4px }
+}
+
+@media (max-width: 640px) {
+	/* no hover to lean into, and the rail is the only way to change slide */
+	.gal__rail { gap: .4rem }
+	.gal__thumb { inline-size: 72px }
+	.row:hover, .row:focus-visible { padding-inline: .5rem }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.gal__slide { transition: none; transform: none }
+	.gal__thumb:hover { transform: none }
+	.feature__body, .feature:hover .feature__body { translate: 0 0 }
+	.row:hover, .row:focus-visible { padding-inline: 0 }
+	.row::before { transition: none }
+}

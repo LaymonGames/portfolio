@@ -1,0 +1,240 @@
+/* ══════════════════════════════════════════════════════════════════
+   LAYMON GAMES — mascot.css
+
+   The hero's one loud moment. Everything in this file is about the lemon:
+   its stage, the light pooled under it, the colour it turns when you reach
+   for it, and the drop-in.
+
+   Loaded after styles.css / motion.css / polish.css, and it deliberately
+   retires three pieces of decoration those files had already introduced,
+   because the brief for this round is one memorable moment and a quiet
+   everything-else — one decoration removed for every one added:
+
+     retired  .mascot__ring                 (a circle drawn around a round
+                                             lemon taught the reader nothing)
+     retired  .fx__grain                    (a second full-screen grain layer
+                                             on top of body::after's grain)
+     retired  polish.css's double
+              drop-shadow on the canvas     (replaced by one real contact
+                                             shadow that reacts)
+
+   Retiring .fx__grain is also the single biggest paint win on the page: it
+   was a 180px turbulence tile stretched over an element inset by -50%, so it
+   was ~4× the viewport area of blended noise composited under every section.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ──────────────── the retired decoration ──────────────── */
+.mascot__ring { display: none; }
+.fx__grain { display: none; }
+
+/* one shadow, not two stacked ones */
+.mascot canvas { filter: none; }
+
+/* visually hidden, still read aloud — the language button needs a prefix on
+   its accessible name so "العربية" alone is not the whole label */
+.sr-only {
+	position: absolute;
+	inline-size: 1px; block-size: 1px;
+	padding: 0; margin: -1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* ──────────────── the stage ────────────────
+   The mascot is a <button>, so every reset a button needs is here rather
+   than in styles.css: no border, no background, no inherited text metrics. */
+.mascot {
+	position: relative;
+	display: grid;
+	place-items: center;
+	padding: 0;
+	border: 0;
+	background: none;
+	border-radius: 0;
+	-webkit-tap-highlight-color: transparent;
+	/* the stage is the pointer target, so it owns the cursor */
+	cursor: pointer;
+	/* the entrance writes translate/scale; the renderer writes nothing here.
+	   Kept as separate properties so they compose with anything else. */
+	translate: 0 0;
+	scale: 1;
+}
+
+/* ──────────────── the contact shadow ────────────────
+   A ground pool placed to sit under the fruit's lower third, not a physical
+   projection. A true projection of this model cannot work: the lemon narrows
+   to a point at the bottom, so the projected footprint is a sliver, and the
+   model is framed to ~74% of the box, so a computed shadow is always fighting
+   the silhouette. What reads correctly is a shadow whose centre is just below
+   the base and which is narrower than the widest part of the fruit.
+
+   The peak sits at --shadow-top plus the -27% offset and half the shadow's own
+   height. With the default 73% and an aspect-ratio height of ~18.5% of the
+   stage that puts the darkest point at ~81% — under the lower third of the
+   lemon — and the falloff carries it to ~90%, just past the base. lemon3d.js
+   overrides --shadow-top with the model's own base position, so this survives a
+   change of model or camera; the default here covers first paint and the pixel
+   fallback, where no renderer is running.
+
+   --shadow-spread widens it as the lemon squashes, --shadow-dark deepens it,
+   --shadow-lift pushes it down, and --shadow-slide moves it sideways with the
+   turn so the fruit leaves a footprint instead of pivoting on a pin. */
+.mascot__shadow {
+	/* --shadow-slide is written in the page's physical X. In Arabic the fruit's
+	   +turn goes the other way, so the slide is negated rather than mirrored —
+	   the shadow must follow the body, not the reading direction. */
+	--slide-sign: 1;
+	position: absolute;
+	inset-block-start: var(--shadow-top, 73%);
+	inset-inline: 23%;
+	aspect-ratio: 3.1 / 1;
+	transform: translate(calc(var(--shadow-slide, 0px) * var(--slide-sign, 1)), calc(var(--shadow-lift, 0%) - 27%)) scaleX(var(--shadow-spread, 1));
+	transform-origin: 50% 50%;
+	border-radius: 50%;
+	background:
+		radial-gradient(ellipse at 50% 50%,
+			rgba(0, 0, 0, calc(.58 * var(--shadow-dark, 1))) 0%,
+			rgba(0, 0, 0, calc(.42 * var(--shadow-dark, 1))) 34%,
+			rgba(0, 0, 0, calc(.16 * var(--shadow-dark, 1))) 62%,
+			transparent 88%);
+	pointer-events: none;
+	z-index: 1;
+}
+html[dir="rtl"] .mascot__shadow { --slide-sign: -1 }
+/* the splash ring: one per click, thrown outward from the contact patch */
+.mascot__shadow::after {
+	content: '';
+	position: absolute;
+	inset: 12% 6%;
+	border: 1px solid rgba(216, 164, 60, .55);
+	border-radius: 50%;
+	opacity: 0;
+	transform: scale(.6);
+}
+.mascot__shadow.is-splash::after {
+	opacity: calc(.7 - var(--splash, 1) * .8);
+	transform: scale(calc(1 + var(--splash, 1) * 1.5));
+}
+
+/* ──────────────── the canvas and the pixel fallback ──────────────── */
+.mascot__canvas {
+	position: relative;
+	z-index: 2;
+	inline-size: 100%; block-size: 100%;
+	pointer-events: none;   /* the button is the target, not the canvas */
+}
+.mascot__fallback {
+	position: absolute;
+	z-index: 2;
+	inline-size: 58%; block-size: auto;
+	image-rendering: pixelated;
+	display: none;
+	transform-origin: 50% 100%;
+}
+/* the pixel mark faces the same direction: it is the same character, so it
+   gets the same idle and the same squash language as the model */
+html.no-mascot3d .mascot__fallback { display: block; animation: markBob 3.4s ease-in-out infinite }
+html.no-mascot3d .mascot:active .mascot__fallback { transform: scale(1.04, .92) }
+html.no-mascot3d .mascot__canvas { display: none }
+/* and once the model is drawing, the pixel mark must not sit on top of it —
+   styles.css hides it by default, so this only matters if the flag was ever
+   added and then removed (a context that failed on the second attempt) */
+html:not(.no-mascot3d) .mascot__fallback { display: none }
+
+@keyframes markBob {
+	0%, 100% { transform: translateY(0) }
+	50%      { transform: translateY(-2.5%) }
+}
+
+/* ──────────────── the drop-in ────────────────
+   One entrance, once. It starts above and slightly small, lands with the
+   squash the renderer fires at 1.15s, and then never animates again —
+   the lemon's resting state belongs to the renderer. */
+@keyframes mascotDrop {
+	0%   { opacity: 0; translate: 0 -26px; scale: .88 }
+	62%  { opacity: 1; translate: 0 0; scale: 1 }
+	78%  { scale: 1.035 .97 }
+	100% { opacity: 1; translate: 0 0; scale: 1 }
+}
+.js .mascot:not(.is-3d) { animation: mascotDrop .95s cubic-bezier(.2, .9, .3, 1) .05s both }
+/* once the model is drawing, the drop-in is over — the class that lands here
+   is added by the renderer on its first real frame */
+.js .mascot.is-3d { animation: none; opacity: 1; translate: 0 0; scale: 1 }
+
+/* ──────────────── reaching for it ────────────────
+   The hero has exactly one accent, and this is where it is spent: the stage
+   warms and the lemon lifts a little. No glow is added on top of the halo. */
+.mascot::before {
+	content: '';
+	position: absolute;
+	inset: -6%;
+	border-radius: 50%;
+	background: radial-gradient(circle at 50% 62%, rgba(216, 164, 60, .22), transparent 66%);
+	opacity: 0;
+	transition: opacity .45s ease;
+	pointer-events: none;
+	z-index: 0;
+}
+@media (hover: hover) {
+	.mascot:hover::before { opacity: 1 }
+	.mascot:hover .mascot__canvas { translate: 0 -4px }
+	.mascot__canvas { transition: translate .5s cubic-bezier(.16, 1, .3, 1) }
+	.mascot:hover .mascot__fallback { translate: 0 -4px }
+}
+.mascot:active::before { opacity: 1 }
+.mascot:active .mascot__canvas { translate: 0 -1px }
+
+/* the lemon is the first thing a keyboard reaches in the hero, so its focus
+   ring is the gold one and it is not ambiguous about which thing is focused.
+   polish.css puts a square outline on every :focus-visible; on a round stage
+   the ring follows the stage instead. */
+.mascot:focus-visible {
+	outline: 2px solid var(--gold-hi);
+	outline-offset: 6px;
+	box-shadow: none;
+	border-radius: 50%;
+}
+.mascot:focus-visible::before { opacity: 1 }
+
+/* ──────────────── reduced motion ────────────────
+   The mascot stays a control and still reacts — it just stops moving on its
+   own. The renderer holds it at rest under the same query, so the two agree.
+   Only the entrance and the idle are dropped. */
+@media (prefers-reduced-motion: reduce) {
+	.js .mascot:not(.is-3d) { animation: none; opacity: 1; translate: 0 0; scale: 1 }
+	html.no-mascot3d .mascot__fallback { animation: none }
+	.mascot__canvas { transition: none }
+	.mascot:hover .mascot__canvas,
+	.mascot:active .mascot__canvas { translate: 0 0 }
+	.mascot__shadow.is-splash::after { display: none }
+}
+
+/* on a touch device there is no hover to leave, so the hover state does not
+   arm; the press state still does */
+@media (hover: none) {
+	.mascot:hover::before { opacity: 0 }
+	.mascot:hover .mascot__canvas { translate: 0 0 }
+	.mascot:active::before { opacity: 1 }
+}
+
+/* ──────────────── the language button's visible label ────────────────
+   The accessible name is now "Switch language: العربية" instead of a
+   mismatched aria-label, so the visible text is part of the name again. */
+.lang { gap: .34rem }
+.lang .sr-only { font: 500 var(--fs-label)/1 var(--f-body) }
+
+/* the warm light pooling on the floor, kept as its own layer so the contact
+   shadow above can stay purely dark. It sits below the fruit's base (80%+) so
+   it never washes over the model's own lower banding. */
+.mascot::after {
+	content: '';
+	position: absolute;
+	inset-block-start: 80%;
+	inset-inline: 8%;
+	block-size: 30%;
+	background: radial-gradient(ellipse at 50% 30%, rgba(216, 164, 60, .10), transparent 72%);
+	pointer-events: none;
+	z-index: 0;
+}

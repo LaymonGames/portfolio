@@ -174,10 +174,10 @@ html[dir="rtl"] .progress i{
   animation:flowCurrent 1.15s cubic-bezier(.45,0,.25,1) .12s both;
 }
 @keyframes flowCurrent{
-  0%  { inset-inline-start:0; opacity:0 }
+  0%  { inset-inline-start:var(--flow-dot,0px); opacity:0 }
   8%  { opacity:1 }
   92% { opacity:1 }
-  100%{ inset-inline-start:calc(var(--flow-col) * 3 + var(--flow-gap) * 3);
+  100%{ inset-inline-start:calc(var(--flow-dot,0px) + var(--flow-col) * 3 + var(--flow-gap) * 3);
         opacity:0 }
 }
 /* the dots now land as the current reaches them */
