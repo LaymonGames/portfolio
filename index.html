@@ -41,6 +41,8 @@
 <link rel="stylesheet" href="gallery.css">
 <!-- last: a correction layer for geometry that measures wrong today -->
 <link rel="stylesheet" href="layout-fix.css">
+<!-- then the layer that swaps text for the thing it was standing in for -->
+<link rel="stylesheet" href="visual.css">
 
 <script>document.documentElement.classList.add('js');</script>
 <!-- deferred: it used to be parser-blocking in the head, which put ~1s of
@@ -113,6 +115,14 @@
   <div class="hero__grid" aria-hidden="true"></div>
   <div class="hero__halo" aria-hidden="true"></div>
 
+  <!-- The cinematic plate: one oversized word the mascot stands in front of, so
+       it is cropped by the fruit rather than sitting beside it. Purely
+       decorative — the page's real title is the <h1> below — so it is out of the
+       accessibility tree and out of the tab order. Not a data-i18n key either:
+       "PORTFOLIO" is the same word in both languages and is an identity mark,
+       like the project names in the markup, not translated copy. -->
+  <span class="hero__plate" aria-hidden="true" dir="ltr">PORTFOLIO</span>
+
   <div class="wrap hero__in">
     <!-- 3D mascot: above the wordmark, the single focus of the viewport.
          It is a real control now (click / tap / Enter / Space licks it), so it
@@ -156,9 +166,17 @@
     </div>
 
     <figure class="about__figure" data-reveal="scale">
-      <span class="about__frame" aria-hidden="true"></span>
-      <img src="assets/aymen-me.webp" width="640" height="800" loading="lazy" decoding="async"
-           alt="Aymen Meghezzi, creator behind Laymon Games" data-i18n-attr="alt:about.ownerAlt">
+      <!-- The photograph gets its own clipping box. It used to be a direct child
+           of the <figure>, with .about__frame painted over it as an absolutely
+           positioned sibling — so the frame's `overflow: hidden` clipped nothing
+           and the hover zoom bled out of the picture: measured at 1440, the
+           image's top sat 17px ABOVE the frame's and its bottom ran 6px into the
+           caption below. A real wrapper is the only thing that can clip it. -->
+      <span class="about__photo">
+        <span class="about__frame" aria-hidden="true"></span>
+        <img src="assets/aymen-me.webp" width="640" height="800" loading="lazy" decoding="async"
+             alt="Aymen Meghezzi, creator behind Laymon Games" data-i18n-attr="alt:about.ownerAlt">
+      </span>
       <figcaption>
         <span data-i18n="about.personLabel">The person behind the studio</span>
         <b dir="ltr">Aymen Meghezzi</b>
@@ -263,8 +281,8 @@
           <div><dt data-i18n="work.meta.type">Type</dt><dd data-i18n="work.meta.typeValue">2D pixel RPG</dd></div>
           <div><dt data-i18n="work.meta.status">Status</dt><dd data-i18n="work.meta.statusValue">In development</dd></div>
         </dl>
-        <a class="btn btn--gold" href="https://laymon-games.itch.io" target="_blank" rel="noopener"
-           data-i18n-attr="aria-label:work.main.aria"><span dir="ltr">itch.io</span></a>
+        <a class="btn btn--gold" href="https://laymongames.github.io/parallox/" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:work.main.aria"><span dir="ltr">Official Website</span></a>
       </div>
     </article>
 
@@ -377,20 +395,55 @@
     </div>
 
     <div class="reach" data-reveal="up">
+      <!-- The email control reads as a control now: an icon, the address as the
+           dominant line, and an explicit "Copy email" affordance with its own
+           feedback, so it is obvious what pressing it does and that it worked.
+           The whole tile stays one button, so the target is the full width. -->
       <button class="reach__mail" type="button" data-copy="gamesbylaymon@gmail.com"
               data-i18n-attr="aria-label:contact.copyAria">
-        <span class="reach__label" data-i18n="contact.emailLabel">Email</span>
-        <span class="reach__addr" dir="ltr">gamesbylaymon@gmail.com</span>
+        <span class="reach__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="2.5" y="5" width="19" height="14" rx="2.5" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M3.4 7.1 11.3 12.6a1.3 1.3 0 0 0 1.4 0l7.9-5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="reach__body">
+          <span class="reach__label" data-i18n="contact.emailLabel">Email</span>
+          <span class="reach__addr" dir="ltr">gamesbylaymon@gmail.com</span>
+        </span>
+        <span class="reach__cue">
+          <span class="reach__cue-text" data-i18n="contact.copyCta" data-copied="Copied!">Copy email</span>
+          <svg class="reach__cue-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="8.5" y="8.5" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M15.5 5.5H5.5a2 2 0 0 0-2 2v10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
         <span class="reach__state" data-copy-state aria-live="polite"></span>
       </button>
 
       <div class="reach__more">
         <p class="reach__label" data-i18n="contact.elsewhereLabel">Elsewhere</p>
-        <a href="https://discord.com/users/laymon_games" target="_blank" rel="noopener">
-          <span>Discord</span><b dir="ltr">laymon_games</b>
+        <a class="reach__link" href="https://discord.com/users/laymon_games" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:contact.discordAria">
+          <span class="reach__link-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.27 5.33A16.2 16.2 0 0 0 15.4 4.1a.06.06 0 0 0-.07.03c-.17.3-.36.69-.49 1a15 15 0 0 0-4.48 0c-.13-.32-.33-.7-.5-1a.06.06 0 0 0-.07-.03A16.1 16.1 0 0 0 5.92 5.3a.06.06 0 0 0-.03.02C3.4 8.98 2.76 12.5 3.07 15.98a.07.07 0 0 0 .03.04 16.4 16.4 0 0 0 4.92 2.48.06.06 0 0 0 .07-.02c.38-.52.72-1.07 1-1.64a.06.06 0 0 0-.03-.09 10.8 10.8 0 0 1-1.53-.73.06.06 0 0 1 0-.1l.3-.24a.06.06 0 0 1 .06-.01 11.6 11.6 0 0 0 9.82 0 .06.06 0 0 1 .07.01l.3.24a.06.06 0 0 1 0 .1c-.49.29-1 .54-1.54.73a.06.06 0 0 0-.03.09c.29.57.63 1.12 1 1.64a.06.06 0 0 0 .07.02 16.3 16.3 0 0 0 4.93-2.48.07.07 0 0 0 .03-.04c.37-4.02-.62-7.51-2.63-10.61a.05.05 0 0 0-.03-.02ZM8.68 13.9c-.97 0-1.76-.89-1.76-1.98s.78-1.98 1.76-1.98c.99 0 1.78.89 1.76 1.98 0 1.09-.78 1.98-1.76 1.98Zm6.5 0c-.97 0-1.76-.89-1.76-1.98s.78-1.98 1.76-1.98c.99 0 1.78.89 1.76 1.98 0 1.09-.77 1.98-1.76 1.98Z"/>
+            </svg>
+          </span>
+          <span class="reach__link-name">Discord</span>
+          <b dir="ltr">laymon_games</b>
+          <svg class="reach__go" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6M6.2 4.6h5.2v5.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
         </a>
-        <a href="https://linkedin.com/in/aymen-meghezzi" target="_blank" rel="noopener">
-          <span>LinkedIn</span><b dir="ltr">aymen-meghezzi</b>
+        <a class="reach__link" href="https://linkedin.com/in/aymen-meghezzi" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:contact.linkedinAria">
+          <span class="reach__link-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M6.94 5.5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0ZM3.3 20.5h3.4V9.1H3.3v11.4Zm5.7 0h3.4v-6.2c0-1.6.3-3.2 2.3-3.2 2 0 2 1.9 2 3.3v6.1h3.4v-7c0-3-.6-5.3-4.1-5.3-1.7 0-2.8.9-3.3 1.8h-.1V9.1H9v11.4Z"/>
+            </svg>
+          </span>
+          <span class="reach__link-name">LinkedIn</span>
+          <b dir="ltr">aymen-meghezzi</b>
+          <svg class="reach__go" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.6 11.4 11.4 4.6M6.2 4.6h5.2v5.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
         </a>
       </div>
     </div>
@@ -458,6 +511,7 @@
 
 <script src="canvas.js" defer></script>
 <script src="lemon3d.js" defer></script>
+<script src="hero-plate.js" defer></script>
 <script src="motion.js" defer></script>
 <script src="polish.js" defer></script>
 <script src="gallery.js" defer></script>

@@ -81,7 +81,7 @@
 
       /* about */
       'about.eyebrow': 'About',
-      'about.personLabel': 'The person behind the studio',
+      'about.personLabel': 'The person behind the studio,',
       'about.ownerAlt': 'Aymen Meghezzi, creator behind Laymon Games',
       'about.role': '<strong>Laymon Games</strong>, a creator & solo developer.',
       'about.note': 'Games, code, art, audio, video - all in one.',
@@ -164,7 +164,10 @@
       'contact.intro': 'For collaborations, game projects, creative digital work, or you just want to say hi, get in touch with Laymon Games.',
       'contact.emailLabel': 'Email',
       'contact.copyAria': 'Copy email address',
+      'contact.copyCta': 'Copy email',
       'contact.elsewhereLabel': 'Elsewhere',
+      'contact.discordAria': 'Open Laymon Games on Discord (laymon_games)',
+      'contact.linkedinAria': 'Open Aymen Meghezzi on LinkedIn',
 
       /* modals */
       'modal.wip.closeAria': 'Close notice',
@@ -222,7 +225,7 @@
       'hero.lede': 'ألعاب، برمجة، رسم، صوت، فيديو — كل ذلك من مكان واحد.',
 
       'about.eyebrow': 'نبذة عني',
-      'about.personLabel': 'الشخص وراء الاستوديو',
+      'about.personLabel': 'الشخص وراء الاستوديو،',
       'about.ownerAlt': 'Aymen Meghezzi، المبدع وراء Laymon Games',
       'about.role': '<span dir="ltr"><strong>Laymon Games</strong></span>، صانع ومطوّر مستقل.',
       'about.note': 'ألعاب، برمجة، رسم، صوت، فيديو — كل ذلك من مكان واحد.',
@@ -301,7 +304,10 @@
       'contact.intro': 'لمشاريع مشتركة، أو مشاريع ألعاب، أو أعمال إبداعية، أو حتى لمجرّد إلقاء التحية — تواصل مع <span dir="ltr">Laymon Games</span>.',
       'contact.emailLabel': 'البريد الإلكتروني',
       'contact.copyAria': 'نسخ البريد الإلكتروني',
+      'contact.copyCta': 'انسخ البريد',
       'contact.elsewhereLabel': 'منصات أخرى',
+      'contact.discordAria': 'فتح Laymon Games على Discord (laymon_games)',
+      'contact.linkedinAria': 'فتح Aymen Meghezzi على LinkedIn',
 
       'modal.wip.closeAria': 'إغلاق التنبيه',
       'modal.wip.eyebrow': 'عمل قيد الإنجاز',

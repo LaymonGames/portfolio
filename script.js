@@ -368,13 +368,29 @@
      from a keyboard. gallery.js owns #artGallery now: one slide on screen,
      every slide a real button, arrows / Home / End / digits as shortcuts. */
 
+  /* ─────────────── 9b. THE COPY CUE'S SUCCESS LABEL ─────────────── */
+  /* The email tile's cue swaps its own text on .is-copied via
+     `content: attr(data-copied)`. A CSS `content` value cannot be translated, so
+     the label is written from the dictionary on load and on every switch —
+     otherwise the confirmation would be the only English string on an Arabic
+     page, and it is the one string the reader most needs to understand. */
+  (function copyCue() {
+    function paint() {
+      $$('[data-copied]').forEach(function (el) {
+        el.setAttribute('data-copied', t('ui.copied'));
+      });
+    }
+    paint();
+    document.addEventListener('lg:lang', paint);
+  })();
 
   /* ─────────────── 10. MISC ─────────────── */
   (function misc() {
     var year = $('#year');
     if (year) year.textContent = String(new Date().getFullYear());
 
-    /* the language button label is language-specific, not i18n copy */
+    /* the language button label is language-specific, not i18n copy, and the
+       copy confirmation has to be cleared so it cannot survive a switch */
     document.addEventListener('lg:lang', function () {
       var copy = $('[data-copy] [data-copy-state]');
       if (copy) copy.textContent = '';

@@ -53,10 +53,36 @@
 .skill--lead .skill__d { max-inline-size: 42ch }
 
 /* the step number was set flush against the dot and clipped by the rail line,
-   so "01" read as "0I". It now clears the dot and its label sits under it. */
+   so "01" read as "0I". It now clears the dot and its label sits under it.
+
+   The number is a marker that sits ON the rail, not beside it. The rail is a
+   1px line at y = flow.top + 3, and the number's own box is 12.5px tall with its
+   top at the same y — so the line ran through the vertical middle of the digits
+   and struck them out: measured at 1440, line y = 347.6 inside a number box
+   spanning 344.6–357.1. Giving the number a plate means the marker interrupts
+   the rail the way a station interrupts a track, which is the reading that was
+   intended, instead of the rail interrupting the number. */
 .flow__num {
-	padding-inline-start: .62rem;
-	letter-spacing: .18em;
+	display: inline-block;
+	/* Clear of the dot but still overlapping the rail, so the rail runs up to
+	   the digits and stops underneath them. The dot is 7px at x = 100–107; this
+	   puts the glyphs at 133.6, so the dot's silhouette is never covered. */
+	padding: .2em .58em .2em 1.55em;
+	border-radius: 3px;
+	background: var(--ink);
+	letter-spacing: .16em;
+	/* The plate would otherwise cover the 1px rail, and on a fresh reveal the
+	   rail's leading end is the only thing joining the dot to the list. The mask
+	   makes exactly the dot's own width (7px) transparent and everything after
+	   it opaque, so the plate begins where the dot ends — dot, then number, with
+	   no unlit gap between them. */
+	-webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7px);
+	mask-image: linear-gradient(90deg, transparent 0, #000 7px);
+}
+html[dir="rtl"] .flow__num {
+	padding: .2em 1.55em .2em .58em;
+	-webkit-mask-image: linear-gradient(270deg, transparent 0, #000 7px);
+	mask-image: linear-gradient(270deg, transparent 0, #000 7px);
 }
 
 /* ──────────────── 4 · the process rail was geometrically wrong ────────────────
@@ -90,6 +116,16 @@
 	.flow::before,
 	.flow::after { content: none }
 	.js [data-reveal="flow"] .flow__step::after { transform: none }
+	/* with the rail gone there is no line for the number to interrupt, so the
+	   plate and its offset are dropped and the label sits plain beside the dot */
+	.flow__num {
+		margin-inline-start: 0;
+		padding: 0;
+		background: none;
+		border-radius: 0;
+		-webkit-mask-image: none;
+		mask-image: none;
+	}
 	/* The spine sits in the flow's 1.9rem inline-start padding, and the dots
 	   are centred on it rather than left-flush against it: styles.css put them
 	   at -1.9rem (flush with the spine's start edge, but on the wrong side of
@@ -160,11 +196,19 @@
    The icon itself is now two vector states instead of three rotated 1.5px divs.
    At 15x1.5px a 45° rotation produces ~2px diagonals that anti-alias into a
    blot rather than a cross, and no amount of sub-pixel nudging fixes a shape
-   whose stroke width changes when it rotates. */
-.burger { justify-content: center; place-items: center; position: relative }
+   whose stroke width changes when it rotates.
+
+   `display: grid` is wrapped in the same breakpoint as `styles.css` uses to
+   reveal the button. Declaring it unconditionally overrode
+   `@media (max-width:900px){ .burger{ display:flex } }` — which is a *reveal*,
+   not a layout tweak — so the burger became visible on desktop, where there is
+   no drawer to open and the nav already carries every link. */
+@media (max-width: 900px) {
+	.burger { display: grid; grid-template-areas: 'icon'; justify-content: center; place-items: center; position: relative }
+}
 .burger__menu,
 .burger__close {
-	grid-area: 1 / 1;
+	grid-area: icon;
 	inline-size: 18px;
 	block-size: 14px;
 	color: var(--cream);
@@ -172,8 +216,6 @@
 }
 /* both states occupy the same grid cell, so the button's box never depends on
    which icon is showing */
-.burger { display: grid; grid-template-areas: 'icon' }
-.burger__menu, .burger__close { grid-area: icon }
 .burger__close { opacity: 0; scale: .82 }
 .burger[aria-expanded="true"] .burger__menu { opacity: 0; scale: .82 }
 .burger[aria-expanded="true"] .burger__close { opacity: 1; scale: 1 }
@@ -246,8 +288,14 @@
 	   the symptom was Arabic still leading with the photograph while English had
 	   already switched — so both selectors are named here rather than relying on
 	   source order. */
-	.about__figure,
-	html[dir="rtl"] .about__figure { order: 0; max-inline-size: 26rem }
+	html[dir="rtl"] .about__figure { order: 0 }
+	.about__figure {
+		order: 0;
+		max-inline-size: 26rem;
+	}
+	/* a real gap between the picture and its own caption — the image used to be
+	   the element that grew on hover, so the words sat right under it */
+	.about__figure figcaption { margin-block-start: 1.1rem }
 	.about__figure img {
 		block-size: min(44svh, 26rem);
 		aspect-ratio: auto;

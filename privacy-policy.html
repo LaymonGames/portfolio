@@ -11,15 +11,35 @@
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- same off-critical-path font load as index.html: this page is one long
+     column of text, so first paint is entirely at the mercy of this request -->
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"
+      media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap"></noscript>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="polish.css">
+<!-- mascot.css carries the relocated .sr-only helper that the language button
+     needs, plus the retirement of the duplicate grain layer; visual.css carries
+     the enlarged brand mark. Both are shared with index.html. -->
+<link rel="stylesheet" href="mascot.css">
+<link rel="stylesheet" href="layout-fix.css">
+<link rel="stylesheet" href="visual.css">
 <script>document.documentElement.classList.add('js');</script>
-<script src="i18n.js"></script>
+<script src="i18n.js" defer></script>
 <style>
-/* page-local: the policy is a document, so it uses a single narrow column */
+/* page-local: the policy is a document, so it uses a single narrow column.
+   74ch is a measure, not a position — `min(100% - pad*2, 74ch)` caps the width
+   and then left-aligns the box, so on a 1440px window the text column began at
+   x=100 with ~240px of dead space to its right and read as though it had been
+   shoved against the left wall. The block margins are what centre it; the
+   cap only decides how wide it gets. */
 .pol{ padding-block:calc(var(--nav-h) + clamp(2rem,7vh,4.5rem)) clamp(3rem,8vh,5.5rem) }
-.pol__in{ inline-size:min(100% - var(--pad)*2, 74ch) }
+.pol__in{
+  inline-size:min(100% - var(--pad)*2, 74ch);
+  margin-inline:auto;
+}
 .pol__eyebrow{ display:flex; gap:.7rem; font:500 .7rem/1 var(--f-mono);
   letter-spacing:.2em; text-transform:uppercase; color:var(--muted-2); margin-block-end:.9rem }
 .pol__eyebrow b{ color:var(--gold-dk); font-weight:700 }
@@ -60,11 +80,12 @@
 <header class="nav is-stuck" id="nav">
   <div class="nav__in">
     <a class="nav__brand" href="index.html" data-i18n-attr="aria-label:brand.homeAria">
-      <span class="nav__mark" aria-hidden="true"><img src="assets/lemon-avatar.png" alt="" width="30" height="30"></span>
+      <span class="nav__mark" aria-hidden="true"><img src="assets/lemon-avatar.png" alt="" width="34" height="34"></span>
       <span class="nav__word" dir="ltr"><b>LAYMON GAMES</b></span>
     </a>
     <div class="nav__tools" style="margin-inline-start:auto">
-      <button class="lang" type="button" data-lang-switch data-i18n-attr="aria-label:lang.switchAria">
+      <button class="lang" type="button" data-lang-switch>
+        <span class="sr-only" data-i18n="lang.switchAction">Switch language:</span>
         <svg class="lang__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/>
           <path d="M3 12h18M12 3c2.6 2.6 3.9 5.7 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.7-3.9-9s1.3-6.4 3.9-9z" stroke="currentColor" stroke-width="1.4"/>

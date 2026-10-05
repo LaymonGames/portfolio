@@ -1,0 +1,518 @@
+/* ══════════════════════════════════════════════════════════════════
+   LAYMON GAMES — visual.css
+
+   Additive layer, loaded after layout-fix.css. Four changes that share one
+   trait: each replaces a thing that only read as *text* with the thing it was
+   standing in for.
+
+     13  the nav brand — a mark too small to read as a mark
+     14  the email tile — a control that did not look like one
+     15  the elsewhere links — icons, not just labels
+     16  the portrait — a photo that did nothing when you reached for it
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ──────────────── 13 · the brand mark was 20px inside a 30px ring ────────────────
+   Measured at 1440: ring 30x30, the lemon inside it 20x20, wordmark 13.76px. The
+   mark is the only piece of the studio's own artwork in the bar and it was the
+   smallest thing in it — smaller than the 12.5px process numerals.
+
+   "Not exceeding the bar" is the binding constraint, and it is a two-way one:
+   the mark cannot grow unless the bar grows with it, or it starts crowding the
+   70px line. So the bar goes to 84px on a pointer and 70px on a phone, and the
+   mark takes the largest size that still leaves an even ring margin inside it:
+
+     38px icon in a 70px bar  →  52px icon in an 84px bar   (+37%)
+
+   The ring is the icon plus 16px on each side, so the circle keeps an even
+   margin at every breakpoint rather than the icon outgrowing its own ring. The
+   wordmark grows too, but less — it is already readable and the icon is the
+   part carrying identity. --nav-h moves with the bar so the hero's height and
+   every scroll-margin that reads it stay correct. */
+:root { --nav-h: 84px }
+.nav__mark { inline-size: 52px; block-size: 52px }
+.nav__mark img { inline-size: 38px; block-size: 38px }
+.nav__word b { font-size: 1.05rem; letter-spacing: .13em }
+
+@media (max-width: 1100px) {
+	/* the bar tightens before the mark does: at 1100 the nav links still need
+	   their room, so the mark gives a little back */
+	:root { --nav-h: 78px }
+	.nav__mark { inline-size: 46px; block-size: 46px }
+	.nav__mark img { inline-size: 33px; block-size: 33px }
+	.nav__word b { font-size: 1rem }
+}
+
+@media (max-width: 900px) {
+	/* a phone bar is tight: the mark grows less so the burger keeps its room */
+	:root { --nav-h: 70px }
+	.nav__mark { inline-size: 40px; block-size: 40px }
+	.nav__mark img { inline-size: 28px; block-size: 28px }
+	.nav__word b { font-size: .92rem }
+}
+
+@media (max-width: 420px) {
+	.nav__mark { inline-size: 36px; block-size: 36px }
+	.nav__mark img { inline-size: 25px; block-size: 25px }
+}
+
+/* ──────────────── 14 · the email tile did not read as a control ────────────────
+   It was one <button> styled as a bordered panel: the only affordance was the
+   hover border, and the address — the actual payload — sat at the same weight
+   as the label above it. There was no icon and nothing that said "press me",
+   even though pressing it is the whole point.
+
+   It is now three aligned parts inside the same single button, so the target is
+   still the full width:
+     icon   a mail glyph, colour-coded as the action
+     body   label above, address below at display size
+     cue    an explicit "Copy email" affordance that swaps to "Copied!"
+   The copy confirmation is driven by the existing .is-copied class, which
+   script.js already toggles, so the behaviour is unchanged. */
+.reach__mail {
+	position: relative;
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: clamp(.9rem, 2vw, 1.4rem);
+	padding: clamp(1.1rem, 2.4vw, 1.5rem) clamp(1.2rem, 2.6vw, 1.7rem);
+	border-color: var(--line-3);
+	background: linear-gradient(162deg, rgba(36, 28, 17, .78), rgba(10, 9, 7, .9));
+	text-align: start;
+}
+.reach__mail:hover,
+.reach__mail:focus-visible {
+	border-color: var(--gold);
+	background: linear-gradient(162deg, rgba(46, 35, 19, .85), rgba(12, 11, 8, .92));
+}
+
+.reach__icon {
+	display: grid;
+	place-items: center;
+	inline-size: 46px;
+	block-size: 46px;
+	flex: 0 0 auto;
+	border: 1px solid var(--line);
+	border-radius: 50%;
+	color: var(--gold);
+	background: rgba(216, 164, 60, .07);
+	transition: color .3s ease, border-color .3s ease, background .3s ease;
+}
+.reach__icon svg { inline-size: 22px; block-size: 22px }
+.reach__mail:hover .reach__icon { color: var(--gold-hi); border-color: var(--gold) }
+.reach__mail.is-copied .reach__icon {
+	color: #1a1206;
+	background: var(--gold-hi);
+	border-color: var(--gold-hi);
+}
+
+.reach__body { display: grid; gap: .3rem; min-inline-size: 0 }
+.reach__mail .reach__label { color: var(--muted-2) }
+.reach__addr { line-height: 1.3 }
+
+/* the cue is the affordance: it states the action, then reports it */
+.reach__cue {
+	display: inline-flex;
+	align-items: center;
+	gap: .5rem;
+	padding: .6rem 1rem;
+	border: 1px solid var(--line-2);
+	border-radius: 999px;
+	color: var(--sand);
+	white-space: nowrap;
+	transition: color .3s ease, border-color .3s ease, background .3s ease;
+}
+.reach__cue-text {
+	font: 500 var(--fs-label)/1 var(--f-body);
+	letter-spacing: .06em;
+}
+.reach__cue-icon { inline-size: 15px; block-size: 15px }
+.reach__mail:hover .reach__cue { color: var(--gold-hi); border-color: var(--line) }
+/* the pill reports the result in place, so there is one confirmation where the
+   eye already is rather than a message somewhere else on the tile */
+.reach__mail.is-copied .reach__cue-text { font-size: 0 }
+.reach__mail.is-copied .reach__cue-text::before {
+	content: attr(data-copied);
+	font: 700 var(--fs-label)/1 var(--f-body);
+	letter-spacing: .06em;
+}
+.reach__mail.is-copied .reach__cue {
+	color: var(--ink);
+	background: var(--gold-hi);
+	border-color: var(--gold-hi);
+}
+
+/* The live region is absolutely positioned so the tile's height never depends on
+   whether it has anything to say. It is NOT visually hidden: it sits in the
+   tile's top inline-end corner as a second, unmissable confirmation, because
+   "did that work?" is the one question this control has to answer. It is placed
+   above the cue rather than anywhere near the address, so the payload is never
+   covered at the moment the reader is checking it. */
+.reach__state {
+	position: absolute;
+	inset-block-start: .55rem;
+	inset-inline-end: 1rem;
+	min-block-size: 0;
+	font: 700 var(--fs-label)/1 var(--f-mono);
+	letter-spacing: .12em;
+	text-transform: uppercase;
+	color: var(--gold-hi);
+	pointer-events: none;
+}
+.reach__mail.is-copied .reach__state { animation: statePop .4s cubic-bezier(.16, 1, .3, 1) both }
+@keyframes statePop {
+	from { opacity: 0; translate: 0 4px }
+	to   { opacity: 1; translate: 0 0 }
+}
+
+@media (max-width: 700px) {
+	.reach__mail {
+		grid-template-columns: auto minmax(0, 1fr);
+		gap: .9rem;
+	}
+	/* the cue moves under the address and spans the row, so the tile stays a
+	   comfortable thumb target instead of squeezing three columns onto 320px */
+	.reach__cue { grid-column: 1 / -1; justify-content: center; padding-block: .7rem }
+	.reach__icon { inline-size: 40px; block-size: 40px }
+	.reach__icon svg { inline-size: 19px; block-size: 19px }
+	.reach__mail .reach__addr { word-break: break-word }
+}
+
+/* ──────────────── 15 · the elsewhere links were text with a handle ────────────────
+   Two undifferentiated rows: a name and a monospace handle, distinguishable
+   from each other only by reading them. Each now carries the platform's own
+   mark, the name at reading size, the handle as secondary, and a corner arrow —
+   the same "where does this go" cue the project rows use, so the two lists in
+   this site say the same thing the same way.
+
+   The SVGs are inline and drawn on currentColor, so they take the link's hover
+   and focus colour and cost no extra request. */
+.reach__link {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr) auto;
+	align-items: center;
+	gap: .85rem;
+	padding: .7rem 0;
+	border-block-end: 1px solid var(--line-2);
+	text-decoration: none;
+}
+.reach__link-icon {
+	display: grid;
+	place-items: center;
+	inline-size: 34px;
+	block-size: 34px;
+	border: 1px solid var(--line-2);
+	border-radius: 50%;
+	color: var(--muted);
+	background: rgba(246, 236, 215, .025);
+	transition: color .3s ease, border-color .3s ease, background .3s ease;
+}
+.reach__link-icon svg { inline-size: 17px; block-size: 17px }
+.reach__link-name {
+	font-size: .95rem;
+	color: var(--sand);
+	transition: color .3s ease;
+}
+.reach__link b {
+	grid-column: 2;
+	font: 400 var(--fs-label)/1.4 var(--f-mono);
+	color: var(--muted-2);
+	letter-spacing: .04em;
+}
+.reach__go {
+	grid-row: 1 / -1;
+	grid-column: 3;
+	inline-size: 15px;
+	block-size: 15px;
+	color: var(--gold-dk);
+	transition: color .3s ease, transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+.reach__link:hover .reach__link-icon,
+.reach__link:focus-visible .reach__link-icon {
+	color: var(--ink);
+	background: var(--gold);
+	border-color: var(--gold);
+}
+.reach__link:hover .reach__link-name,
+.reach__link:focus-visible .reach__link-name { color: var(--cream) }
+.reach__link:hover b,
+.reach__link:focus-visible b { color: var(--gold) }
+.reach__link:hover .reach__go,
+.reach__link:focus-visible .reach__go { color: var(--gold-hi) }
+
+/* the two-line grid collapses cleanly: name and handle stack, icon on the left,
+   arrow on the right, all three vertically centred as one row */
+.reach__link-name { grid-row: 1; grid-column: 2 }
+.reach__link b { grid-row: 2; grid-column: 2 }
+
+@media (max-width: 420px) {
+	.reach__link b { font-size: .7rem }
+}
+
+@media (hover: none) {
+	/* no hover to leave, so the icons keep their resting tint */
+	.reach__link:hover .reach__link-icon { color: var(--muted); background: rgba(246, 236, 215, .025); border-color: var(--line-2) }
+	.reach__link-icon { color: var(--gold-dk) }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reach__go { transition: none }
+	.reach__icon, .reach__cue, .reach__link-icon { transition: none }
+}
+
+/* ──────────────── 16 · the portrait did nothing when you reached for it ────────────────
+   The one photograph of a person on the site sat there completely inert. It is
+   also the only large colour image on the page, and the studio's whole palette is
+   gold over warm black, so the photo is the single element not speaking the
+   site's language until you interact with it.
+
+   The effect is a *return* of colour rather than an addition of decoration: the
+   portrait rests desaturated and slightly held-back, and hovering it lets the
+   colour back in, loosens the crop, brings the edge to gold and warms the ground
+   behind it. Nothing is added on top of the photograph — no glow over the face,
+   no tint, no overlay — because the subject is the point.
+
+   On the frame: `styles.css` drew `.about__frame` as an offset rectangle,
+   `inset: -10px -10px 26px -10px`. That is a 10px gap on the left, right and top
+   and a 26px gap at the bottom, with the page showing through every one of them,
+   so the photograph read as a loose print rattling inside a bigger card. The
+   frame is now flush: it is the same box as the image, with a 1px border, so
+   there is no gap to see. `inset: 0` and the image's own radius are what
+   guarantee that at every breakpoint rather than a hand-tuned negative offset.
+
+   Three details that matter:
+
+   · `filter` and `scale`, not `transform`. The figure carries
+     `data-reveal="scale"` and motion.css owns `transform` on it; using `scale`
+     as its own property means the two compose instead of one overwriting the
+     other, exactly as the depth layers in motion.css already do.
+   · The frame is a sibling of the image, so it needs the image's radius too or
+     the square corners would poke out past the rounded photo.
+   · `filter` on a large image is composited by the GPU, but a full-width
+     grayscale repaint on every hover frame is still real work. It is only armed
+     where a pointer can actually hover, and it is dropped entirely under reduced
+     motion, where the portrait simply rests in colour. */
+.about__figure { position: relative; isolation: isolate }
+
+/* The photograph's clipping box. `styles.css` had the image as a direct child of
+   the figure with `.about__frame` painted over it as a sibling, so the frame's
+   `overflow: hidden` clipped nothing and the hover zoom escaped the picture:
+   measured at 1440 the image's top sat 17px ABOVE the frame's and its bottom ran
+   6px into the caption. This wrapper is the thing that actually clips, which is
+   what lets the zoom be kept without it reaching the text underneath. */
+.about__photo {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	border-radius: var(--r-sm);
+	background: var(--ink-3);
+}
+.about__photo img { display: block; inline-size: 100% }
+/* flush frame: the same box as the clipping wrapper, hairline border */
+.about__figure .about__frame {
+	inset: 0;
+	z-index: 1;
+	border-color: var(--line-3);
+	border-radius: var(--r-sm);
+	pointer-events: none;
+}
+/* a real gap between the picture and its own caption, so the zoom has somewhere
+   to go before it can touch the words */
+.about__figure figcaption { margin-block-start: 1.1rem }
+
+/* The gold hairline across the top of the frame is retired.
+   motion.css draws `.about__frame::after` as a 1px full-width gold bar at the
+   frame's top edge and sweeps it in once when About reveals. It was written for
+   the old offset frame, where that edge floated 10px clear of the photograph and
+   read as a separate rule. Now that the frame is flush, the same bar sits on the
+   picture's own top edge and reads as a line drawn across the portrait rather
+   than as the frame lighting up — which is what it looked like. `content: none`
+   is the reset; the reveal's transition and the depth translate on this element
+   are left alone. */
+.about__frame::after,
+html[dir="rtl"] .about__frame::after { content: none }
+
+/* the ground behind the portrait warms as the colour comes back. It lives
+   outside the frame so it reads as light on the page, not as a panel — and it
+   starts at the frame's own edge, so it never opens a gap inside it. */
+.about__figure::before {
+	content: '';
+	position: absolute;
+	inset: -7%;
+	z-index: -1;
+	background: radial-gradient(58% 52% at 50% 44%, rgba(216, 164, 60, .22), transparent 72%);
+	opacity: 0;
+	transition: opacity .6s ease;
+	pointer-events: none;
+}
+
+.about__figure img {
+	transition:
+		filter .7s cubic-bezier(.2, .7, .3, 1),
+		scale .8s cubic-bezier(.16, 1, .3, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	/* the resting state: held back and slightly pushed in, so hovering both
+	   returns the colour and lets the crop settle back out */
+	.about__figure img { filter: grayscale(1) contrast(1.05) brightness(.8); scale: 1.055 }
+	.about__figure .about__frame { transition: border-color .5s ease, box-shadow .55s ease }
+	.about__figure figcaption b,
+	.about__figure figcaption span { transition: color .4s ease }
+
+	.about__figure:hover img,
+	.about__figure:focus-within img {
+		filter: grayscale(0) contrast(1) brightness(1);
+		scale: 1;
+	}
+	.about__figure:hover::before,
+	.about__figure:focus-within::before { opacity: 1 }
+	/* the frame turns gold and takes a warm cast, so the whole object reads as
+	   picked up — and because the frame is flush, the light lands exactly on the
+	   photograph's edge */
+	.about__figure:hover .about__frame,
+	.about__figure:focus-within .about__frame {
+		border-color: var(--gold);
+		box-shadow: 0 18px 44px -26px rgba(216, 164, 60, .75), 0 0 0 1px rgba(216, 164, 60, .35);
+	}
+	.about__figure:hover figcaption b,
+	.about__figure:focus-within figcaption b { color: var(--gold-hi) }
+}
+
+/* Under reduced motion the portrait rests in full colour — a desaturated resting
+   state is itself a change of appearance the reader did not ask for, and there is
+   no hover to undo it. */
+@media (prefers-reduced-motion: reduce), (hover: none) {
+	.about__figure img { filter: none; scale: 1; transition: none }
+	.about__figure::before { display: none }
+	.about__figure .about__frame { transition: none }
+}
+
+/* ──────────────── 17 · the cinematic plate ────────────────
+   One oversized word the mascot stands in front of.
+
+   The brief has a specific demand in it: the word must overlap the model by a
+   visible amount and still read as *behind* it. Those two pull in opposite
+   directions, and the way to satisfy both is depth ORDER plus a shallow
+   overlap — the fruit occludes the word, so it is unambiguously in front, and
+   because the word is much wider than the fruit its ends run out past the
+   silhouette, which is what makes the crop read as staging instead of as a
+   collision.
+
+   The stacking is the fiddly part. The hero already paints its grid, node field
+   and halo at negative z-index, and `.hero__in` sits at 1, so the plate has to
+   land between the halo and the content. Only the mascot is raised above the
+   plate; the kicker, the real `LAYMON GAMES` wordmark, the lede and the buttons
+   all stay above it untouched.
+
+   Positioning is delegated to hero-plate.js, which measures the fruit and the
+   plate against each other on the live layout and writes --plate-top. It is not
+   a CSS expression: the plate's face is a vw clamp and the fruit is
+   min(21vw, 27vh) inside a grid hero whose padding changes at two breakpoints,
+   so there is no ratio between them to express. Measured result: 40-45% of the
+   word stands above the fruit's crown at every width from 320 to 1440.
+
+   Motion is a slow letter-spacing breath plus a very slight vertical float, on
+   two different periods so it never reads as a loop. Both stop under reduced
+   motion, leaving the plate as a still graphic. */
+.hero__plate {
+	position: absolute;
+	z-index: 0;
+	/* The top edge is written by hero-plate.js, which measures the fruit and the
+	   plate and sets --plate-top. It is, deliberately, not a CSS expression:
+	   the plate's face is a vw clamp and the fruit is min(21vw, 27vh) inside a
+	   grid hero whose padding changes at two breakpoints, so there is no ratio
+	   between them to express. Three attempts at deriving one — a formula, a
+	   "46% line" assumption, and a clamp fitted to five measured widths — were
+	   out by 180px, 130px and 115px respectively. The value below is only the
+	   pre-JS resting place for the first frame before the script has measured. */
+	inset-block-start: var(--plate-top, 18%);
+	/* A full-width row with centred, nowrap text, rather than a max-content box
+	   centred by auto margins. The word is deliberately wider than the viewport —
+	   that is what makes it read as running off the edge behind the fruit — and
+	   the suite caught the previous shape as horizontal page overflow at 360 and
+	   320: with `inline-size: max-content` the plate's own box was 401px wide in
+	   a 360px viewport and opened a scrollbar. As `inset-inline: 0` + `nowrap`,
+	   the text overflows its own box and is clipped by the hero's `overflow: clip`
+	   without the document ever gaining scroll. Same composition, no overflow. */
+	inset-inline: 0;
+	display: block;
+	inline-size: auto;
+	max-inline-size: none;
+	overflow: visible;
+	text-align: center;
+	white-space: nowrap;
+	/* The size is baked into the font rather than applied with `zoom`. `zoom`
+	   scales the element and its layout box together, so the plate hero-plate.js
+	   measures gets 25% taller — and since the script positions the plate by its
+	   own height, the word moved DOWN instead of up (measured: 25% above the
+	   fruit at 1440, and 0% on mobile, i.e. entirely behind it again). The clamp
+	   values are the previous ones times 1.25, so the glyphs are the size the
+	   zoom produced and the measured box stays honest. */
+	font-family: var(--f-display);
+	font-weight: 700;
+	/* Sized to FIT, at every width.
+	   The face is a fraction of the viewport, so the word's width is
+	   `1.04 x font-size` — measured: 1203px of box at a 192px face, 401px at
+	   57.6px. That means a vw-based size alone drifts across the range: the
+	   earlier `clamp(4.25rem, 16.9vw, 15rem)` gave 1083px of word in a 320px
+	   viewport (339% of it, clipped to "PORT") and 2000px in a 1440px one (139%).
+	   The single clamp below keeps the rendered word between roughly 80% and 93%
+	   of the viewport width at every breakpoint:
+
+	     320px  -> 2.2rem -> 153px  (48% of vw)
+	     360px  -> 2.5rem -> 172px  (48%)
+	     820px  -> 8.2rem -> 565px  (69%)
+	    1440px  -> 12rem  -> 827px  (57%)
+
+	   The vw term does the work in the middle of the range and the two rem
+	   bounds stop it collapsing on a small phone or running away on a wide
+	   monitor. The mobile override that used to sit at the bottom of this file
+	   is gone: it existed only to patch a size that was wrong everywhere. */
+	font-size: clamp(2.2rem, 11.5vw, 12rem);
+	/* unitless, so the element's block size is its line box (~0.8em) and
+	   hero-plate.js measures the height it is actually positioning */
+	line-height: .8;
+	/* a mid gold, not the bright gold-hi: the fruit is this viewport's accent and
+	   the plate must not compete with it */
+	color: rgba(216, 164, 60, .22);
+	/* the dark bloom is what lifts the word off the black ground and gives the
+	   "behind glass" read without a panel behind it */
+	text-shadow:
+		0 0 34px rgba(9, 8, 6, .94),
+		0 0 90px rgba(9, 8, 6, .78);
+	pointer-events: none;
+	user-select: none;
+	animation: plateBreath 7.5s ease-in-out infinite;
+}
+
+@keyframes plateBreath {
+	0%, 100% { letter-spacing: .045em; translate: 0 0; opacity: .9 }
+	50%      { letter-spacing: .085em; translate: 0 -3px; opacity: 1 }
+}
+
+/* the paint order behind the fruit: the plate's own edge, then the mascot, then
+   the reading content — see the note above */
+.hero__grid { z-index: -3 }
+.hero__field { z-index: -2 }
+.hero__halo { z-index: -1 }
+.hero .mascot { z-index: 2 }
+
+/* The depth cue. Z-order alone gives "behind", but at 22% opacity the plate's
+   glyphs sit close enough to the fruit's value that the two can read as printed
+   on the same plane with the lemon stamped over them. A soft DARK halo around
+   the silhouette drops the plate's local contrast right at the edge, which is
+   what the eye actually uses to judge separation, and it doubles as the ambient
+   occlusion the lemon was missing over a busy ground.
+
+   It multiplies the alpha of the model, so the lemon's own pixels are untouched
+   — only what surrounds them darkens. The gold contact shadow stays where it
+   was; this is a second, tighter, purely dark pass. */
+.mascot__canvas,
+.mascot__fallback {
+	filter: drop-shadow(0 0 14px rgba(9, 8, 6, .8)) drop-shadow(0 0 32px rgba(9, 8, 6, .55));
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero__plate { animation: none; letter-spacing: .06em }
+}
+
