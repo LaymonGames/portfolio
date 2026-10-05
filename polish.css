@@ -1,0 +1,61 @@
+/* ══════════════════════════════════════════════════════════════════
+   LAYMON GAMES — polish.css
+   Additive layer loaded after motion.css. It only reacts to the person
+   (pointer light, magnetic buttons) or sits still (grain, glow), so the
+   site keeps its rule of no ambient loops.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* -- surface: static film grain gives the flat black some material -- */
+body::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: 1400;
+	pointer-events: none;
+	opacity: .055;
+	mix-blend-mode: overlay;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+::selection { background: var(--gold); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 3px; border-radius: 4px; }
+html { scrollbar-color: var(--gold-dk, #8a6a22) var(--ink); scrollbar-width: thin; }
+
+/* -- mascot: warm light pooled under the lemon, not a hard shadow -- */
+.mascot canvas {
+	filter: drop-shadow(0 28px 38px rgba(216, 164, 60, .24)) drop-shadow(0 4px 10px rgba(0, 0, 0, .5));
+}
+
+/* -- pointer light: cards are lit from wherever the cursor is -- */
+.spot-host { isolation: isolate; }
+.spot {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	border-radius: inherit;
+	opacity: 0;
+	transition: opacity .45s ease;
+	background:
+		radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(243, 199, 100, .13), transparent 62%);
+	-webkit-mask: linear-gradient(#000, #000);
+}
+.spot-host:hover > .spot { opacity: 1; }
+.spot-host > *:not(.spot) { position: relative; z-index: 1; }
+
+/* -- magnetic buttons: settle back with a spring, not a snap -- */
+.btn.is-magnet {
+	translate: var(--tx, 0) var(--ty, 0);
+	transition: translate .5s cubic-bezier(.16, 1, .3, 1);
+}
+.btn.is-magnet.is-pulled { transition: translate .12s linear; }
+
+/* -- reading: slightly firmer body text and balanced headings -- */
+h1, h2, h3, .shead__title { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+@media (hover: none), (prefers-reduced-motion: reduce) {
+	.spot { display: none; }
+	.btn.is-magnet { translate: none; }
+	body::after { opacity: .035; }
+}

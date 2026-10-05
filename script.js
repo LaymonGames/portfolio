@@ -1,566 +1,402 @@
-const secondHand = document.querySelector('.second-hand');
-const minuteHand = document.querySelector('.minute-hand');
-const hourHand = document.querySelector('.hour-hand');
-const lemonHead = document.querySelector('.lemon-head');
-const year = document.querySelector('#year');
+/* ══════════════════════════════════════════════════════════════════
+   LAYMON GAMES — script.js
 
-const totalLemonFrames = 46;
-let currentLemonFrameIndex = 1;
-let targetLemonFrameIndex = 1;
+   Modules
+     1  language switch          6  progress + scroll spy
+     2  navigation               7  copy email
+     3  reveal system            8  modals
+     4  terminal typer           9  art gallery
+     5  custom cursor           10  misc
+   Everything is progressive: with JavaScript off the page still reads
+   top to bottom, and nothing is required to reach the content.
+   ══════════════════════════════════════════════════════════════════ */
 
-function setHandAngle(hand, angle) {
-	if (hand) {
-		hand.style.setProperty('--rotation-angle', `${angle}deg`);
-	}
-}
+(function () {
+  'use strict';
 
-/* Smooth sweeping clock — replaces the 1-second tick.
-   Falls back to ticking for prefers-reduced-motion users. */
-const clockSmooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var I18N = window.LaymonI18n;
+  var t = function (k, p) { return I18N ? I18N.t(k, p) : k; };
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function updateClock() {
-  const now = new Date();
-  const seconds = now.getSeconds() + (clockSmooth ? now.getMilliseconds() / 1000 : 0);
-  const minutes = now.getMinutes() + seconds / 60;
-  const hours = (now.getHours() % 12) + minutes / 60;
-  // The hand wrapper naturally points to 3 o'clock (90°) at 0° rotation,
-  // so subtract 90° to align 0° with 12 o'clock.
-  setHandAngle(secondHand, seconds * 6 - 90);
-  setHandAngle(minuteHand, minutes * 6 - 90);
-  setHandAngle(hourHand, hours * 30 - 90);
-}
-
-if (secondHand && minuteHand && hourHand) {
-  updateClock();
-  if (clockSmooth) {
-    const sweepClock = () => {
-      updateClock();
-      requestAnimationFrame(sweepClock);
-    };
-    requestAnimationFrame(sweepClock);
-  } else {
-    setInterval(updateClock, 1000);
-  }
-}
-
-function setLemonHeadTarget(clientX) {
-	if (!lemonHead) return;
-	const width = window.innerWidth || 1;
-	const ratio = Math.min(Math.max(clientX / width, 0), 1);
-	targetLemonFrameIndex = Math.round(ratio * (totalLemonFrames - 1)) + 1;
-}
-
-function updateLemonHeadFrame() {
-	if (!lemonHead) return;
-
-	const delta = targetLemonFrameIndex - currentLemonFrameIndex;
-	if (Math.abs(delta) > 0.01) {
-		currentLemonFrameIndex += delta * 0.22;
-		const frameIndex = Math.max(1, Math.min(totalLemonFrames, Math.round(currentLemonFrameIndex)));
-		const frameNumber = String(frameIndex).padStart(3, '0');
-		const nextSrc = `frames/frame_${frameNumber}.png`;
-		if (!lemonHead.src.endsWith(nextSrc)) {
-			lemonHead.src = nextSrc;
-		}
-	}
-
-	requestAnimationFrame(updateLemonHeadFrame);
-}
-
-if (lemonHead) {
-	document.addEventListener('pointermove', (event) => {
-		setLemonHeadTarget(event.clientX);
-	});
-
-	window.addEventListener('resize', () => {
-		setLemonHeadTarget(window.innerWidth / 2);
-	});
-
-	setLemonHeadTarget(window.innerWidth / 2);
-	requestAnimationFrame(updateLemonHeadFrame);
-}
-
-if (year) {
-	year.textContent = new Date().getFullYear();
-}
-
-const navToggle = document.querySelector('.nav-toggle');
-const mobileNav = document.querySelector('#mobile-nav');
-
-function closeMobileNav() {
-	if (!navToggle || !mobileNav) return;
-	navToggle.setAttribute('aria-expanded', 'false');
-	mobileNav.hidden = true;
-}
-
-function openMobileNav() {
-	if (!navToggle || !mobileNav) return;
-	navToggle.setAttribute('aria-expanded', 'true');
-	mobileNav.hidden = false;
-}
-
-if (navToggle && mobileNav) {
-	navToggle.addEventListener('click', () => {
-		const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-		if (isOpen) {
-			closeMobileNav();
-		} else {
-			openMobileNav();
-		}
-	});
-
-	mobileNav.querySelectorAll('a').forEach((link) => {
-		link.addEventListener('click', closeMobileNav);
-	});
-
-	document.addEventListener('keydown', (event) => {
-		if (event.key === 'Escape') {
-			closeMobileNav();
-			navToggle.focus();
-		}
-	});
-
-	document.addEventListener('click', (event) => {
-		const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-		if (!isOpen) return;
-		if (event.target === navToggle || navToggle.contains(event.target)) return;
-		if (mobileNav.contains(event.target)) return;
-		closeMobileNav();
-	});
-
-	window.addEventListener('resize', () => {
-		if (window.innerWidth > 980) {
-			closeMobileNav();
-		}
-	});
-}
-
-
-const navLinks = Array.from(document.querySelectorAll('.site-header .nav a'));
-const sections = Array.from(document.querySelectorAll('main section[id]'));
-
-function updateActiveNav() {
-	const scrollY = window.scrollY + 120;
-	let activeId = 'top';
-	for (const section of sections) {
-		if (section.offsetTop <= scrollY) activeId = section.id;
-	}
-	navLinks.forEach((link) => {
-		const target = link.getAttribute('href');
-		if (target === `#${activeId}` || (activeId === 'top' && target === '#top')) {
-			link.setAttribute('aria-current', 'page');
-		} else {
-			link.removeAttribute('aria-current');
-		}
-	});
-}
-
-window.addEventListener('scroll', updateActiveNav, { passive: true });
-window.addEventListener('resize', updateActiveNav);
-updateActiveNav();
-
-
-/* ---------------------------------------------------------
-   Deterministic section navigation
-   The fixed header must not change where the browser lands on
-   different devices/browsers. Calculate the target from the
-   element's actual rendered position every time.
---------------------------------------------------------- */
-const allSectionLinks = Array.from(document.querySelectorAll('a[href^="#"]'));
-const HEADER_GAP = 10;
-
-function getHeaderOffset() {
-	const header = document.querySelector('.site-header');
-	if (!header) return 0;
-	return Math.max(0, header.getBoundingClientRect().height);
-}
-
-function scrollToSectionId(id, behavior = 'smooth') {
-	const section = document.getElementById(id);
-	if (!section) return;
-
-	/*
-		Use the actual visible content inside the section rather than the
-		outer section box. The panel sections have intentional top padding,
-		so scrolling to the section element itself makes the browser stop
-		above the heading/content.
-	*/
-	const contentTarget =
-		section.querySelector(':scope > .section-content') ||
-		section.querySelector(':scope > .process-inner') ||
-		section.querySelector(':scope > .contact-frame') ||
-		section;
-
-	const targetTop = contentTarget.getBoundingClientRect().top + window.scrollY;
-	const destination = Math.max(0, targetTop - getHeaderOffset() - HEADER_GAP);
-
-	window.scrollTo({
-		top: destination,
-		behavior
-	});
-
-	if (history.replaceState) {
-		history.replaceState(null, '', `#${id}`);
-	}
-}
-
-allSectionLinks.forEach((link) => {
-	link.addEventListener('click', (event) => {
-		const href = link.getAttribute('href');
-		if (!href || href === '#' || !href.startsWith('#')) return;
-
-		const id = href.slice(1);
-		if (!document.getElementById(id)) return;
-
-		event.preventDefault();
-		closeMobileNav();
-		scrollToSectionId(id);
-	});
-});
-
-/* =========================================================
-   UPGRADE PACK — header state, card spotlight, scroll reveals
-   ========================================================= */
-const upgradeReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ---------- Header depth on scroll ---------- */
-const siteHeader = document.querySelector('.site-header');
-function updateHeaderState() {
-  if (!siteHeader) return;
-  siteHeader.classList.toggle('is-scrolled', window.scrollY > 24);
-}
-window.addEventListener('scroll', updateHeaderState, { passive: true });
-updateHeaderState();
-
-/* ---------- Cursor spotlight on cards ---------- */
-if (window.matchMedia('(hover: hover)').matches) {
-  document
-    .querySelectorAll('.skill-card, .small-work, .work-main, .contact-channel')
-    .forEach((card) => {
-      card.addEventListener('pointermove', (event) => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
-        card.style.setProperty('--my', `${event.clientY - rect.top}px`);
-      });
-    });
-}
-
-/* ---------- Scroll reveals ---------- */
-const revealSelector = [
-  '.about-identity',
-  '.section-heading-row',
-  '.copy-column',
-  '.skill-card',
-  '.work-main',
-  '.small-work',
-  '.process-step',
-  '.contact-frame',
-].join(',');
-
-const revealTargets = Array.from(document.querySelectorAll(revealSelector));
-
-if (!upgradeReducedMotion && 'IntersectionObserver' in window && revealTargets.length) {
-  revealTargets.forEach((el) => {
-    const parent = el.parentElement;
-    const siblings = parent
-      ? Array.from(parent.children).filter((child) => child.matches(revealSelector))
-      : [];
-    const siblingIndex = siblings.indexOf(el);
-    if (siblingIndex > 0) {
-      el.style.setProperty('--reveal-delay', `${Math.min(siblingIndex * 90, 420)}ms`);
+  /* ─────────────── 1. LANGUAGE SWITCH ─────────────── */
+  (function lang() {
+    var label = $('[data-lang-switch-label]');
+    function paint() {
+      var ar = I18N && I18N.get() === 'ar';
+      if (label) label.textContent = ar ? 'English' : 'العربية';
+      document.title = document.getElementById('page-title')
+        ? document.getElementById('page-title').textContent
+        : document.title;
     }
-    el.classList.add('reveal');
-  });
+    $$('[data-lang-switch]').forEach(function (btn) {
+      btn.addEventListener('click', function () { I18N.toggle(); });
+    });
+    document.addEventListener('lg:lang', paint);
+    paint();
+  })();
 
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
+  /* ─────────────── 2. NAVIGATION ─────────────── */
+  (function nav() {
+    var bar = $('#nav');
+    var burger = $('.burger');
+    var links = $('#navLinks');
+    if (!bar) return;
+
+    function setOpen(open) {
+      bar.classList.toggle('is-open', open);
+      if (burger) burger.setAttribute('aria-expanded', String(open));
+    }
+    if (burger) {
+      burger.addEventListener('click', function () {
+        setOpen(burger.getAttribute('aria-expanded') !== 'true');
+      });
+    }
+    /* the drawer only exists on the pages that have one */
+    if (links) {
+      links.addEventListener('click', function (e) {
+        if (e.target.closest('a')) setOpen(false);
+      });
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') setOpen(false);
+    });
+    document.addEventListener('click', function (e) {
+      if (!bar.classList.contains('is-open')) return;
+      if (!bar.contains(e.target)) setOpen(false);
+    });
+
+    /* scroll spy */
+    var targets = $$('#navLinks a').map(function (a) {
+      return { link: a, section: document.querySelector(a.getAttribute('href')) };
+    }).filter(function (x) { return x.section; });
+
+    function spy() {
+      var line = window.scrollY + (window.innerHeight * 0.34);
+      var current = null;
+      targets.forEach(function (x) {
+        if (x.section.offsetTop <= line) current = x;
+      });
+      targets.forEach(function (x) {
+        x.link.classList.toggle('is-current', x === current);
+      });
+      bar.classList.toggle('is-stuck', window.scrollY > 8);
+    }
+
+    /* progress + spy share one rAF-throttled listener */
+    var bar2 = $('#progressBar');
+    var hero = $('#home');
+    var cue = $('.hero__cue');
+    var queued = false;
+    function onScroll() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        spy();
+        if (bar2) {
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          bar2.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+        }
+        /* the current on the progress bar only exists once reading starts */
+        document.documentElement.classList.toggle('has-scrolled', window.scrollY > 8);
+        if (hero && cue) cue.style.opacity = window.scrollY > 120 ? '0' : '1';
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    /* onScroll rather than spy, so a reload that restores a scroll offset
+       still gets the stuck bar, the progress width and has-scrolled */
+    onScroll();
+  })();
+
+  /* ─────────────── 3. REVEAL SYSTEM ─────────────── */
+  (function reveal() {
+    var items = $$('[data-reveal]');
+    if (!items.length) return;
+
+    if (REDUCED || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        const el = entry.target;
-        el.classList.add('is-visible');
-        revealObserver.unobserve(el);
-        /* Release the reveal classes once the entrance finishes so the
-           original fast hover transitions take over again. */
-        window.setTimeout(() => {
-          el.classList.remove('reveal', 'is-visible');
-          el.style.removeProperty('--reveal-delay');
-        }, 1500);
+        var el = entry.target;
+        var siblings = el.parentElement
+          ? Array.prototype.filter.call(el.parentElement.children, function (c) {
+            return c.hasAttribute && c.hasAttribute('data-reveal');
+          })
+          : [];
+        var idx = siblings.indexOf(el);
+        if (idx > 0) el.style.setProperty('--d', (idx * 70) + 'ms');
+
+        /* the process rail draws its rail and its dots in sequence, so the
+           steps need their own index */
+        if (el.hasAttribute('data-reveal') && el.getAttribute('data-reveal') === 'flow') {
+          $$(':scope > *', el).forEach(function (child, n) {
+            child.style.setProperty('--i', n);
+          });
+        }
+        el.classList.add('is-in');
+        io.unobserve(el);
       });
-    },
-    { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
-  );
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
 
-  revealTargets.forEach((el) => revealObserver.observe(el));
-}
+    items.forEach(function (el) { io.observe(el); });
+  })();
 
-/* ── Click-to-copy email: the whole card is the button ── */
-const copyEmailBtn = document.querySelector('.contact-channel-copy');
-const i18n = window.LaymonI18n || null;
+  /* ─────────────── 4. TERMINAL TYPER ─────────────── */
+  (function terminal() {
+    var out = $('#termOut');
+    if (!out) return;
 
-function tr(key, params, fallback) {
-  if (i18n) return i18n.t(key, params);
-  let value = fallback;
-  if (params) {
-    Object.keys(params).forEach((name) => {
-      value = String(value).split(`{${name}}`).join(params[name]);
+    /* A GDScript excerpt. Code, not copy: no prose, no claims. */
+    var LINES = [
+      [['k', 'func '], ['f', '_ready'], ['k', '() -> '], ['n', 'void'], ['k', ':']],
+      [['', '\tvar '], ['k', 'world'], ['k', ': '], ['n', 'ParalloxWorld'], ['k', ' = '], ['f', 'ParalloxWorld'], ['k', '.new()']],
+      [['', '\t'], ['f', 'world'], ['k', '.'], ['f', 'load_cast'], ['k', '(self, '], ['s', '"villain"'], ['k', ')']],
+      [['', '\t'], ['f', 'world'], ['k', '.'], ['f', 'set_perspective'], ['k', '('], ['n', 'PLAYER'], ['k', ')']],
+      [['', '']],
+      [['k', 'func '], ['f', '_process'], ['k', '(d: '], ['n', 'float'], ['k', ') -> '], ['n', 'void'], ['k', ':']],
+      [['', '\tif '], ['f', 'hero'], ['k', '.'], ['f', 'is_player_side'], ['k', ':']],
+      [['', '\t\t'], ['f', 'world'], ['k', '.'], ['f', 'shift_perspective'], ['k', '()']],
+      [['', '']],
+      [['k', 'func '], ['f', '_input'], ['k', '(e: '], ['n', 'InputEvent'], ['k', ') -> '], ['n', 'void'], ['k', ':']],
+      [['', '\tif '], ['f', 'e'], ['k', '.'], ['f', 'is_action_pressed'], ['k', '('], ['s', '"interact"'], ['k', ')']],
+      [['', '\t\t'], ['f', 'interact'], ['k', '()']]
+    ];
+
+    var esc = function (s) {
+      return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    };
+    var plain = function (line) {
+      return line.map(function (p) { return p[1]; }).join('');
+    };
+    var toHtml = function (line) {
+      return line.map(function (p) {
+        return p[0] ? '<span class="' + p[0] + '">' + esc(p[1]) + '</span>' : esc(p[1]);
+      }).join('');
+    };
+    var full = function () { return LINES.map(toHtml).join('\n'); };
+
+    function dump() {
+      out.classList.remove('is-typing');
+      out.innerHTML = full();
+    }
+
+    function type() {
+      if (REDUCED) { dump(); return; }
+      out.classList.add('is-typing');
+      var li = 0, ci = 0, buf = [];
+
+      function step() {
+        if (li >= LINES.length) {
+          /* leave the finished listing clean: no caret, no scrollbar jump */
+          out.classList.remove('is-typing');
+          out.innerHTML = full();
+          out.scrollTop = 0;
+          return;
+        }
+        var line = LINES[li];
+        var fullLine = plain(line);
+        ci++;
+        if (ci >= fullLine.length) {
+          buf.push(toHtml(line));
+          li++; ci = 0;
+          out.innerHTML = buf.join('\n') + '<span class="caret"></span>';
+          out.scrollTop = out.scrollHeight;
+          setTimeout(step, 110);
+          return;
+        }
+        /* build the partial line by walking the parts */
+        var used = 0, html = '';
+        for (var i = 0; i < line.length; i++) {
+          var part = line[i];
+          var chars = Math.max(0, Math.min(part[1].length, ci - used));
+          used += part[1].length;
+          if (!chars) break;
+          var text = esc(part[1].slice(0, chars));
+          html += part[0] ? '<span class="' + part[0] + '">' + text + '</span>' : text;
+        }
+        out.innerHTML = buf.join('\n') + html + '<span class="caret"></span>';
+        out.scrollTop = out.scrollHeight;
+        setTimeout(step, fullLine.length > 34 ? 7 : 22);
+      }
+      setTimeout(step, 220);
+    }
+
+    if (!('IntersectionObserver' in window)) { dump(); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        io.disconnect();
+        type();
+      });
+    }, { threshold: 0.3 });
+    io.observe(out);
+  })();
+
+  /* ─────────────── 5. CUSTOM CURSOR ─────────────── */
+  (function cursor() {
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!fine || REDUCED) return;
+
+    var el = document.createElement('div');
+    el.className = 'cursor';
+    el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = '<span class="cursor__ring"></span><span class="cursor__dot"></span>';
+    document.body.appendChild(el);
+
+    var ring = $('.cursor__ring', el);
+    var dot = $('.cursor__dot', el);
+    var x = window.innerWidth / 2, y = window.innerHeight / 2;
+    var rx = x, ry = y;
+
+    document.documentElement.classList.add('has-cursor');
+    el.classList.add('is-hidden');
+
+    window.addEventListener('mousemove', function (e) {
+      x = e.clientX; y = e.clientY;
+      el.classList.remove('is-hidden');
+      dot.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)';
+      var over = !!(e.target.closest && e.target.closest('a,button,[role="button"],input,textarea,select'));
+      el.classList.toggle('is-link', over);
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', function () { el.classList.add('is-hidden'); });
+    document.addEventListener('mouseenter', function () { el.classList.remove('is-hidden'); });
+
+    (function follow() {
+      rx += (x - rx) * 0.18;
+      ry += (y - ry) * 0.18;
+      ring.style.transform = 'translate3d(' + rx.toFixed(2) + 'px,' + ry.toFixed(2) + 'px,0)';
+      requestAnimationFrame(follow);
+    })();
+  })();
+
+  /* ─────────────── 6a. PROGRESS ─────────────── */
+  /* handled inside the nav module, which already listens to scroll */
+
+  /* ─────────────── 7. COPY EMAIL ─────────────── */
+  (function copyMail() {
+    $$('[data-copy]').forEach(function (btn) {
+      var state = $('[data-copy-state]', btn);
+      var timer = null;
+
+      function flash() {
+        if (!state) return;
+        /* the class is what motion.css animates; it is dropped again when
+           the announcement clears, so the state always resets */
+        btn.classList.add('is-copied');
+        state.textContent = t('ui.copied');
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          state.textContent = '';
+          btn.classList.remove('is-copied');
+        }, 1900);
+      }
+      function fallback(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-200px;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+      }
+
+      btn.addEventListener('click', function () {
+        var text = btn.getAttribute('data-copy');
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(flash, function () { fallback(text); flash(); });
+        } else {
+          fallback(text);
+          flash();
+        }
+      });
     });
-  }
-  return value;
-}
+  })();
 
-if (copyEmailBtn) {
-  const copyEmailText = copyEmailBtn.querySelector('.copy-email-text');
-  const originalLabel  = copyEmailText ? copyEmailText.textContent.trim() : '';
-  let copyResetTimeout = null;
+  /* ─────────────── 8. MODALS ─────────────── */
+  (function modals() {
+    var open = null;
+    var lastFocus = null;
 
-  async function copyToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-      return;
+    function show(id) {
+      var box = document.getElementById(id);
+      if (!box) return;
+      lastFocus = document.activeElement;
+      box.hidden = false;
+      open = box;
+      document.body.style.overflow = 'hidden';
+      var first = $('[data-modal-close]', box);
+      if (first) first.focus();
     }
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-  }
-
-  copyEmailBtn.addEventListener('click', async () => {
-    const email = copyEmailBtn.dataset.email;
-    if (!email) return;
-    try {
-      await copyToClipboard(email);
-    } catch (_) {
-      return;
+    function hide() {
+      if (!open) return;
+      open.hidden = true;
+      open = null;
+      document.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
     }
 
-    copyEmailBtn.classList.add('is-copied');
-    copyEmailBtn.setAttribute('aria-label', tr('ui.emailCopiedAria', null, 'Email copied to clipboard'));
-    if (copyEmailText) copyEmailText.textContent = tr('ui.copied', null, 'Copied!');
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest && e.target.closest('[data-modal-open]');
+      if (trigger) { show(trigger.getAttribute('data-modal-open')); return; }
+      if (!open) return;
+      if (e.target.closest('[data-modal-close]') || e.target === open) hide();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (!open) return;
+      if (e.key === 'Escape') { hide(); return; }
+      if (e.key !== 'Tab') return;
+      var f = $$('a[href],button:not([disabled]),input,textarea,select,[tabindex]:not([tabindex="-1"])', open)
+        .filter(function (el) { return el.offsetParent !== null; });
+      if (!f.length) return;
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+  })();
 
-    window.clearTimeout(copyResetTimeout);
-    copyResetTimeout = window.setTimeout(() => {
-      copyEmailBtn.classList.remove('is-copied');
-      copyEmailBtn.setAttribute('aria-label', tr('contact.copyAria', null, 'Copy email address'));
-      if (copyEmailText) copyEmailText.textContent = originalLabel;
-    }, 2000);
-  });
-}
+  /* ─────────────── 9. ART GALLERY ─────────────── */
+  (function gallery() {
+    var host = $('#gallery');
+    if (!host) return;
 
-/* ---------------------------------------------------------
-   Skills interactions
---------------------------------------------------------- */
-const artGalleryImages = [
-	{ src: 'assets/young mike3.gif', alt: 'Art preview 1' },
-	{ src: 'assets/screenshot_2.webp', alt: 'Art preview 2' },
-	{ src: 'assets/screenshot_3.webp', alt: 'Art preview 2' },
-	{ src: 'assets/screenshot.webp', alt: 'Art preview 2' },
-	{ src: 'assets/old mike4.png', alt: 'Art preview 3' }
-];
+    /* Every image already in the project. Alt text comes from the
+       supplied ui.artPreviewAlt string; no captions are invented. */
+    var ITEMS = [
+      { src: 'assets/parallox.webp', w: 1920, h: 1080, pos: 'center 42%' },
+      { src: 'assets/off.webp', w: 1920, h: 1080, pos: 'center 45%' },
+      { src: 'assets/cursed.webp', w: 1880, h: 1057, pos: 'center 50%' },
+      { src: 'assets/off_remastered.webp', w: 616, h: 371, pos: 'center 45%' }
+    ];
 
-const skillCards = Array.from(document.querySelectorAll('[data-skill-action]'));
-const artModal = document.querySelector('#skill-art-modal');
-const wipModal = document.querySelector('#wip-modal');
-const aiModal = document.querySelector('#skill-ai-modal');
-const artGalleryTrack = document.querySelector('#art-gallery-track');
+    function draw() {
+      host.innerHTML = ITEMS.map(function (item, i) {
+        return '<figure><img src="' + item.src + '" alt="' +
+          String(t('ui.artPreviewAlt', { n: i + 1 })).replace(/"/g, '&quot;') +
+          '" width="' + item.w + '" height="' + item.h +
+          '" loading="lazy" decoding="async" style="object-position:' + item.pos + '"></figure>';
+      }).join('');
+    }
+    draw();
+    document.addEventListener('lg:lang', draw);
+  })();
 
-const artGallery = document.querySelector('.art-gallery');
+  /* ─────────────── 10. MISC ─────────────── */
+  (function misc() {
+    var year = $('#year');
+    if (year) year.textContent = String(new Date().getFullYear());
 
-function enableArtGalleryMouseDrag() {
-	if (!artGallery) return;
-
-	let isDragging = false;
-	let startX = 0;
-	let startScrollLeft = 0;
-	let moved = false;
-
-	artGallery.addEventListener('pointerdown', (event) => {
-		if (event.pointerType === 'mouse' && event.button !== 0) return;
-		if (event.target.closest('button, a')) return;
-		isDragging = true;
-		moved = false;
-		startX = event.clientX;
-		startScrollLeft = artGallery.scrollLeft;
-		artGallery.classList.add('is-dragging');
-		artGallery.setPointerCapture?.(event.pointerId);
-	});
-
-	artGallery.addEventListener('pointermove', (event) => {
-		if (!isDragging) return;
-		const deltaX = event.clientX - startX;
-		if (Math.abs(deltaX) > 4) moved = true;
-		artGallery.scrollLeft = startScrollLeft - deltaX;
-		event.preventDefault();
-	});
-
-	const stopDragging = (event) => {
-		if (!isDragging) return;
-		isDragging = false;
-		artGallery.classList.remove('is-dragging');
-		try {
-			artGallery.releasePointerCapture?.(event.pointerId);
-		} catch (_) {
-			// Pointer capture may already have been released.
-		}
-	};
-
-	artGallery.addEventListener('pointerup', stopDragging);
-	artGallery.addEventListener('pointercancel', stopDragging);
-	artGallery.addEventListener('lostpointercapture', stopDragging);
-	artGallery.addEventListener('click', (event) => {
-		if (!moved) return;
-		event.preventDefault();
-		event.stopPropagation();
-		moved = false;
-	});
-}
-
-enableArtGalleryMouseDrag();
-
-function renderArtGallery() {
-	if (!artGalleryTrack) return;
-
-	artGalleryTrack.innerHTML = '';
-	artGalleryTrack.style.setProperty('--art-count', Math.max(1, artGalleryImages.length));
-
-	artGalleryImages.forEach((image, index) => {
-		const slide = document.createElement('div');
-		slide.className = 'art-gallery-slide';
-		slide.setAttribute('role', 'group');
-		slide.setAttribute('aria-label', tr('ui.artSlideAria', { i: index + 1, total: artGalleryImages.length }, `Artwork ${index + 1} of ${artGalleryImages.length}`));
-
-		const img = document.createElement('img');
-		img.className = 'art-gallery-image';
-		img.src = image.src;
-		img.alt = tr('ui.artPreviewAlt', { n: index + 1 }, `Art preview ${index + 1}`);
-		img.loading = 'lazy';
-		img.addEventListener('error', () => {
-			slide.innerHTML = '';
-			const fallback = document.createElement('div');
-			fallback.className = 'art-gallery-fallback';
-			fallback.textContent = tr('ui.artAddImage', { src: image.src }, `Add image: ${image.src}`);
-			slide.appendChild(fallback);
-		}, { once: true });
-
-		slide.appendChild(img);
-		artGalleryTrack.appendChild(slide);
-	});
-}
-
-function openSkillModal(modal) {
-	if (!modal) return;
-	modal.hidden = false;
-	modal.setAttribute('aria-hidden', 'false');
-	document.body.classList.add('skill-modal-open');
-	if (modal === artModal) renderArtGallery();
-	const closeButton = modal.querySelector('.skill-modal-close');
-	if (closeButton) closeButton.focus();
-}
-
-function closeSkillModal(modal) {
-	if (!modal) return;
-	modal.hidden = true;
-	modal.setAttribute('aria-hidden', 'true');
-	if (!document.querySelector('.skill-modal:not([hidden])')) {
-		document.body.classList.remove('skill-modal-open');
-	}
-}
-
-function handleSkillAction(card) {
-	const action = card.dataset.skillAction;
-
-	if (action === 'projects') {
-		scrollToSectionId('work');
-		return;
-	}
-
-	if (action === 'art') {
-		openSkillModal(artModal);
-		return;
-	}
-
-	if (action === 'audio') {
-		window.location.href = 'https://soundcloud.com/laymon-games';
-		return;
-	}
-
-	if (action === 'video') {
-		window.location.href = 'https://www.youtube.com/@AymensCorner';
-		return;
-	}
-
-	if (action === 'ai') {
-		openSkillModal(aiModal);
-	}
-}
-
-skillCards.forEach((card) => {
-	card.addEventListener('click', () => handleSkillAction(card));
-	card.addEventListener('keydown', (event) => {
-		if (event.key === 'Enter' || event.key === ' ') {
-			event.preventDefault();
-			handleSkillAction(card);
-		}
-	});
-});
-
-document.querySelectorAll('[data-modal-close]').forEach((closeTrigger) => {
-	closeTrigger.addEventListener('click', () => {
-		closeSkillModal(closeTrigger.closest('.skill-modal'));
-	});
-});
-
-/* ---------------------------------------------------------
-   Project card links
---------------------------------------------------------- */
-const projectCards = Array.from(document.querySelectorAll('[data-itch-url]'));
-
-projectCards.forEach((card) => {
-	const url = card.dataset.itchUrl;
-	if (!url) return;
-
-	card.addEventListener('click', (event) => {
-		if (event.target.closest('a')) return;
-		window.location.href = url;
-	});
-
-	card.addEventListener('keydown', (event) => {
-		if (event.key !== 'Enter' && event.key !== ' ') return;
-		if (event.target !== card) return;
-		event.preventDefault();
-		window.location.href = url;
-	});
-});
-
-// WIP project cards — show "under development" popup instead of navigating
-const wipCards = Array.from(document.querySelectorAll('[data-wip]'));
-
-wipCards.forEach((card) => {
-	card.addEventListener('click', (event) => {
-		if (event.target.closest('a')) return;
-		openSkillModal(wipModal);
-	});
-
-	card.addEventListener('keydown', (event) => {
-		if (event.key !== 'Enter' && event.key !== ' ') return;
-		if (event.target !== card) return;
-		event.preventDefault();
-		openSkillModal(wipModal);
-	});
-});
-
-document.addEventListener('keydown', (event) => {
-	if (event.key !== 'Escape') return;
-	document.querySelectorAll('.skill-modal:not([hidden])').forEach((modal) => closeSkillModal(modal));
-});
-
-/* ---------------------------------------------------------
-   Localization hooks — re-render language-dependent content
---------------------------------------------------------- */
-window.addEventListener('laymon:languagechange', () => {
-	if (artModal && !artModal.hidden) {
-		renderArtGallery();
-	}
-});
+    /* the language button label is language-specific, not i18n copy */
+    document.addEventListener('lg:lang', function () {
+      var copy = $('[data-copy] [data-copy-state]');
+      if (copy) copy.textContent = '';
+    });
+  })();
+})();

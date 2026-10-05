@@ -1,511 +1,416 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" id="meta-description" content="Laymon Games — solo indie developer portfolio. Godot game development, pixel art, low-poly 3D, music, and video, featuring the 2D pixel RPG Parallox." />
-	<meta name="theme-color" content="#090806" />
-	<link rel="icon" href="assets/lemon-avatar.png" type="image/png" />
-	<meta property="og:title" id="og-title" content="Laymon Games — Solo Indie Developer" />
-	<meta property="og:description" id="og-description" content="Games, pixel art, low-poly 3D, music, and video — made from idea to finished result by one developer." />
-	<meta property="og:type" content="website" />
-	<meta property="og:locale" id="og-locale" content="en_US" />
-	<meta property="og:locale:alternate" content="ar_AR" />
-	<title id="page-title">Laymon Games — Solo Indie Developer Portfolio</title>
-	<link rel="stylesheet" href="style.css" />
-	<style>
-		/* Portfolio footer balance — scoped to the main portfolio page. */
-		.portfolio-footer {
-			padding: 28px clamp(20px, 4vw, 48px) 22px;
-		}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-		.portfolio-footer-inner {
-			width: min(1180px, 100%);
-			margin: 0 auto;
-			display: grid;
-			grid-template-columns: auto minmax(0, 1fr);
-			align-items: center;
-			gap: clamp(28px, 6vw, 84px);
-		}
+<!-- ── identity ─────────────────────────────────────────────────────── -->
+<title id="page-title">Laymon Games — Solo Indie Developer Portfolio</title>
+<meta name="description" id="meta-description" content="Laymon Games — solo indie developer portfolio. Godot game development, pixel art, low-poly 3D, music, and video, featuring the 2D pixel RPG Parallox.">
+<meta name="theme-color" content="#090806">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="assets/lemon-avatar.png" type="image/png" sizes="32x32">
 
-		.portfolio-footer-brand {
-			margin: 0;
-			white-space: nowrap;
-		}
+<!-- ── social ───────────────────────────────────────────────────────── -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Laymon Games">
+<meta property="og:title" id="og-title" content="Laymon Games — Solo Indie Developer">
+<meta property="og:description" id="og-description" content="Games, pixel art, low-poly 3D, music, and video — made from idea to finished result by one developer.">
+<meta property="og:locale" id="og-locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_AR">
 
-		.portfolio-footer-details {
-			min-width: 0;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			gap: 28px;
-		}
+<!-- ── type ─────────────────────────────────────────────────────────── -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cairo:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-		.portfolio-footer .footer-statement {
-			margin: 0;
-			color: var(--muted);
-			font-size: 12px;
-			line-height: 1.5;
-			letter-spacing: 0.01em;
-			display: flex;
-			align-items: center;
-			flex-wrap: wrap;
-			gap: 8px;
-		}
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="polish.css">
 
-		.portfolio-footer .footer-statement strong {
-			color: var(--text);
-			font-weight: 600;
-		}
-
-		.footer-credit-separator {
-			color: rgba(216, 164, 60, 0.55);
-		}
-
-		.portfolio-footer-meta {
-			flex: 0 0 auto;
-			display: inline-flex;
-			align-items: center;
-			gap: 14px;
-			white-space: nowrap;
-		}
-
-		.portfolio-footer .footer-link {
-			font-size: 12px;
-			font-weight: 600;
-			letter-spacing: 0.02em;
-			color: var(--text);
-			text-decoration: none;
-			border-bottom: 1px solid rgba(216, 164, 60, 0.28);
-			padding-bottom: 2px;
-			transition: color 0.18s ease, border-color 0.18s ease;
-		}
-
-		.portfolio-footer .footer-link:hover {
-			color: var(--gold-bright);
-			border-color: var(--gold-bright);
-		}
-
-		.footer-meta-divider {
-			width: 1px;
-			height: 14px;
-			background: rgba(216, 164, 60, 0.18);
-		}
-
-		.portfolio-footer .footer-copy {
-			margin: 0;
-			color: var(--muted);
-			font-size: 11px;
-			white-space: nowrap;
-		}
-
-		@media (max-width: 820px) {
-			.portfolio-footer-inner {
-				grid-template-columns: 1fr;
-				gap: 18px;
-				text-align: center;
-			}
-
-			.portfolio-footer-brand {
-				justify-content: center;
-			}
-
-			.portfolio-footer-details {
-				justify-content: center;
-				flex-direction: column;
-				gap: 12px;
-			}
-
-			.portfolio-footer .footer-statement {
-				justify-content: center;
-			}
-		}
-
-		@media (max-width: 480px) {
-			.portfolio-footer {
-				padding-top: 24px;
-			}
-
-			.portfolio-footer .footer-statement {
-				max-width: 30ch;
-				justify-content: center;
-			}
-		}
-	</style>
-
+<script>document.documentElement.classList.add('js');</script>
+<script src="i18n.js"></script>
 </head>
+
 <body>
-	<div class="page-noise" aria-hidden="true"></div>
 
-	<a class="skip-link" href="#about" data-i18n="skip.text">Skip to content</a>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
-	<header class="site-header" aria-label="Primary navigation" data-i18n-attr="aria-label:nav.ariaPrimary">
-		<a class="brand" href="#top" aria-label="Laymon Games home" data-i18n-attr="aria-label:brand.homeAria">
-			<span class="brand-mark"><img src="assets/lemon-avatar.png" alt="" /></span>
-			<span>
-				<strong>LAYMON GAMES</strong>
-				<small data-i18n="brand.tagline">SOLO INDIE DEVELOPER</small>
-			</span>
-		</a>
-		<nav class="nav" aria-label="Main navigation" data-i18n-attr="aria-label:nav.ariaMain">
-			<a href="#top" data-i18n="nav.home">Home</a>
-			<a href="#about" data-i18n="nav.about">About</a>
-			<a href="#skills" data-i18n="nav.skills">Skills</a>
-			<a href="#work" data-i18n="nav.projects">Projects</a>
-			<a href="#process" data-i18n="nav.process">Process</a>
-			<a href="#contact" data-i18n="nav.contact">Contact</a>
-		</nav>
-		<div class="header-controls">
-			<button class="lang-switch" type="button" data-lang-switch aria-label="Switch language">
-				<svg class="lang-switch-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-					<circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
-					<path d="M3 12h18M12 3c2.6 2.6 3.9 5.7 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.7-3.9-9s1.3-6.4 3.9-9z" stroke="currentColor" stroke-width="1.5"/>
-				</svg>
-				<span class="lang-switch-label" data-lang-switch-label dir="auto">العربية</span>
-			</button>
-			<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation" data-i18n-attr="aria-label:nav.toggleAria">
-				<span class="nav-toggle-bar"></span>
-				<span class="nav-toggle-bar"></span>
-				<span class="nav-toggle-bar"></span>
-			</button>
-		</div>
-	</header>
-	<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" hidden data-i18n-attr="aria-label:nav.ariaMobile">
-		<a href="#top" data-i18n="nav.home">Home</a>
-		<a href="#about" data-i18n="nav.about">About</a>
-		<a href="#skills" data-i18n="nav.skills">Skills</a>
-		<a href="#work" data-i18n="nav.work">Work</a>
-		<a href="#process" data-i18n="nav.process">Process</a>
-		<a href="#contact" data-i18n="nav.contact">Contact</a>
-	</nav>
+<!-- film grain + vignette only; both are static, no scanline wash -->
+<div class="fx" aria-hidden="true">
+  <div class="fx__grain"></div>
+  <div class="fx__vig"></div>
+</div>
+<div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
 
-	<main id="top">
-		<section class="legacy-hero" aria-label="Laymon Games header artwork" data-i18n-attr="aria-label:hero.ariaLabel">
-			<img class="legacy-hero-image" src="assets/pg01.webp" alt="" aria-hidden="true" width="1727" height="911" />
-			<div class="legacy-sky-lift" aria-hidden="true"></div>
-			<div class="legacy-detail-lift legacy-lamp-lift lamp-left" aria-hidden="true"></div>
-			<div class="legacy-detail-lift legacy-lamp-lift lamp-upper-left" aria-hidden="true"></div>
-			<div class="legacy-detail-lift legacy-lamp-lift lamp-upper-right" aria-hidden="true"></div>
-			<div class="legacy-detail-lift legacy-lamp-lift lamp-right-tube" aria-hidden="true"></div>
-			<div class="legacy-detail-lift legacy-lamp-lift lamp-bottom-left" aria-hidden="true"></div>
-			<div class="legacy-detail-lift legacy-lamp-lift lamp-bottom-center" aria-hidden="true"></div>
-			<div class="legacy-detail-lift legacy-glass-lift" aria-hidden="true"></div>
-			<div class="legacy-hero-vignette" aria-hidden="true"></div>
+<!-- ══════════════════════════════════ NAV ══════════════════════════ -->
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="nav__brand" href="#home" data-i18n-attr="aria-label:brand.homeAria">
+      <span class="nav__mark" aria-hidden="true"><img src="assets/lemon-avatar.png" alt="" width="34" height="34" decoding="async"></span>
+      <span class="nav__word" dir="ltr"><b>LAYMON GAMES</b></span>
+    </a>
 
-			<div class="legacy-lemon-layer" aria-hidden="true">
-				<img class="floating-lemon" src="assets/lemon.png" alt="" />
-				<img class="lemon-head" src="frames/frame_001.png" alt="" />
-			</div>
+    <nav class="nav__links" data-i18n-attr="aria-label:nav.ariaPrimary" id="navLinks">
+      <a href="#about"><span data-i18n="nav.about">About</span></a>
+      <a href="#skills"><span data-i18n="nav.skills">Skills</span></a>
+      <a href="#projects"><span data-i18n="nav.projects">Projects</span></a>
+      <a href="#process"><span data-i18n="nav.process">Process</span></a>
+      <a class="nav__links-cta" href="#contact"><span data-i18n="nav.contact">Contact</span></a>
+    </nav>
 
-			<div class="legacy-clock-overlay" aria-hidden="true">
-				<span class="clock-hand hour-hand"><img src="assets/hous.png" alt="" /></span>
-				<span class="clock-hand minute-hand"><img src="assets/mins.png" alt="" /></span>
-				<span class="clock-hand second-hand"><img src="assets/secs.png" alt="" /></span>
-				<span class="clock-hub"></span>
-			</div>
-		</section>
+    <div class="nav__tools">
+      <a class="btn btn--gold nav__cta" href="#contact"><span data-i18n="nav.contact">Contact</span></a>
+      <button class="lang" type="button" data-lang-switch data-i18n-attr="aria-label:lang.switchAria">
+        <svg class="lang__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M3 12h18M12 3c2.6 2.6 3.9 5.7 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.7-3.9-9s1.3-6.4 3.9-9z" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+        <span class="lang__label" data-lang-switch-label dir="auto">العربية</span>
+      </button>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="navLinks" data-i18n-attr="aria-label:nav.toggleAria">
+        <i></i><i></i><i></i>
+      </button>
+    </div>
+  </div>
+</header>
 
-		<section id="about" class="panel-section about-section">
-			<img class="panel-frame" src="assets/pg02.webp" alt="" aria-hidden="true" loading="lazy" width="1400" height="683" />
-			<div class="section-content">
-				<div class="about-identity">
-					<div class="creator-photo-frame">
-						<img src="assets/aymen-me.webp" alt="Aymen Meghezzi, creator behind Laymon Games" class="creator-photo" loading="lazy" data-i18n-attr="alt:about.ownerAlt" />
-					</div>
-					<div class="about-identity-copy">
-						<p class="eyebrow" data-i18n="about.eyebrow">About</p>
-						<p class="mini-label" data-i18n="about.personLabel">The person behind the studio</p>
-						<h2>Aymen Meghezzi</h2>
-						<p class="identity-role" data-i18n-html="about.role"><strong>Laymon Games</strong>, a creator &amp; solo developer.</p>
-						<p class="identity-note" data-i18n="about.note">Games, code, art, audio, video - all in one.</p>
-					</div>
-					<div class="about-summary">
-						<h3 data-i18n="about.summaryTitle">All done by one person.</h3>
-						<p data-i18n-html="about.bio1">I'm the person behind <strong>Laymon Games</strong>, a solo indie developer focused on making games, creative digital projects, and editing videos. I work across programming, 2D and 3D art, sound, music, editing, and presentation so the whole project can keep one consistent direction.</p>
-						<p data-i18n="about.bio2">I like building games, from brainstorming ideas to finishing the project, and using new tools when they genuinely improve the workflow.</p>
-						<p class="signature" data-i18n="about.signature">Code · Art · Audio · Video</p>
-					</div>
-				</div>
-			</div>
-		</section>
+<main id="main">
 
-		<section id="skills" class="panel-section skills-section">
-			<img class="panel-frame" src="assets/pg02.webp" alt="" aria-hidden="true" loading="lazy" width="1400" height="683" />
-			<div class="section-content">
-				<p class="eyebrow" data-i18n="skills.eyebrow">Skills</p>
-				<h2 data-i18n-html="skills.heading">What I<br /><em>can do:</em></h2>
+<!-- ══════════════════════════════════ HERO ══════════════════════════ -->
+<section class="hero" id="home">
+  <canvas class="hero__field" id="field" aria-hidden="true"></canvas>
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="hero__halo" aria-hidden="true"></div>
 
-				<div class="skill-grid">
-					<article class="skill-card skill-card-wide" data-skill-action="projects" tabindex="0" role="button" aria-label="Go to projects" data-i18n-attr="aria-label:skills.game.aria">
-						<span class="skill-number"> </span>
-						<h3 data-i18n="skills.game.title">Game Development</h3>
-						<p data-i18n="skills.game.desc">Godot and GDScript for creating 2D and 3D game projects, implementing gameplay systems, and putting everything together.</p>
-						<div class="tags"><span>Godot</span><span>GDScript</span><span>2D</span><span>3D</span></div>
-					</article>
+  <div class="wrap hero__in">
+    <!-- 3D mascot: above the wordmark, the single focus of the viewport -->
+    <div class="mascot" id="mascot" role="img" data-i18n-attr="aria-label:hero.ariaLabel">
+      <div class="mascot__ring" aria-hidden="true"></div>
+      <canvas class="mascot__canvas" id="mascotCanvas"></canvas>
+      <img class="mascot__fallback" src="assets/lemon.png" alt="" width="128" height="128" decoding="async">
+    </div>
 
-					<article class="skill-card" data-skill-action="art" tabindex="0" role="button" aria-label="Open art preview" data-i18n-attr="aria-label:skills.art.aria">
-						<span class="skill-number"> </span>
-						<h3 data-i18n="skills.art.title">Art</h3>
-						<p data-i18n="skills.art.desc">Pixel-art sprites and environments for 2D, and stylized low-poly 3D modelling for 3D.</p>
-						<div class="tags" data-i18n-html="skills.tags.art"><span>Aseprite</span><span>Pixel Art</span><span>Blender</span><span>Low-Poly 3D</span></div>
-					</article>
+    <p class="hero__kicker" data-i18n="brand.tagline">SOLO INDIE DEVELOPER</p>
+    <h1 class="hero__title" dir="ltr">LAYMON GAMES</h1>
+    <p class="hero__lede" data-i18n="hero.lede">Games, code, art, audio, video - all in one.</p>
 
-					<article class="skill-card" data-skill-action="audio" tabindex="0" role="link" aria-label="Open audio link" data-i18n-attr="aria-label:skills.audio.aria">
-						<span class="skill-number"> </span>
-						<h3 data-i18n="skills.audio.title">Audio</h3>
-						<p data-i18n="skills.audio.desc">Original soundtracks and sound design made to set the mood of a scene, or a moment of gameplay.</p>
-						<div class="tags" data-i18n-html="skills.tags.audio"><span>FL Studio</span><span>Music</span><span>Sound Design</span><span>SFX</span></div>
-					</article>
+    <div class="hero__btns">
+      <a class="btn btn--gold" href="#projects"><span data-i18n="nav.projects">Projects</span></a>
+      <a class="btn btn--quiet" href="#about"><span data-i18n="nav.about">About</span></a>
+    </div>
+  </div>
 
-					<article class="skill-card" data-skill-action="video" tabindex="0" role="link" aria-label="Open YouTube video link" data-i18n-attr="aria-label:skills.video.aria">
-						<span class="skill-number"> </span>
-						<h3 data-i18n="skills.video.title">Video</h3>
-						<p data-i18n="skills.video.desc">Editing for creative videos that present a project the way it deserves.</p>
-						<div class="tags" data-i18n-html="skills.tags.video"><span>Davinci Resolve</span><span>Video Editing</span></div>
-					</article>
+  <!-- decorative scroll cue: outside the tab order and the a11y tree -->
+  <span class="hero__cue" aria-hidden="true"><i></i></span>
+</section>
 
-					<article class="skill-card accent-card" data-skill-action="ai" tabindex="0" role="button" aria-label="Show AI assisted notice" data-i18n-attr="aria-label:skills.other.aria">
-						<span class="skill-number"> </span>
-						<h3 data-i18n="skills.other.title">Other/AI-Assisted</h3>
-						<p data-i18n="skills.other.desc">Websites, apps, including this site, built with the help of AI-assisted workflows. A tool for extra capability, not the foundation of my game development, art, or audio work.</p>
-						<div class="tags" data-i18n-html="skills.tags.other"><span>AI</span><span>Websites</span><span>Apps</span></div>
-					</article>
-				</div>
-			</div>
-		</section>
+<!-- ══════════════════════════════════ ABOUT ═════════════════════════ -->
+<section class="sec sec--about" id="about" aria-labelledby="aboutTitle">
+  <div class="wrap about">
+    <div class="about__prose" data-reveal="up">
+      <p class="shead__eyebrow"><span class="shead__num">// 01</span><span data-i18n="about.eyebrow">About</span></p>
+      <h2 class="shead__title" id="aboutTitle" data-i18n="about.summaryTitle">All done by one person.</h2>
+      <p class="about__role" data-i18n-html="about.role"><strong>Laymon Games</strong>, a creator &amp; solo developer.</p>
+      <p class="lede" data-i18n-html="about.bio1"></p>
+      <p data-i18n="about.bio2"></p>
+      <p class="about__sig" data-i18n="about.signature">Code · Art · Audio · Video</p>
+    </div>
 
-		<section id="work" class="panel-section work-section">
-			<img class="panel-frame" src="assets/pg02.webp" alt="" aria-hidden="true" loading="lazy" width="1400" height="683" />
-			<div class="section-content">
-				<div class="section-heading-row">
-					<div>
-						<p class="eyebrow" data-i18n="work.eyebrow">Projects</p>
-						<h2 data-i18n="work.heading">Projects I made.</h2>
-					</div>
-					<p class="section-intro" data-i18n-html="work.intro">Here you can check projects made by Laymon Games.</p>
-				</div>
+    <figure class="about__figure" data-reveal="scale">
+      <span class="about__frame" aria-hidden="true"></span>
+      <img src="assets/aymen-me.webp" width="640" height="800" loading="lazy" decoding="async"
+           alt="Aymen Meghezzi, creator behind Laymon Games" data-i18n-attr="alt:about.ownerAlt">
+      <figcaption>
+        <span data-i18n="about.personLabel">The person behind the studio</span>
+        <b dir="ltr">Aymen Meghezzi</b>
+      </figcaption>
+    </figure>
+  </div>
+</section>
 
-				<div class="featured-work">
-					<div class="work-card work-main" data-itch-url="https://laymongames.github.io/parallox" tabindex="0" role="link" aria-label="Open Parallox on itch.io" data-i18n-attr="aria-label:work.main.aria">
-						<div class="work-visual work-visual-game">
+<!-- ══════════════════════════════════ SKILLS ════════════════════════ -->
+<section class="sec sec--skills" id="skills" aria-labelledby="skillsTitle">
+  <div class="wrap">
+    <div class="shead" data-reveal="up">
+      <p class="shead__eyebrow"><span class="shead__num">// 02</span><span data-i18n="skills.eyebrow">Skills</span></p>
+      <h2 class="shead__title shead__title--split" id="skillsTitle" data-i18n-html="skills.heading">What I<br><em>can do:</em></h2>
+    </div>
 
-							<img src="assets/parallox.webp" alt="Something's Off Remastered" class="mini-project-img" onerror="this.closest('.mini-project-thumb').classList.add('mini-project-thumb--missing')" />
-							<span class="visual-label" data-i18n="work.main.badge">In development</span>
-						</div>
-						<div class="work-copy">
-							<p class="mini-label" data-i18n="work.main.label">Main Project · 2D Pixel RPG</p>
-							<h3>Parallox</h3>
-							<p data-i18n="work.main.desc">A 2D indie pixel RPG under solo development in Godot, the game where the hero is also the villain.</p>
-							<dl class="work-meta">
-								<div><dt data-i18n="work.meta.engine">Engine</dt><dd>Godot</dd></div>
-								<div><dt data-i18n="work.meta.type">Type</dt><dd data-i18n="work.meta.typeValue">2D pixel RPG</dd></div>
-								<div><dt data-i18n="work.meta.status">Status</dt><dd data-i18n="work.meta.statusValue">In development</dd></div>
-							</dl>
-							<a href="#contact" class="text-link"><span data-i18n="work.talk">Talk about the project</span> <span aria-hidden="true">→</span></a>
-						</div>
-					</div>
+    <div class="skills">
+      <!-- lead card: the terminal is the focal point of this section -->
+      <article class="skill skill--lead" data-reveal="up">
+        <div class="skill__top">
+          <h3 class="skill__t" data-i18n="skills.game.title">Game Development</h3>
+          <a class="skill__go" href="#projects" data-i18n-attr="aria-label:skills.game.aria">
+            <span data-i18n="nav.projects">Projects</span>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+          </a>
+        </div>
+        <p class="skill__d" data-i18n="skills.game.desc"></p>
 
-					<div class="work-side">
-						<article class="work-card small-work">
-							<div class="small-work-icon" aria-hidden="true">✦</div>
-							<div>
-								<p class="mini-label" data-i18n="work.side1.label">Game Art</p>
-								<h3 data-i18n="work.side1.title">Art &amp; Assets</h3>
-								<p data-i18n="work.side1.desc">Stylized pixel art, characters, props, environments, all created for the project.</p>
-							</div>
-						</article>
-						<article class="work-card small-work">
-							<div class="small-work-icon" aria-hidden="true">♪</div>
-							<div>
-								<p class="mini-label" data-i18n="work.side2.label">Original Soundtracks</p>
-								<h3 data-i18n="work.side2.title">Music &amp; SFX</h3>
-								<p data-i18n="work.side2.desc">Original music and sound design produced for the game.</p>
-							</div>
-						</article>
-						<article class="work-card small-work">
-							<div class="small-work-icon" aria-hidden="true">◉</div>
-							<div>
-								<p class="mini-label" data-i18n="work.side3.label">GDScript</p>
-								<h3 data-i18n="work.side3.title">Code &amp; Programming</h3>
-								<p data-i18n="work.side3.desc">Coding in Godot's supported language, GDScript, creating gameplay mechanics and in-game scenes.</p>
-							</div>
-						</article>
-					</div>
-				</div>
+        <div class="term" dir="ltr">
+          <div class="term__bar" aria-hidden="true">
+            <span class="term__dot"></span><span class="term__dot"></span><span class="term__dot"></span>
+            <b>parallox.gd</b>
+          </div>
+          <pre class="term__out" id="termOut"></pre>
+        </div>
+      </article>
 
-				<!-- Mini projects grid: additional smaller project entries.
-				     Each ".mini-project-card" below is an identical template —
-				     duplicate the block to add more projects. Only the text,
-				     the small-work-icon glyph, and (optionally) the href need
-				     to change per project. -->
-				<div class="mini-projects-grid">
-					<article class="work-card mini-project-card" data-itch-url="https://laymon-games.itch.io/somethings-off" tabindex="0" role="link" aria-label="Open Something's Off on itch.io" data-i18n-attr="aria-label:work.m1.aria">
-						<!-- Replace src with your project screenshot. Recommended size: 800×450px (16:9) -->
-						<div class="mini-project-thumb">
-							<img src="assets/off.webp" alt="Something's Off" class="mini-project-img" onerror="this.closest('.mini-project-thumb').classList.add('mini-project-thumb--missing')" />
-							<span class="mini-project-thumb-label">assets/off.png</span>
-						</div>
-						<div class="mini-project-body">
-							<div class="small-work-icon" aria-hidden="true">◉</div>
-							<p class="mini-label" data-i18n="work.m1.label">2D Pixel Game</p>
-							<h3>Something's Off</h3>
-							<p data-i18n="work.m1.desc">A game made in 1 month, where everything keeps getting weirder until you wake up to the harsh truth.</p>
-							<a href="#contact" class="text-link"><span data-i18n="work.talk">Talk about the project</span> <span aria-hidden="true">→</span></a>
-						</div>
-					</article>
+      <article class="skill" data-reveal="up">
+        <h3 class="skill__t" data-i18n="skills.art.title">Art</h3>
+        <p class="skill__d" data-i18n="skills.art.desc"></p>
+        <p class="tags" data-i18n-html="skills.tags.art"></p>
+        <button class="skill__go skill__go--btn" type="button" data-modal-open="mArt" data-i18n-attr="aria-label:skills.art.aria">
+          <span data-i18n="modal.art.title">Art</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </button>
+      </article>
 
-					<article class="work-card mini-project-card" data-itch-url="https://laymon-games.itch.io/cursed-arcade" tabindex="0" role="link" aria-label="Open Cursed Arcade on Laymon Games itch.io" data-i18n-attr="aria-label:work.m2.aria">
-						<!-- Replace src with your project screenshot. Recommended size: 800×450px (16:9) -->
-						<div class="mini-project-thumb">
-							<img src="assets/cursed.webp" alt="Cursed Arcade" class="mini-project-img" onerror="this.closest('.mini-project-thumb').classList.add('mini-project-thumb--missing')" />
-							<span class="mini-project-thumb-label" data-i18n-html="work.m2.thumbLabel">Add image → assets/cursed.png</span>
-						</div>
-						<div class="mini-project-body">
-							<div class="small-work-icon" aria-hidden="true">◉</div>
-							<p class="mini-label" data-i18n="work.m2.label">2D/3D Horror Game</p>
-							<h3>Cursed Arcade</h3>
-							<p data-i18n="work.m2.desc">A horror game made in 4 days, with a unique style and challenging gameplay.</p>
-							<a href="#contact" class="text-link"><span data-i18n="work.talk">Talk about the project</span> <span aria-hidden="true">→</span></a>
-						</div>
-					</article>
+      <article class="skill" data-reveal="up">
+        <h3 class="skill__t" data-i18n="skills.audio.title">Audio</h3>
+        <p class="skill__d" data-i18n="skills.audio.desc"></p>
+        <p class="tags" data-i18n-html="skills.tags.audio"></p>
+        <a class="skill__go" href="https://soundcloud.com/laymon-games" target="_blank" rel="noopener" data-i18n-attr="aria-label:skills.audio.aria">
+          <span>SoundCloud</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </a>
+      </article>
 
-					<article class="work-card mini-project-card" data-wip="true" tabindex="0" role="button" aria-label="Something's Off Remastered – currently in development" data-i18n-attr="aria-label:work.m3.aria">
-						<!-- Replace src with your project screenshot. Recommended size: 800×450px (16:9) -->
-						<div class="mini-project-thumb">
-							<img src="assets/off_remastered.webp" alt="Something's Off Remastered" class="mini-project-img" onerror="this.closest('.mini-project-thumb').classList.add('mini-project-thumb--missing')" />
-							<span class="mini-project-thumb-label" data-i18n-html="work.m3.thumbLabel">Add image → assets/off.png</span>
-						</div>
-						<div class="mini-project-body">
-							<div class="small-work-icon" aria-hidden="true">◉</div>
-							<p class="mini-label" data-i18n="work.m3.label">2D/3D Horror Game</p>
-							<h3>Something's Off Remastered</h3>
-							<p data-i18n-html="work.m3.desc">A 2D game with some aspects of 3D, the remastered version of the previous game "Something's Off".</p>
-							<a href="#contact" class="text-link"><span data-i18n="work.talk">Talk about the project</span> <span aria-hidden="true">→</span></a>
-						</div>
-					</article>
-				</div>
-			</div>
-		</section>
+      <article class="skill" data-reveal="up">
+        <h3 class="skill__t" data-i18n="skills.video.title">Video</h3>
+        <p class="skill__d" data-i18n="skills.video.desc"></p>
+        <p class="tags" data-i18n-html="skills.tags.video"></p>
+        <a class="skill__go" href="https://www.youtube.com/@AymensCorner" target="_blank" rel="noopener" data-i18n-attr="aria-label:skills.video.aria">
+          <span>YouTube</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </a>
+      </article>
 
-		<section id="process" class="process-section" aria-labelledby="process-title">
-			<div class="process-inner">
-				<p class="eyebrow" data-i18n="process.eyebrow">Process</p>
-				<h2 id="process-title" data-i18n="process.heading">Idea. Prototype. Create. Polish.</h2>
-				<ol class="process-line">
-					<li class="process-step"><span>01</span><strong data-i18n="process.s1.title">Idea</strong><p data-i18n="process.s1.desc">brainstorming an interesting idea, then upgrading it.</p></li>
-					<li class="process-step"><span>02</span><strong data-i18n="process.s2.title">Prototype</strong><p data-i18n="process.s2.desc">Building the smallest playable or visible version before polishing it.</p></li>
-					<li class="process-step"><span>03</span><strong data-i18n="process.s3.title">Create</strong><p data-i18n="process.s3.desc">Developing gameplay, art, audio, game feel, and the systems around them.</p></li>
-					<li class="process-step"><span>04</span><strong data-i18n="process.s4.title">Polish</strong><p data-i18n="process.s4.desc">Test, refine, and improve for the presentation.</p></li>
-				</ol>
-				<p class="process-note" data-i18n="process.note">One person, moving across the whole pipeline.</p>
-			</div>
-		</section>
+      <article class="skill" data-reveal="up">
+        <h3 class="skill__t" data-i18n="skills.other.title">Other/AI-Assisted</h3>
+        <p class="skill__d" data-i18n="skills.other.desc"></p>
+        <p class="tags" data-i18n-html="skills.tags.other"></p>
+        <button class="skill__go skill__go--btn" type="button" data-modal-open="mAi" data-i18n-attr="aria-label:skills.other.aria">
+          <span data-i18n="modal.ai.eyebrow">AI Assisted</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </button>
+      </article>
+    </div>
+  </div>
+</section>
 
-		<section id="contact" class="contact-section" aria-labelledby="contact-title">
-			<div class="contact-frame">
-				<div class="contact-intro">
-					<p class="eyebrow" data-i18n="contact.eyebrow">Contact</p>
-					<h2 id="contact-title" data-i18n="contact.heading">Wanna get in touch?</h2>
-					<p data-i18n-html="contact.intro">For collaborations, game projects, creative digital work, or you just want to say hi, get in touch with Laymon Games.</p>
-				</div>
-				<div class="contact-channels">
-					<button type="button" class="contact-channel contact-channel-copy" data-email="gamesbylaymon@gmail.com" aria-label="Copy email address" data-i18n-attr="aria-label:contact.copyAria">
-						<span class="mini-label" data-i18n="contact.emailLabel">Email</span>
-						<span class="copy-email-row">
-							<span class="copy-email-text">gamesbylaymon@gmail.com</span>
-							<span class="copy-email-icon" aria-hidden="true">
-								<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<rect x="7" y="7" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
-									<path d="M4.5 13.2V4.5A1.5 1.5 0 0 1 6 3h8.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-								</svg>
-							</span>
-						</span>
-					</button>
-					<div class="contact-channel">
-						<span class="mini-label" data-i18n="contact.elsewhereLabel">Elsewhere</span>
-						<div class="social-links">
-							<a href="https://discord.com/users/laymon_games" target="_blank" rel="noopener noreferrer" class="social-link">
-								<span class="social-icon" aria-hidden="true">
-									<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-										<path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.055a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-									</svg>
-								</span>
-								<span class="social-name">Discord</span>
-								<span class="social-handle">laymon_games</span>
-							</a>
-							<a href="https://linkedin.com/in/aymen-meghezzi" target="_blank" rel="noopener noreferrer" class="social-link">
-								<span class="social-icon" aria-hidden="true">
-									<svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-										<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-									</svg>
-								</span>
-								<span class="social-name">LinkedIn</span>
-								<span class="social-handle">aymen-meghezzi</span>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<div class="skill-modal" id="wip-modal" hidden aria-hidden="true">
-			<div class="skill-modal-backdrop" data-modal-close></div>
-			<div class="skill-modal-dialog skill-modal-dialog-small" role="dialog" aria-modal="true" aria-labelledby="wip-modal-title">
-				<button class="skill-modal-close" type="button" aria-label="Close notice" data-modal-close data-i18n-attr="aria-label:modal.wip.closeAria">×</button>
-				<p class="eyebrow" data-i18n="modal.wip.eyebrow">Work in Progress</p>
-				<h2 id="wip-modal-title" data-i18n="modal.wip.title">Under Development</h2>
-				<p data-i18n="modal.wip.body">This project is still under development. Stay tuned!</p>
-			</div>
-		</div>
+<!-- ══════════════════════════════════ PROJECTS ═════════════════════ -->
+<section class="sec sec--work" id="projects" aria-labelledby="workTitle">
+  <div class="wrap">
+    <div class="shead" data-reveal="up">
+      <p class="shead__eyebrow"><span class="shead__num">// 03</span><span data-i18n="work.eyebrow">Projects</span></p>
+      <h2 class="shead__title" id="workTitle" data-i18n="work.heading">Projects I made.</h2>
+      <p class="shead__lede" data-i18n="work.intro"></p>
+    </div>
 
-		<div class="skill-modal" id="skill-art-modal" hidden aria-hidden="true">
-			<div class="skill-modal-backdrop" data-modal-close></div>
-			<div class="skill-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="skill-art-modal-title">
-				<button class="skill-modal-close" type="button" aria-label="Close art preview" data-modal-close data-i18n-attr="aria-label:modal.art.closeAria">×</button>
-				<p class="eyebrow" data-i18n="modal.art.eyebrow">Art</p>
-				<h2 id="skill-art-modal-title" data-i18n="modal.art.title">Art</h2>
-				<div class="art-gallery" aria-label="Art preview gallery" data-i18n-attr="aria-label:modal.art.galleryAria">
-					<div class="art-gallery-track" id="art-gallery-track"></div>
-				</div>
-				<p data-i18n="modal.art.body">If you want to see more art check out my games!</p>
-			</div>
-		</div>
+    <!-- the one hero project -->
+    <article class="feature" data-reveal="up">
+      <div class="feature__art">
+        <img src="assets/parallox.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+        <span class="feature__badge" data-i18n="work.main.badge">In development</span>
+      </div>
+      <div class="feature__body">
+        <p class="feature__label" data-i18n="work.main.label">Main Project · 2D Pixel RPG</p>
+        <h3 class="feature__name" dir="ltr">Parallox</h3>
+        <p class="feature__desc" data-i18n="work.main.desc"></p>
+        <dl class="spec">
+          <div><dt data-i18n="work.meta.engine">Engine</dt><dd dir="ltr">Godot</dd></div>
+          <div><dt data-i18n="work.meta.type">Type</dt><dd data-i18n="work.meta.typeValue">2D pixel RPG</dd></div>
+          <div><dt data-i18n="work.meta.status">Status</dt><dd data-i18n="work.meta.statusValue">In development</dd></div>
+        </dl>
+        <a class="btn btn--gold" href="https://laymon-games.itch.io" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:work.main.aria"><span dir="ltr">itch.io</span></a>
+      </div>
+    </article>
 
-		<div class="skill-modal" id="skill-ai-modal" hidden aria-hidden="true">
-			<div class="skill-modal-backdrop" data-modal-close></div>
-			<div class="skill-modal-dialog skill-modal-dialog-small" role="dialog" aria-modal="true" aria-labelledby="skill-ai-modal-title">
-				<button class="skill-modal-close" type="button" aria-label="Close AI notice" data-modal-close data-i18n-attr="aria-label:modal.ai.closeAria">×</button>
-				<p class="eyebrow" data-i18n="modal.ai.eyebrow">AI Assisted</p>
-				<h2 id="skill-ai-modal-title" data-i18n="modal.ai.title">This site was made with the help of AI!</h2>
-				<p data-i18n="modal.ai.body">AI-assisted tools were used to help build this website.</p>
-			</div>
-		</div>
+    <!-- what goes into it -->
+    <ul class="layers" data-reveal="up">
+      <li class="layer">
+        <p class="layer__label" data-i18n="work.side1.label">Game Art</p>
+        <h4 class="layer__t" data-i18n="work.side1.title">Art &amp; Assets</h4>
+        <p class="layer__d" data-i18n="work.side1.desc"></p>
+      </li>
+      <li class="layer">
+        <p class="layer__label" data-i18n="work.side2.label">Original Soundtracks</p>
+        <h4 class="layer__t" data-i18n="work.side2.title">Music &amp; SFX</h4>
+        <p class="layer__d" data-i18n="work.side2.desc"></p>
+      </li>
+      <li class="layer">
+        <p class="layer__label" dir="ltr" data-i18n="work.side3.label">GDScript</p>
+        <h4 class="layer__t" data-i18n="work.side3.title">Code &amp; Programming</h4>
+        <p class="layer__d" data-i18n="work.side3.desc"></p>
+      </li>
+    </ul>
 
-	</main>
+    <!-- the rest, as a quiet archive -->
+    <ul class="archive" data-reveal="up">
+      <li>
+        <a class="row" href="https://laymon-games.itch.io/somethings-off" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:work.m1.aria">
+          <span class="row__art"><img src="assets/off.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async"></span>
+          <span class="row__body">
+            <span class="row__name" dir="ltr">Something's Off</span>
+            <span class="row__label" data-i18n="work.m1.label">2D Pixel Game</span>
+            <span class="row__desc" data-i18n="work.m1.desc"></span>
+          </span>
+          <svg class="row__go" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="https://laymon-games.itch.io/cursed-arcade" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:work.m2.aria">
+          <span class="row__art"><img src="assets/cursed.webp" alt="" width="1880" height="1057" loading="lazy" decoding="async"></span>
+          <span class="row__body">
+            <span class="row__name" dir="ltr">Cursed Arcade</span>
+            <span class="row__label" data-i18n="work.m2.label">2D/3D Horror Game</span>
+            <span class="row__desc" data-i18n="work.m2.desc"></span>
+          </span>
+          <svg class="row__go" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </a>
+      </li>
+      <li>
+        <button class="row row--btn" type="button" data-modal-open="mWip" data-i18n-attr="aria-label:work.m3.aria">
+          <span class="row__art"><img src="assets/off_remastered.webp" alt="" width="616" height="371" loading="lazy" decoding="async"></span>
+          <span class="row__body">
+            <span class="row__name" dir="ltr">Something's Off Remastered</span>
+            <span class="row__label" data-i18n="work.m3.label">2D/3D Horror Game</span>
+            <span class="row__desc" data-i18n="work.m3.desc"></span>
+          </span>
+          <svg class="row__go" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </button>
+      </li>
+    </ul>
+  </div>
+</section>
 
+<!-- ══════════════════════════════════ PROCESS ══════════════════════ -->
+<section class="sec sec--flow" id="process" aria-labelledby="processTitle">
+  <div class="wrap">
+    <div class="shead" data-reveal="up">
+      <p class="shead__eyebrow"><span class="shead__num">// 04</span><span data-i18n="process.eyebrow">Process</span></p>
+      <h2 class="shead__title" id="processTitle" data-i18n="process.heading">Idea. Prototype. Create. Polish.</h2>
+    </div>
 
-	<footer class="site-footer portfolio-footer">
-		<div class="portfolio-footer-inner">
-			<div class="portfolio-footer-brand footer-brand">
-				<span class="brand-mark"><img src="assets/lemon-avatar.png" alt="" loading="lazy" /></span>
-				<span>Laymon Games</span>
-			</div>
+    <ol class="flow" data-reveal="flow">
+      <li class="flow__step">
+        <span class="flow__dot" aria-hidden="true"></span>
+        <span class="flow__num">01</span>
+        <h3 class="flow__t" data-i18n="process.s1.title">Idea</h3>
+        <p class="flow__d" data-i18n="process.s1.desc"></p>
+      </li>
+      <li class="flow__step">
+        <span class="flow__dot" aria-hidden="true"></span>
+        <span class="flow__num">02</span>
+        <h3 class="flow__t" data-i18n="process.s2.title">Prototype</h3>
+        <p class="flow__d" data-i18n="process.s2.desc"></p>
+      </li>
+      <li class="flow__step">
+        <span class="flow__dot" aria-hidden="true"></span>
+        <span class="flow__num">03</span>
+        <h3 class="flow__t" data-i18n="process.s3.title">Create</h3>
+        <p class="flow__d" data-i18n="process.s3.desc"></p>
+      </li>
+      <li class="flow__step">
+        <span class="flow__dot" aria-hidden="true"></span>
+        <span class="flow__num">04</span>
+        <h3 class="flow__t" data-i18n="process.s4.title">Polish</h3>
+        <p class="flow__d" data-i18n="process.s4.desc"></p>
+      </li>
+    </ol>
 
-			<div class="portfolio-footer-details">
-				<p class="footer-statement" data-i18n-html="footer.statement">
-					<span>Site developed by <strong>Laymon Games</strong></span>
-					<span class="footer-credit-separator" aria-hidden="true">·</span>
-					<span>Home page by <strong>Youcef Benredjem</strong></span>
-				</p>
-				<div class="portfolio-footer-meta">
-					<a class="footer-link" href="privacy-policy.html">Privacy Policy</a>
-					<span class="footer-meta-divider" aria-hidden="true"></span>
-					<p class="footer-copy">© <span id="year"></span> Laymon Games</p>
-				</div>
-			</div>
-		</div>
-	</footer>
+    <p class="flow__note" data-i18n="process.note">One person, moving across the whole pipeline.</p>
+  </div>
+</section>
 
-	<script src="translations.js"></script>
-	<script src="script.js"></script>
+<!-- ══════════════════════════════════ CONTACT ══════════════════════ -->
+<section class="sec sec--contact" id="contact" aria-labelledby="contactTitle">
+  <div class="wrap">
+    <div class="shead" data-reveal="up">
+      <p class="shead__eyebrow"><span class="shead__num">// 05</span><span data-i18n="contact.eyebrow">Contact</span></p>
+      <h2 class="shead__title" id="contactTitle" data-i18n="contact.heading">Wanna get in touch?</h2>
+      <p class="shead__lede" data-i18n="contact.intro"></p>
+    </div>
+
+    <div class="reach" data-reveal="up">
+      <button class="reach__mail" type="button" data-copy="gamesbylaymon@gmail.com"
+              data-i18n-attr="aria-label:contact.copyAria">
+        <span class="reach__label" data-i18n="contact.emailLabel">Email</span>
+        <span class="reach__addr" dir="ltr">gamesbylaymon@gmail.com</span>
+        <span class="reach__state" data-copy-state aria-live="polite"></span>
+      </button>
+
+      <div class="reach__more">
+        <p class="reach__label" data-i18n="contact.elsewhereLabel">Elsewhere</p>
+        <a href="https://discord.com/users/laymon_games" target="_blank" rel="noopener">
+          <span>Discord</span><b dir="ltr">laymon_games</b>
+        </a>
+        <a href="https://linkedin.com/in/aymen-meghezzi" target="_blank" rel="noopener">
+          <span>LinkedIn</span><b dir="ltr">aymen-meghezzi</b>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════════ FOOTER ════════════════════════ -->
+<footer class="foot">
+  <div class="wrap foot__in">
+    <p class="foot__mark" dir="ltr">LAYMON GAMES</p>
+    <p class="foot__credit" data-i18n-html="footer.statement"></p>
+    <nav class="foot__nav" data-i18n-attr="aria-label:nav.ariaMain">
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#skills" data-i18n="nav.skills">Skills</a>
+      <a href="#projects" data-i18n="nav.projects">Projects</a>
+      <a href="#process" data-i18n="nav.process">Process</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+    <p class="foot__copy"><span>© <span id="year">2026</span> <span dir="ltr">Laymon Games</span></span></p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════ MODALS ═══════════════════════ -->
+<div class="modal" id="mWip" role="dialog" aria-modal="true" aria-labelledby="mWipT" hidden>
+  <div class="modal__box">
+    <button class="modal__x" type="button" data-modal-close data-i18n-attr="aria-label:modal.wip.closeAria">&times;</button>
+    <p class="modal__eyebrow" data-i18n="modal.wip.eyebrow">Work in Progress</p>
+    <h3 class="modal__t" id="mWipT" data-i18n="modal.wip.title">Under Development</h3>
+    <p class="modal__b" data-i18n="modal.wip.body"></p>
+  </div>
+</div>
+
+<div class="modal" id="mArt" role="dialog" aria-modal="true" aria-labelledby="mArtT" hidden>
+  <div class="modal__box modal__box--wide">
+    <button class="modal__x" type="button" data-modal-close data-i18n-attr="aria-label:modal.art.closeAria">&times;</button>
+    <p class="modal__eyebrow" data-i18n="modal.art.eyebrow">Art</p>
+    <h3 class="modal__t" id="mArtT" data-i18n="modal.art.title">Art</h3>
+    <p class="modal__b" data-i18n="modal.art.body"></p>
+    <div class="gallery" id="gallery" data-i18n-attr="aria-label:modal.art.galleryAria"></div>
+  </div>
+</div>
+
+<div class="modal" id="mAi" role="dialog" aria-modal="true" aria-labelledby="mAiT" hidden>
+  <div class="modal__box">
+    <button class="modal__x" type="button" data-modal-close data-i18n-attr="aria-label:modal.ai.closeAria">&times;</button>
+    <p class="modal__eyebrow" data-i18n="modal.ai.eyebrow">AI Assisted</p>
+    <h3 class="modal__t" id="mAiT" data-i18n="modal.ai.title">This site was made with the help of AI!</h3>
+    <p class="modal__b" data-i18n="modal.ai.body"></p>
+  </div>
+</div>
+
+<script src="canvas.js" defer></script>
+<script src="lemon3d.js" defer></script>
+<script src="motion.js" defer></script>
+<script src="polish.js" defer></script>
+<script src="script.js" defer></script>
 </body>
 </html>
