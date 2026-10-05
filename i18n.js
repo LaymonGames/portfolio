@@ -340,20 +340,33 @@
   }
 
   /* A node marked [data-i18n-skip] owns its own children (the art gallery
-     builds them), so fill() must not walk into it. Without this the gallery
-     had its slides replaced by a key string on load and on every switch. */
+     builds them), so fill() must not walk into it.
+
+     The opt-out is deliberately only the marked node itself, never its
+     subtree. A closest() test — which this used to be — means marking ANY
+     ancestor silently skips every [data-i18n] and [data-i18n-html] inside it,
+     and because a skipped [data-i18n-html] node is *empty* in the markup (its
+     content lived in the dictionary) the result is not a missing translation,
+     it is deleted copy. That is how the two About bio paragraphs and their
+     <strong> tags disappeared on load, in both languages, at every width.
+     A document-wide opt-out that can erase content is not a safe default. */
+  function skipped(el) {
+    var owner = el.closest('[data-i18n-skip]');
+    return !!owner && owner !== el;
+  }
+
   function fill(root) {
     var scope = root || document;
     (scope.querySelectorAll('[data-i18n]')).forEach(function (el) {
-      if (el.closest('[data-i18n-skip]')) return;
+      if (skipped(el)) return;
       el.textContent = t(el.getAttribute('data-i18n'));
     });
     (scope.querySelectorAll('[data-i18n-html]')).forEach(function (el) {
-      if (el.closest('[data-i18n-skip]')) return;
+      if (skipped(el)) return;
       el.innerHTML = t(el.getAttribute('data-i18n-html'));
     });
     (scope.querySelectorAll('[data-i18n-attr]')).forEach(function (el) {
-      if (el.closest('[data-i18n-skip]')) return;
+      if (skipped(el)) return;
       el.getAttribute('data-i18n-attr').split(';').forEach(function (pair) {
         var bits = pair.split(':');
         if (bits.length === 2) el.setAttribute(bits[0].trim(), t(bits[1].trim()));

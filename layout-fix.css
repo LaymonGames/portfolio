@@ -144,3 +144,82 @@
 	block-size: 74%;
 	mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, .5) 58%, transparent 100%);
 }
+
+/* ──────────────── 9 · the burger icon sat 11.7px above its own button ────────────────
+   `.burger` is a column flex box with `place-items: center`. In a column flex
+   container, `align-items` is the CROSS axis (horizontal) and `justify-content`
+   is the MAIN axis (vertical) — `place-items` only sets align-items, so
+   justify-content stayed at its initial `normal`, i.e. flex-start. The three
+   bars were pinned to the top edge of the 38px circle:
+
+     button centre y = 31.0   bars centre y = 19.25   offset = -11.7px
+
+   Symmetric on small screens, but 31% of the button's height off centre, at
+   every breakpoint below 900px. */
+.burger { justify-content: center }
+
+/* ──────────────── 10 · a phone's first screen was 226px of empty black ────────────────
+   The hero is `min-block-size: 100svh` and a grid with `place-items: center`,
+   and the sticky nav already occupies the top 63px. So on top of that the hero
+   held a `calc(nav + clamp(1.8rem, 6vh, 4.4rem))` top pad AND centred its
+   content in what was left over:
+
+     360x780   nav bottom 63   mascot top 289   ->  226px of nothing
+     320x700                      239            ->  176px
+     390x844                      335            ->  272px  (worse, taller phone)
+     768x1024                     391            ->  328px
+
+   Making the hero exactly the viewport MINUS the nav means the pads now do the
+   spacing instead of sharing it with a second layer of auto margins, and the
+   mask-image on the field fades the grid out well before the wordmark, so the
+   band never reads as an unpainted rectangle. */
+.hero { min-block-size: calc(var(--vh) - var(--nav-h)) }
+
+@media (max-width: 900px) {
+	/* the vh term stops winning above ~800px tall, so the pad stops
+	   over-running on exactly the phones that had the most slack */
+	.hero {
+		padding-block: calc(var(--nav-h) + clamp(1.1rem, 3.4vh, 2.4rem))
+		                clamp(2.6rem, 6vh, 4rem);
+	}
+}
+
+/* ──────────────── 11 · section rhythm on a phone ────────────────
+   Sections are separated by rhythm rather than by boxes, and at 360px every
+   one of them opened with a hairline-thin eyebrow floating at the top of a
+   ~70px empty band, which reads as a hole rather than as space. The band is
+   tightened and the sections are separated by a hairline instead, so the
+   rhythm is carried by a mark rather than by absence. On a pointer nothing
+   changes: the hairlines are only worth having where the space is scarce. */
+@media (max-width: 640px) {
+	.sec { padding-block: clamp(2.9rem, 7vh, 3.9rem) }
+	main > .sec + .sec { border-block-start: 1px solid var(--line-2) }
+	/* and the anchor target clears the sticky bar instead of tucking under it */
+	main > .sec { scroll-margin-block-start: var(--nav-h) }
+}
+
+/* ──────────────── 12 · About led with the photo and buried its own text ────────────────
+   On narrow screens the portrait is ordered first, so a 4/5 image in a ~340px
+   column measures 455px tall. Measured on a 360x780 phone: the figure occupied
+   y 82–538, the heading began at 623, and the two bio paragraphs and the
+   signature ran from 678 to 784. Every word of the section's content was below
+   the fold, and the *name* of the section — `<h2 id="aboutTitle">` — sat 480px
+   down a screen whose first 538px were one photograph.
+
+   `styles.css` sets order:-1 on the figure below 900px, which is the right call
+   for a portrait-led teaser and the wrong one for a section whose job is to say
+   who the studio is. The markup already has the prose first and the portrait
+   second, so the narrow-screen override simply stops fighting it: text, then
+   the face. Nothing is cropped, nothing is moved in the DOM, and the desktop
+   two-column layout beside the portrait is untouched.
+
+   The image still gets a height budget rather than being as tall as its column,
+   so on a short phone it cannot swallow the screen on its own. */
+@media (max-width: 900px) {
+	.about__figure { order: 0; max-inline-size: 26rem }
+	.about__figure img {
+		block-size: min(44svh, 26rem);
+		aspect-ratio: auto;
+	}
+}
+

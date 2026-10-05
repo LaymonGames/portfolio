@@ -511,15 +511,22 @@
 			return (0.5 + Math.tan(Math.atan(n)) / Math.tan(FOV / 2) * 0.5) * 100;
 		}
 
-		const paintShadow = (q, gain) => {
+		const paintShadow = (q, gain, turn) => {
 			if (!shadow) return;
 			/* the lemon widens as it flattens, and the shadow spreads with it */
 			const spread = 1 + q * 1.5;
 			const shade = 1 - q * 0.42;
+			/* Turning is horizontal motion, so the contact patch slides along the
+			   ground underneath rather than staying pinned to the middle: a 9px
+			   throw at 224px, enough to read as a footprint and never enough to
+			   leave the stage. mascot.css negates it in RTL so the shadow follows
+			   the body, not the reading direction. */
+			const slide = Math.sin(turn) * 9 * gain;
 			shadow.style.setProperty('--shadow-top', shadowTop().toFixed(2) + '%');
 			shadow.style.setProperty('--shadow-spread', spread.toFixed(3));
 			shadow.style.setProperty('--shadow-dark', Math.max(0.18, shade).toFixed(3));
 			shadow.style.setProperty('--shadow-lift', (q * 26).toFixed(1) + '%');
+			shadow.style.setProperty('--shadow-slide', slide.toFixed(2) + 'px');
 			/* splashes: a ring that leaves the contact patch */
 			let ring = 0, ringT = 0;
 			for (let i = state.splashes.length - 1; i >= 0; i--) {
@@ -606,7 +613,7 @@
 
 			/* 4 · splashes decay */
 			for (const s of state.splashes) s.d -= dt;
-			paintShadow(q, state.gain);
+			paintShadow(q, state.gain, state.turn);
 
 			/* the CSS entrance is dropped the moment the first real frame is
 			   about to paint, so the drop-in and the pointer ramp agree */
