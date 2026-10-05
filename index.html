@@ -88,7 +88,18 @@
         <span class="lang__label" data-lang-switch-label dir="auto">العربية</span>
       </button>
       <button class="burger" type="button" aria-expanded="false" aria-controls="navLinks" data-i18n-attr="aria-label:nav.toggleAria">
-        <i></i><i></i><i></i>
+        <!-- Two vector states rather than three rotated div bars. The bars were
+             15x1.5px, so the 45° rotation made ~2px diagonals whose ends
+             anti-aliased into a raspberry rather than a cross at every device
+             pixel ratio; a stroked path stays 1.5px on the diagonal and closes
+             cleanly. Only opacity and a small scale change between the states,
+             so the shape is never resampled. -->
+        <svg class="burger__menu" viewBox="0 0 18 14" fill="none" aria-hidden="true" focusable="false">
+          <path d="M1 2.25h16M1 7h16M1 11.75h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <svg class="burger__close" viewBox="0 0 18 14" fill="none" aria-hidden="true" focusable="false">
+          <path d="M3.4 2.2 14.6 11.8M14.6 2.2 3.4 11.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
       </button>
     </div>
   </div>

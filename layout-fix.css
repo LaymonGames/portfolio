@@ -149,14 +149,39 @@
    `.burger` is a column flex box with `place-items: center`. In a column flex
    container, `align-items` is the CROSS axis (horizontal) and `justify-content`
    is the MAIN axis (vertical) — `place-items` only sets align-items, so
-   justify-content stayed at its initial `normal`, i.e. flex-start. The three
-   bars were pinned to the top edge of the 38px circle:
+   justify-content stayed at its initial `normal`, i.e. flex-start. The icon was
+   pinned to the top edge of the 38px circle:
 
      button centre y = 31.0   bars centre y = 19.25   offset = -11.7px
 
    Symmetric on small screens, but 31% of the button's height off centre, at
-   every breakpoint below 900px. */
-.burger { justify-content: center }
+   every breakpoint below 900px.
+
+   The icon itself is now two vector states instead of three rotated 1.5px divs.
+   At 15x1.5px a 45° rotation produces ~2px diagonals that anti-alias into a
+   blot rather than a cross, and no amount of sub-pixel nudging fixes a shape
+   whose stroke width changes when it rotates. */
+.burger { justify-content: center; place-items: center; position: relative }
+.burger__menu,
+.burger__close {
+	grid-area: 1 / 1;
+	inline-size: 18px;
+	block-size: 14px;
+	color: var(--cream);
+	transition: opacity .22s ease, scale .28s cubic-bezier(.16, 1, .3, 1);
+}
+/* both states occupy the same grid cell, so the button's box never depends on
+   which icon is showing */
+.burger { display: grid; grid-template-areas: 'icon' }
+.burger__menu, .burger__close { grid-area: icon }
+.burger__close { opacity: 0; scale: .82 }
+.burger[aria-expanded="true"] .burger__menu { opacity: 0; scale: .82 }
+.burger[aria-expanded="true"] .burger__close { opacity: 1; scale: 1 }
+.burger:hover .burger__menu,
+.burger:hover .burger__close { color: var(--gold-hi) }
+/* the three <i> bars are gone from the markup; this retires the rules that
+   styled them in styles.css so nothing is left half-matching */
+.burger i { display: none }
 
 /* ──────────────── 10 · a phone's first screen was 226px of empty black ────────────────
    The hero is `min-block-size: 100svh` and a grid with `place-items: center`,
@@ -216,7 +241,13 @@
    The image still gets a height budget rather than being as tall as its column,
    so on a short phone it cannot swallow the screen on its own. */
 @media (max-width: 900px) {
-	.about__figure { order: 0; max-inline-size: 26rem }
+	/* `styles.css` also carries an explicit `html[dir="rtl"] .about__figure
+	   { order: -1 }`. A single-class override loses to that on specificity, and
+	   the symptom was Arabic still leading with the photograph while English had
+	   already switched — so both selectors are named here rather than relying on
+	   source order. */
+	.about__figure,
+	html[dir="rtl"] .about__figure { order: 0; max-inline-size: 26rem }
 	.about__figure img {
 		block-size: min(44svh, 26rem);
 		aspect-ratio: auto;
