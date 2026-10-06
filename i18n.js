@@ -185,7 +185,7 @@
       'modal.ai.body': 'AI-assisted tools were used to help build this website.',
 
       /* footer */
-      'footer.statement': 'Site developed by Laymon Games (spinning lemon idea by Youcef Benredjem).'
+      'footer.statement': 'Site developed by Laymon Games.'
     },
 
     /* ─────────────────────────────── AR ─────────────────────────── */
@@ -323,7 +323,7 @@
       'modal.ai.title': 'أُنشئ هذا الموقع بمساعدة الذكاء الاصطناعي!',
       'modal.ai.body': 'استُخدمت أدوات مدعومة بالذكاء الاصطناعي للمساعدة في بناء هذا الموقع.',
 
-      'footer.statement': 'تطوير الموقع بواسطة <span dir="ltr">Laymon Games</span> (فكرة الليمونة الدوارة بواسطة <span dir="ltr">Youcef Benredjem</span>).'
+      'footer.statement': 'تطوير الموقع بواسطة <span dir="ltr">Laymon Games</span>.'
     }
   };
 
