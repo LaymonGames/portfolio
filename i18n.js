@@ -81,7 +81,7 @@
 
       /* about */
       'about.eyebrow': 'About',
-      'about.personLabel': 'The person behind the studio,',
+      'about.personLabel': 'The person behind the studio.',
       'about.ownerAlt': 'Aymen Meghezzi, creator behind Laymon Games',
       'about.role': '<strong>Laymon Games</strong>, a creator & solo developer.',
       'about.note': 'Games, code, art, audio, video - all in one.',
