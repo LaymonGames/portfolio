@@ -597,6 +597,22 @@ html.no-mascot3d .mascot__fallback{ display:block }
 .row__go{ inline-size:18px; block-size:18px; color:var(--gold-dk); flex:0 0 auto }
 .row:hover .row__go{ color:var(--gold-hi) }
 
+/* logo rows for software and websites */
+.row--logo .row__art{
+  background:rgba(216,164,60,.04);
+  padding:.35rem;
+}
+/* the archive gradient is for screenshots; logos must stay fully visible */
+.row--logo .row__art::after{ content:none }
+.row--logo .row__art img{
+  display:block;
+  object-fit:contain;
+  transform:none;
+}
+/* no zoom-crop on hover for logos */
+.row--logo:hover .row__art img,
+.row--logo:focus-visible .row__art img{ transform:none }
+
 /* ══════════════════════════ PROCESS ══════════════════════════ */
 .flow{
   --flow-gap:clamp(1.3rem,2.8vw,2.4rem);

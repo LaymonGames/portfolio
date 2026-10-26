@@ -248,10 +248,10 @@
         <h3 class="skill__t" data-i18n="skills.other.title">Other/AI-Assisted</h3>
         <p class="skill__d" data-i18n="skills.other.desc"></p>
         <p class="tags" data-i18n-html="skills.tags.other"></p>
-        <button class="skill__go skill__go--btn" type="button" data-modal-open="mAi" data-i18n-attr="aria-label:skills.other.aria">
-          <span data-i18n="modal.ai.eyebrow">AI Assisted</span>
+        <a class="skill__go" href="#software" data-i18n-attr="aria-label:skills.other.aria">
+          <span data-i18n="skills.other.cta">Explore software</span>
           <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
-        </button>
+        </a>
       </article>
     </div>
   </div>
@@ -346,6 +346,84 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════════ SOFTWARE ═════════════════════ -->
+<section class="sec sec--work" id="software" aria-labelledby="softwareTitle">
+  <div class="wrap">
+    <div class="shead" data-reveal="up">
+      <p class="shead__eyebrow"><span class="shead__num">// 03.1</span><span data-i18n="work.software.eyebrow">Software</span></p>
+      <h2 class="shead__title" id="softwareTitle" data-i18n="work.software.heading">Apps &amp; Tools.</h2>
+      <p class="shead__lede" data-i18n-html="work.software.intro"></p>
+    </div>
+
+    <!-- Moltazim: main software project -->
+    <article class="feature" data-reveal="up">
+      <div class="feature__art">
+        <img src="assets/moltazim_banner.png" alt="" width="1920" height="1080" loading="lazy" decoding="async">
+        <span class="feature__badge" data-i18n="work.software.moltazim.badge">Android App</span>
+      </div>
+      <div class="feature__body">
+        <p class="feature__label" data-i18n="work.software.moltazim.label">Main Software Project · Android App</p>
+        <h3 class="feature__name" dir="ltr">Moltazim</h3>
+        <p class="feature__desc" data-i18n="work.software.moltazim.desc"></p>
+        <dl class="spec">
+          <div><dt data-i18n="work.software.moltazim.platform">Platform</dt><dd dir="ltr" data-i18n="work.software.moltazim.platformValue">Android</dd></div>
+          <div><dt data-i18n="work.software.moltazim.framework">Built with</dt><dd dir="ltr" data-i18n="work.software.moltazim.frameworkValue">Flutter &amp; Dart</dd></div>
+        </dl>
+        <a class="btn btn--gold" href="https://play.google.com/store/apps/details?id=com.laymonstudio.moltazim" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:work.software.moltazim.aria"><span data-i18n="work.software.moltazim.cta">Google Play</span></a>
+      </div>
+    </article>
+
+    <!-- Phantrix: secondary software -->
+    <ul class="archive" data-reveal="up">
+      <li>
+        <a class="row row--logo" href="https://github.com/LaymonGames/phantrix-vpn" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:work.software.phantrix.aria">
+          <span class="row__art"><img src="assets/Phantrix.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></span>
+          <span class="row__body">
+            <span class="row__name" dir="ltr">Phantrix VPN</span>
+            <span class="row__label" data-i18n="work.software.phantrix.label">VPN Client · Flutter</span>
+            <span class="row__desc" data-i18n="work.software.phantrix.desc"></span>
+          </span>
+          <svg class="row__go" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Websites subsection -->
+    <div class="shead" style="margin-block-start:clamp(2rem,4vw,3rem);" data-reveal="up">
+      <p class="shead__eyebrow"><span class="shead__num">// 03.2</span><span data-i18n="work.software.websites.heading">Websites</span></p>
+      <h3 class="shead__title" style="font-size:clamp(1.4rem,3vw,2rem);" data-i18n="work.software.websites.title">Websites I've built.</h3>
+    </div>
+    <ul class="archive" data-reveal="up">
+      <li>
+        <a class="row row--logo" href="https://laymongames.github.io/portfolio" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:work.software.websites.portfolio.aria">
+          <span class="row__art"><img src="assets/lemon.png" alt="" width="192" height="192" loading="lazy" decoding="async"></span>
+          <span class="row__body">
+            <span class="row__name" dir="ltr" data-i18n="work.software.websites.portfolio.name">Portfolio</span>
+            <span class="row__label" data-i18n="work.software.websites.portfolio.label">Personal Website</span>
+            <span class="row__desc" data-i18n="work.software.websites.portfolio.desc"></span>
+          </span>
+          <svg class="row__go" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </a>
+      </li>
+      <li>
+        <a class="row row--logo" href="https://laymongames.github.io/parallox/" target="_blank" rel="noopener"
+           data-i18n-attr="aria-label:work.software.websites.parallox.aria">
+          <span class="row__art"><img src="assets/LL website.png" alt="" width="1920" height="1080" loading="lazy" decoding="async"></span>
+          <span class="row__body">
+            <span class="row__name" dir="ltr" data-i18n="work.software.websites.parallox.name">Parallox Official Website</span>
+            <span class="row__label" data-i18n="work.software.websites.parallox.label">Official Game Website</span>
+            <span class="row__desc" data-i18n="work.software.websites.parallox.desc"></span>
+          </span>
+          <svg class="row__go" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"/></svg>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
 <!-- ══════════════════════════════════ PROCESS ══════════════════════ -->
 <section class="sec sec--flow" id="process" aria-labelledby="processTitle">
   <div class="wrap">
@@ -375,7 +453,7 @@
       </li>
       <li class="flow__step">
         <span class="flow__dot" aria-hidden="true"></span>
-        <span class="flow__num">04</span>
+        <span class="flow__num">03.1</span>
         <h3 class="flow__t" data-i18n="process.s4.title">Polish</h3>
         <p class="flow__d" data-i18n="process.s4.desc"></p>
       </li>
@@ -497,15 +575,6 @@
       <div class="gal__rail" role="tablist" id="galRail"></div>
       <p class="gal__sr" id="galLive" aria-live="polite"></p>
     </div>
-  </div>
-</div>
-
-<div class="modal" id="mAi" role="dialog" aria-modal="true" aria-labelledby="mAiT" hidden>
-  <div class="modal__box">
-    <button class="modal__x" type="button" data-modal-close data-i18n-attr="aria-label:modal.ai.closeAria">&times;</button>
-    <p class="modal__eyebrow" data-i18n="modal.ai.eyebrow">AI Assisted</p>
-    <h3 class="modal__t" id="mAiT" data-i18n="modal.ai.title">This site was made with the help of AI!</h3>
-    <p class="modal__b" data-i18n="modal.ai.body"></p>
   </div>
 </div>
 
