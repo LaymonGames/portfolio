@@ -163,7 +163,7 @@
       'work.software.phantrix.desc': 'Phantrix is a free, vibe-coded, account-free VPN client for OpenVPN, built with Flutter. There is no sign-up, no subscription and no analytics.',
       'work.software.phantrix.aria': 'Open Phantrix VPN on GitHub',
       'work.software.websites.heading': 'Websites',
-      'work.software.websites.title': "Websites I've built.",
+      'work.software.websites.title': "Websites I've built or participated in.",
       'work.software.websites.portfolio.name': 'Portfolio',
       'work.software.websites.portfolio.label': 'Personal Website',
       'work.software.websites.portfolio.desc': 'This website you\'re on right now — my personal portfolio.',
